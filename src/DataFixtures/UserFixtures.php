@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Enum\Roles;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -13,7 +14,7 @@ final class UserFixtures extends Fixture
         $root = (new User())
             ->setEmail("root@phoenix.com")
             ->setPlainPassword("root")
-            ->setRoles([User::ROLE_SUPER_ADMIN])
+            ->setRoles([Roles::SuperAdmin->value])
         ;
 
         $manager->persist($root);
@@ -22,7 +23,7 @@ final class UserFixtures extends Fixture
             $user = (new User())
                 ->setEmail("user$i@gmail.com")
                 ->setPlainPassword('123456')
-                ->setRoles([User::ROLE_USER])
+                ->setRoles([Roles::User->value])
             ;
 
             $manager->persist($user);
