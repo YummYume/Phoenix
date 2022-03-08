@@ -8,6 +8,7 @@ use App\Repository\StatusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: StatusRepository::class)]
 class Status
@@ -18,13 +19,23 @@ class Status
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $title;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['title'])]
     private ?string $slug;
 
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Project::class)]
     private Collection $projects;
+
+    #[ORM\Column(type: 'integer')]
+    private ?int $position;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $color;
 
     public function __construct()
     {
@@ -34,6 +45,18 @@ class Status
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getSlug(): ?string
@@ -74,6 +97,30 @@ class Status
                 $project->setStatus(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

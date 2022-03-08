@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Traits\BlameableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\MilestoneRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MilestoneRepository::class)]
@@ -16,7 +18,7 @@ class Milestone
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
@@ -25,7 +27,15 @@ class Milestone
     private ?bool $required;
 
     #[ORM\Column(type: 'integer')]
-    private int $position;
+    private ?int $position;
+
+    #[ORM\OneToMany(mappedBy: 'milestone', targetEntity: Event::class)]
+    private $events;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -64,6 +74,36 @@ class Milestone
     public function setPosition(int $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setMilestone($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getMilestone() === $this) {
+                $event->setMilestone(null);
+            }
+        }
 
         return $this;
     }

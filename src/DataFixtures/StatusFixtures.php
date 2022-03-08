@@ -13,6 +13,8 @@ final class StatusFixtures extends Fixture
         foreach (range(1, 3) as $i) {
             $status = (new Status())
                 ->setSlug("status_$i")
+                ->setPosition($i)
+                ->setColor('#'.dechex(rand(0, 10000000)))
             ;
 
             $manager->persist($status);

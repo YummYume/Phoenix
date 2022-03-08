@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Entity\Traits\BlameableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -16,7 +19,7 @@ class Project
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private int $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
@@ -33,6 +36,39 @@ class Project
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTime $endAt;
+
+    #[ORM\Column(type: 'string', length: 255, unique: true)]
+    #[Gedmo\Slug(fields: ['name'])]
+    private ?string $code;
+
+    #[ORM\ManyToOne(targetEntity: Portfolio::class, inversedBy: 'Projects')]
+    private ?Portfolio $portfolio;
+
+    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Team $team;
+
+    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'projects')]
+    private ?Team $clientTeam;
+
+    #[ORM\OneToOne(inversedBy: 'project', targetEntity: Budget::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Budget $budget;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Event::class, orphanRemoval: true)]
+    private Collection $events;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Risk::class, orphanRemoval: true)]
+    private Collection $risks;
+
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $archived;
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+        $this->risks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,6 +131,138 @@ class Project
     public function setEndAt(?\DateTimeInterface $endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    public function getPortfolio(): ?Portfolio
+    {
+        return $this->portfolio;
+    }
+
+    public function setPortfolio(?Portfolio $portfolio): self
+    {
+        $this->portfolio = $portfolio;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    public function getClientTeam(): ?Team
+    {
+        return $this->clientTeam;
+    }
+
+    public function setClientTeam(?Team $clientTeam): self
+    {
+        $this->clientTeam = $clientTeam;
+
+        return $this;
+    }
+
+    public function getBudget(): ?Budget
+    {
+        return $this->budget;
+    }
+
+    public function setBudget(Budget $budget): self
+    {
+        $this->budget = $budget;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getProject() === $this) {
+                $event->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Risk>
+     */
+    public function getRisks(): Collection
+    {
+        return $this->risks;
+    }
+
+    public function addRisk(Risk $risk): self
+    {
+        if (!$this->risks->contains($risk)) {
+            $this->risks[] = $risk;
+            $risk->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRisk(Risk $risk): self
+    {
+        if ($this->risks->removeElement($risk)) {
+            // set the owning side to null (unless already changed)
+            if ($risk->getProject() === $this) {
+                $risk->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(bool $archived): self
+    {
+        $this->archived = $archived;
 
         return $this;
     }
