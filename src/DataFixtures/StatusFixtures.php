@@ -12,6 +12,7 @@ final class StatusFixtures extends Fixture
     {
         foreach (range(1, 3) as $i) {
             $status = (new Status())
+                ->setTitle("Status $i")
                 ->setSlug("status_$i")
                 ->setPosition($i)
                 ->setColor('#'.dechex(rand(0, 10000000)))

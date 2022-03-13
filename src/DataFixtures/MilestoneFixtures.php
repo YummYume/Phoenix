@@ -12,7 +12,9 @@ class MilestoneFixtures extends Fixture
     {
         foreach (range(1, 10) as $i) {
             $milestone = (new Milestone())
-                
+                ->setName("Jalon $i")
+                ->setRequired(1 === rand(1, 2))
+                ->setPosition($i)
             ;
 
             $manager->persist($milestone);

@@ -15,7 +15,7 @@ class RiskFixtures extends Fixture implements DependentFixtureInterface
     {
         foreach (range(1, 10) as $i) {
             $risk = (new Risk())
-                ->setName("Risk$i")
+                ->setName("Risque $i")
                 ->setIdentifiedAt(new \DateTime())
                 ->setSeverity(Severity::random())
                 ->setProbability(Probability::random())

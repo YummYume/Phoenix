@@ -62,7 +62,7 @@ class Project
     private Collection $risks;
 
     #[ORM\Column(type: 'boolean')]
-    private ?bool $archived;
+    private ?bool $archived = false;
 
     public function __construct()
     {

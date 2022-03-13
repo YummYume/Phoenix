@@ -8,7 +8,9 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 final class UserListener
 {
-    public function __construct(private UserManager $userManager) {}
+    public function __construct(private UserManager $userManager)
+    {
+    }
 
     public function prePersist(LifecycleEventArgs $args): void
     {
