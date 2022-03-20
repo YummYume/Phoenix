@@ -1,3 +1,14 @@
 ### Common
 common.app_name: Phénix
 common.default_title: Bienvenue
+common.created_at: Créé le
+common.updated_at: Mis à jours le
+
+### Menu
+menu.dashboard: Tableau de bord
+menu.status: Status
+
+### Entities
+status.title: Titre
+status.position: Position
+status.color: Couleur
