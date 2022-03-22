@@ -3,12 +3,58 @@ common.app_name: Phénix
 common.default_title: Bienvenue
 common.created_at: Créé le
 common.updated_at: Mis à jours le
+common.created_by: Créé par
+common.updated_by: Mis à jours par
+
+### Views
+view.admin.dashboard: Bienvenue sur votre tableau de bord!
+view.status.index: Statuts
+view.status.new: Nouveau statut
+view.status.edit: Modifier le statut
+view.status.detail: Détails du statut
+view.status.single: un statut
+view.status.plural: des statuts
+view.team.index: Equipes
+view.team.new: Nouvelle équipe
+view.team.edit: Modifier l'équipe
+view.team.detail: Détails de l'équipe
+view.team.single: une équipe
+view.team.plural: des équipes
+view.user.index: Utilisateurs
+view.user.new: Nouvel utilisateur
+view.user.edit: Modifier l'utilisateur
+view.user.detail: Détails de l'utilisateur
+view.user.single: un utilisateur
+view.user.plural: des utilisateurs
 
 ### Menu
 menu.dashboard: Tableau de bord
-menu.status: Status
+menu.status: Statuts
+menu.team: Equipes
+menu.user: Utilisateurs
+menu.return_to_homepage: Retourner à l'accueil
 
 ### Entities
+# Status
 status.title: Titre
 status.position: Position
 status.color: Couleur
+
+# Team
+team.name: Nom
+team.responsible: Résponsable
+team.members: Membres
+
+# User
+user.email: Adresse email
+user.roles: Rôles
+user.full_name: Nom complet
+user.first_name: Prénom
+user.last_name: Nom
+user.password: Mot de passe
+user.password_repeat: Répéter le mot de passe
+
+# Roles
+User: Utilisateur
+Admin: Administrateur
+SuperAdmin: Super Administateur

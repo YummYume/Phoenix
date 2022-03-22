@@ -23,7 +23,7 @@ class Team
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $name;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'teams')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ownedTeams')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $responsible;
 
@@ -37,13 +37,17 @@ class Team
     private Collection $teams;
 
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Project::class, orphanRemoval: true)]
-    private $projects;
+    private Collection $projects;
+
+    #[ORM\OneToMany(mappedBy: 'clientTeam', targetEntity: Project::class, orphanRemoval: false)]
+    private Collection $clientProjects;
 
     public function __construct()
     {
         $this->members = new ArrayCollection();
         $this->teams = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->clientProjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,6 +169,36 @@ class Team
             // set the owning side to null (unless already changed)
             if ($project->getTeam() === $this) {
                 $project->setTeam(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getClientProjects(): Collection
+    {
+        return $this->clientProjects;
+    }
+
+    public function addClientProject(Project $clientProject): self
+    {
+        if (!$this->clientProjects->contains($clientProject)) {
+            $this->clientProjects[] = $clientProject;
+            $clientProject->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClientProject(Project $clientProject): self
+    {
+        if ($this->clientProjects->removeElement($clientProject)) {
+            // set the owning side to null (unless already changed)
+            if ($clientProject->getTeam() === $this) {
+                $clientProject->setTeam(null);
             }
         }
 

@@ -48,7 +48,7 @@ class Project
     #[ORM\JoinColumn(nullable: false)]
     private ?Team $team;
 
-    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'projects')]
+    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'clientProjects')]
     private ?Team $clientTeam;
 
     #[ORM\OneToOne(inversedBy: 'project', targetEntity: Budget::class, cascade: ['persist', 'remove'])]

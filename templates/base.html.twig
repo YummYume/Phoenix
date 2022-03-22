@@ -12,7 +12,46 @@
         {% endblock %}
     </head>
     <body>
-        {% block header %}{% endblock %}
+        {% block header %}
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('icons/favicon.ico') }}" alt="{{ 'common.app_name'|trans }}">
+                        {{ 'common.app_name'|trans }}
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">uwu</a>
+                            </li>
+                        </ul>
+                        <div class="d-lg-flex">
+                            <ul class="navbar-nav me-auto mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">uwu</a>
+                                </li>
+                            </ul>
+                            <div class="d-flex ms-lg-5">
+                                <input class="form-control ml-5 me-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
         {% block body %}{% endblock %}
         {% block footer %}{% endblock %}
         <div aria-live="polite" aria-atomic="true" class="position-relative">

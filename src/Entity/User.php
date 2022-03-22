@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private ?string $password;
 
-    private ?string $plainPassword;
+    private ?string $plainPassword = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $firstName;
@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName;
 
     #[ORM\OneToMany(mappedBy: 'responsible', targetEntity: Team::class)]
+    private Collection $ownedTeams;
+
+    #[ORM\ManyToMany(mappedBy: 'members', targetEntity: Team::class)]
     private Collection $teams;
 
     #[ORM\OneToMany(mappedBy: 'responsible', targetEntity: Portfolio::class)]
@@ -48,8 +51,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->ownedTeams = new ArrayCollection();
         $this->teams = new ArrayCollection();
         $this->portfolios = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getFullName() ?? $this->email;
     }
 
     public function getId(): ?int
@@ -153,6 +162,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(?string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFullName(): string|null
+    {
+        return $this->firstName || $this->lastName ? trim("$this->firstName $this->lastName") : null;
+    }
+
+    /**
+     * @return Collection<int, Team>
+     */
+    public function getOwnedTeams(): Collection
+    {
+        return $this->ownedTeams;
+    }
+
+    public function addOwnedTeam(Team $ownedTeam): self
+    {
+        if (!$this->ownedTeams->contains($ownedTeam)) {
+            $this->ownedTeams[] = $ownedTeam;
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedTeam(Team $ownedTeam): self
+    {
+        $this->ownedTeams->removeElement($ownedTeam);
 
         return $this;
     }
