@@ -12,11 +12,13 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $userCount = 1;
+        $faker = \Faker\Factory::create('fr_FR');
 
         foreach (range(1, 10) as $i) {
             $team = (new Team())
-                ->setName("Team $i")
+                ->setName(ucfirst($faker->words(rand(1, 3), true)))
                 ->setResponsible($this->getReference(UserFixtures::class."responsible$i"))
+                ->addMember($this->getReference(UserFixtures::class."responsible$i"))
             ;
 
             foreach (range($userCount, $userCount + 1) as $user) {

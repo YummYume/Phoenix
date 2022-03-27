@@ -1,35 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project index{% endblock %}
+{% block title %}Projects{% endblock %}
 
 {% block body %}
-    <h1>Project index</h1>
+    <div class="row mx-auto w-100 justify-content-center align-items-center">
+        <div class="col-12">
+            <div class="text-center">
+                <h1>Vos projets ({{ pagination.getTotalItemCount }})</h1>
+            </div>
+            <div class="text-end">
+                <a href="{{ path('app_project_new')}}" class="btn btn-primary">Créer un projet</a>
+            </div>
+        </div>
+        <div class="col-12">
+            <table class="table table-hover">
+                <tr>
+                    <th{% if pagination.isSorted('p.name') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Nom', 'p.name') }}
+                    </th>
+                    <th{% if pagination.isSorted('p.startAt') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Commence le', 'p.startAt') }}
+                    </th>
+                    <th{% if pagination.isSorted('p.endAt') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'Termine le', 'p.endAt') }}
+                    </th>
+                </tr>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for project in projects %}
-            <tr>
-                <td>{{ project.id }}</td>
-                <td>{{ project.name }}</td>
-                <td>
-                    <a href="{{ path('project_show', {'id': project.id}) }}">show</a>
-                    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('project_new') }}">Create new</a>
+                {% for project in pagination %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+                        <td>{{ project.name }}</td>
+                        <td>{{ project.startAt ? project.startAt|date('Y/m/d H:i:s') : '' }}</td>
+                        <td>{{ project.endAt ? project.endAt|date('Y/m/d H:i:s') : '' }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-12">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

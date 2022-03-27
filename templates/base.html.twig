@@ -2,8 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
         <title>{% block title %}{{ 'common.app_name'|trans ~ ' | ' ~ pageTitle|default('common.default_title'|trans) }}{% endblock %}</title>
         <link rel="icon" href="{{ asset('icons/favicon.ico') }}">
+        <script src="https://use.fontawesome.com/f5df04fbd7.js" defer></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -13,62 +15,102 @@
     </head>
     <body>
         {% block header %}
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="{{ asset('icons/favicon.ico') }}" alt="{{ 'common.app_name'|trans }}">
-                        {{ 'common.app_name'|trans }}
-                    </a>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">uwu</a>
-                            </li>
-                        </ul>
-                        <div class="d-lg-flex">
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="{{ path('index') }}">
+                            <img src="{{ asset('icons/favicon.ico') }}" alt="{{ 'common.app_name'|trans }}">
+                            <span class="app-title">{{ 'common.app_name'|trans }}</span>
+                        </a>
+                        <button
+                            class="navbar-toggler"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-lg-0">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">uwu</a>
-                                </li>
+                                {% if app.user %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ path('app_project_index') }}">Mes projets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Mes équipes</a>
+                                    </li>
+                                {% endif %}
                             </ul>
-                            <div class="d-flex ms-lg-5">
-                                <input class="form-control ml-5 me-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            <div class="d-lg-flex">
+                                {% if app.user %}
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user"></i>
+                                                <span class="user-name">{{ app.user.email }}</span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                {% if is_granted('ROLE_ADMIN') %}
+                                                    <a class="dropdown-item" href="{{ path('admin') }}">Administration</a>
+                                                {% endif %}
+                                                <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <form class="d-lg-flex ms-lg-5" action="{{ path('app_search') }}">
+                                        <input
+                                            class="form-control ml-5 me-2 header-search-bar mb-lg-0 mb-2"
+                                            type="search"
+                                            placeholder="Rechercher un projet..."
+                                            aria-label="Rechercher un projet..."
+                                            name="q"
+                                            value="{{ app.request.get('q')|default('') }}"
+                                        >
+                                        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                                    </form>
+                                {% else %}
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item">
+                                            <span class="text-light">
+                                                <a class="nav-link d-inline-block" href="{{ path('app_login') }}">Connexion</a>
+                                                ou
+                                                <a class="nav-link d-inline-block" href="{{ path('app_register') }}">Inscription</a>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                {% endif %}
                             </div>
-
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </header>
         {% endblock %}
-        {% block body %}{% endblock %}
-        {% block footer %}{% endblock %}
-        <div aria-live="polite" aria-atomic="true" class="position-relative">
-            <div class="toast-container position-absolute end-0 p-3">
-                {% for key, flash in app.flashes %}
-                    {% for message in flash %}
-                        <div class="toast show text-white align-items-center bg-{{ key }}" role="alert" aria-live="assertive" aria-atomic="true">
-                            <div class="d-flex">
-                                <div class="toast-body">
-                                    {{ message }}
+        <div id="body" class="container-fluid">
+            {% block body %}{% endblock %}
+            <div aria-live="polite" aria-atomic="true">
+                <div class="toast-container position-absolute end-0 p-3">
+                    {% for key, flash in app.flashes %}
+                        {% for message in flash %}
+                            <div class="toast toast-animation show text-white align-items-center bg-{{ key }}" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                        {{ message|raw }}
+                                    </div>
+                                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                                 </div>
-                                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>
-                        </div>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
+                </div>
             </div>
         </div>
+        {% block footer %}
+            <footer>
+                <span><span class="app-title">{{ 'common.app_name'|trans }}</span><span> | 2022</span>
+            </footer>
+        {% endblock %}
     </body>
 </html>

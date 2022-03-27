@@ -11,9 +11,13 @@ final class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = \Faker\Factory::create('fr_FR');
+
         // Root
         $root = (new User())
             ->setEmail('root@phoenix.com')
+            ->setFirstName('Phoenix')
+            ->setLastName('Grégoire')
             ->setPlainPassword('root')
             ->setRoles([Role::SuperAdmin->value])
         ;
@@ -24,7 +28,9 @@ final class UserFixtures extends Fixture
         // Users
         foreach (range(1, 20) as $i) {
             $user = (new User())
-                ->setEmail("user$i@gmail.com")
+                ->setEmail($faker->unique()->email())
+                ->setFirstName($faker->firstName())
+                ->setLastName($faker->lastName())
                 ->setPlainPassword('123456')
                 ->setRoles([Role::User->value])
             ;
@@ -36,7 +42,9 @@ final class UserFixtures extends Fixture
         // Responsibles
         foreach (range(1, 10) as $i) {
             $user = (new User())
-                ->setEmail("responsible$i@gmail.com")
+                ->setEmail($faker->unique()->email())
+                ->setFirstName($faker->firstName())
+                ->setLastName($faker->lastName())
                 ->setPlainPassword('123456')
                 ->setRoles([Role::User->value])
             ;

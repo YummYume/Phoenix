@@ -15,12 +15,52 @@
                 <th>Name</th>
                 <td>{{ project.name }}</td>
             </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ project.description }}</td>
+            </tr>
+            <tr>
+                <th>StartAt</th>
+                <td>{{ project.startAt ? project.startAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EndAt</th>
+                <td>{{ project.endAt ? project.endAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ project.code }}</td>
+            </tr>
+            <tr>
+                <th>Archived</th>
+                <td>{{ project.archived ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Private</th>
+                <td>{{ project.private ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedBy</th>
+                <td>{{ project.createdBy }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedBy</th>
+                <td>{{ project.updatedBy }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('project_index') }}">back to list</a>
+    <a href="{{ path('app_project_index') }}">back to list</a>
 
-    <a href="{{ path('project_edit', {'id': project.id}) }}">edit</a>
+    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
 
     {{ include('project/_delete_form.html.twig') }}
 {% endblock %}

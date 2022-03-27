@@ -10,12 +10,12 @@ final class StatusFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = \Faker\Factory::create('fr_FR');
+
         foreach (range(1, 3) as $i) {
             $status = (new Status())
-                ->setTitle("Status $i")
-                ->setSlug("status_$i")
-                ->setPosition($i)
-                ->setColor('#'.dechex(rand(0, 10000000)))
+                ->setTitle(ucfirst($faker->words(rand(1, 3), true)))
+                ->setColor($faker->hexColor())
             ;
 
             $manager->persist($status);

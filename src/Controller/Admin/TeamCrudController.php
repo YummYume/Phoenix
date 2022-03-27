@@ -38,6 +38,9 @@ class TeamCrudController extends AbstractCrudController
             AssociationField::new('members', 'team.members')
                 ->formatValue(static fn (string $value, Team $entity): string => \count($entity->getMembers()))
                 ->onlyOnIndex(),
+            AssociationField::new('members', 'team.members')
+                ->onlyOnForms(),
+            AssociationField::new('parentTeam', 'team.parentTeam'),
             DateTimeField::new('createdAt', 'common.created_at')
                 ->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'common.updated_at')

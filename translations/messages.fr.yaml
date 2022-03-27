@@ -14,7 +14,7 @@ view.status.edit: Modifier le statut
 view.status.detail: Détails du statut
 view.status.single: un statut
 view.status.plural: des statuts
-view.team.index: Equipes
+view.team.index: Équipes
 view.team.new: Nouvelle équipe
 view.team.edit: Modifier l'équipe
 view.team.detail: Détails de l'équipe
@@ -42,8 +42,9 @@ status.color: Couleur
 
 # Team
 team.name: Nom
-team.responsible: Résponsable
+team.responsible: Responsable
 team.members: Membres
+team.parentTeam: Équipe parent
 
 # User
 user.email: Adresse email

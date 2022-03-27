@@ -64,10 +64,17 @@ class Project
     #[ORM\Column(type: 'boolean')]
     private ?bool $archived = false;
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Milestone::class, orphanRemoval: true)]
+    private Collection $milestones;
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $private = false;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->risks = new ArrayCollection();
+        $this->milestones = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,6 +270,48 @@ class Project
     public function setArchived(bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Milestone>
+     */
+    public function getMilestones(): Collection
+    {
+        return $this->milestones;
+    }
+
+    public function addMilestone(Milestone $milestone): self
+    {
+        if (!$this->milestones->contains($milestone)) {
+            $this->milestones[] = $milestone;
+            $milestone->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMilestone(Milestone $milestone): self
+    {
+        if ($this->milestones->removeElement($milestone)) {
+            // set the owning side to null (unless already changed)
+            if ($milestone->getProject() === $this) {
+                $milestone->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPrivate(): ?bool
+    {
+        return $this->private;
+    }
+
+    public function setPrivate(bool $private): self
+    {
+        $this->private = $private;
 
         return $this;
     }

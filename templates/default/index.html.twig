@@ -1,8 +1,132 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-<div class="example-wrapper">
-    <h1 class="mt-2">App</h1>
-</div>
+    {% if app.user %}
+        <div class="row">
+            <div class="col-12 text-center align-items-center d-flex">
+                <h2 class="w-100 my-lg-0 my-3">Bienvenue! Voici votre tableau de bord.</h2>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Projets en cours</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date de début</th>
+                                    <th scope="col">Date de fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in activeProjects %}
+                                    <tr>
+                                        <td>{{ project.name }}</td>
+                                        <td>{{ project.description }}</td>
+                                        <td>{{ project.startDate|date('d/m/Y') }}</td>
+                                        <td>{{ project.endDate|date('d/m/Y') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Projets à venir</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date de début</th>
+                                    <th scope="col">Date de fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in upcomingProjects %}
+                                    <tr>
+                                        <td>{{ project.name }}</td>
+                                        <td>{{ project.description }}</td>
+                                        <td>{{ project.startDate|date('d/m/Y') }}</td>
+                                        <td>{{ project.endDate|date('d/m/Y') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Projets avec risques</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date de début</th>
+                                    <th scope="col">Date de fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for project in projectsWithRisks %}
+                                    <tr>
+                                        <td>{{ project.name }}</td>
+                                        <td>{{ project.description }}</td>
+                                        <td>{{ project.startDate|date('d/m/Y') }}</td>
+                                        <td>{{ project.endDate|date('d/m/Y') }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3>Jalons</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Requis</th>
+                                    <th scope="col">Projet</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for milestone in milestones %}
+                                    <tr>
+                                        <td>{{ milestone.name }}</td>
+                                        <td>{{ milestone.required ? 'Oui' : 'Non' }}</td>
+                                        <td>{{ milestone.project.name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row d-flex align-items-center justify-content-center text-center">
+            <div class="col-md-10 col-12">
+                <h1>Bienvenue!</h1>
+                <h2>Vous n'êtes pas connecté. Veuillez vous <a href="{{ path('app_login') }}">connecter</a> pour accéder à votre tableau de bord. Vous pouvez également vous <a href="{{ path('app_register') }}">inscrire</a> si vous n'avez pas de compte.</h2>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

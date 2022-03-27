@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% set pageTitle = 'Recherche ' ~ pagination.params.q|default('') %}{{ parent() }}{% endblock %}
+
+{% block body %}
+    {% set query = pagination.params.q|default('') %}
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 my-2 text-center">
+            <h1 class="w-100">{{ pagination.getTotalItemCount ~ ' résultat' ~ (pagination.getTotalItemCount > 1 ? 's' : '') }}</h1>
+        </div>
+        <div class="col-md-8 my-2 col-lg-6 col-xl-5">
+            {% for project in pagination %}
+                <div class="row">
+                    {% if query is not empty %}
+                        <div class="col-12 my-2">
+                            <h2>
+                                {% if project.private %}
+                                    <i class="fa fa-lock" title="Projet privé"></i>
+                                {% endif %}
+                                <span>{{ project.name|replace({ (query): ('<span class="text-primary">' ~ query ~ '</span>')|striptags('<span>') })|raw }}</span>
+                            </h2>
+                            <p>
+                                {% set description = project.description|length > 150 ? project.description|slice(0, 150) ~ '...' : project.description %}
+                                <span>{{ description|replace({ (query): ('<span class="text-primary">' ~ query ~ '</span>')|striptags('<span>') })|raw }}</span>
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="col-12 my-2">
+                            <h2>
+                                {% if project.private %}
+                                    <i class="fa fa-lock" title="Projet privé"></i>
+                                {% endif %}
+                                <span>{{ project.name }}</span>
+                            </h2>
+                            <p>
+                                {% set description = project.description|length > 150 ? project.description|slice(0, 150) ~ '...' : project.description %}
+                                <span>{{ description }}</span>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-12 my-2 d-flex justify-content-center">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

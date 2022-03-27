@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Project;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +21,93 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
-    // /**
-    //  * @return Project[] Returns an array of Project objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    // get all public projects with title or description like query
+    public function getPublicProjects(?string $query = null, User $user = null): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.createdAt', 'DESC')
         ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Project
+        if ($user) {
+            $qb->where('p.private = false');
+        } else {
+            $qb
+                ->join('p.team', 't')
+                ->join('p.clientTeam', 'ct')
+                ->where($qb->expr()->orX(
+                    'p.private = false',
+                    $qb->expr()->isMemberOf(':user', 't.members'),
+                    $qb->expr()->isMemberOf(':user', 'ct.members')
+                ))
+                ->setParameter('user', $user)
+            ;
+        }
+
+        if ($query) {
+            $qb
+                ->andWhere($qb->expr()->orX(
+                    'p.name LIKE :query',
+                    'p.description LIKE :query'
+                ))
+                ->setParameter('query', '%'.$query.'%')
+            ;
+        }
+
+        return $qb;
+    }
+
+    public function getProjectsByUser(User $user): QueryBuilder
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+            ->join('p.team', 't')
+            ->where(':user MEMBER OF t.members')
+            ->setParameter('user', $user)
         ;
     }
-    */
+
+    // get all the active projects of a given user
+    public function getActiveProjectsByUser(User $user, bool $withRisks = false): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        $qb
+            ->join('p.team', 't')
+            ->where($qb->expr()->orX(
+                $qb->expr()->eq('t.responsible', ':user'),
+                $qb->expr()->isMemberOf(':user', 't.members')
+            ))
+            ->andWhere('p.endAt < :now')
+            ->andWhere('p.startAt > :now')
+            ->andWhere('p.archived = false')
+            ->setParameter('user', $user)
+            ->setParameter('now', new \DateTime())
+        ;
+
+        if ($withRisks) {
+            $qb
+                ->leftJoin('p.risks', 'r')
+                ->andWhere('r.id IS NOT NULL')
+            ;
+        }
+
+        return $qb;
+    }
+
+    // get all the upcoming projects of a given user
+    public function getUpcomingProjectsByUser(User $user): QueryBuilder
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb
+            ->join('p.team', 't')
+            ->where($qb->expr()->orX(
+                $qb->expr()->eq('t.responsible', ':user'),
+                $qb->expr()->isMemberOf(':user', 't.members')
+            ))
+            ->andWhere('p.startAt < :now')
+            ->andWhere('p.archived = false')
+            ->setParameter('user', $user)
+            ->setParameter('now', new \DateTime())
+        ;
+    }
 }

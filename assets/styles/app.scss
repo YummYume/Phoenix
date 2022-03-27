@@ -1,1 +1,70 @@
 @import "~bootstrap/scss/bootstrap";
+
+// Header
+header {
+    min-height: 8vh;
+
+    nav {
+        min-height: 8vh;
+    }
+}
+
+// Body
+#body {
+    min-height: 82vh;
+    display: flex;
+}
+
+// Footer
+footer {
+    height: 10vh;
+    color: rgba(var(--bs-light-rgb), 1);
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--bs-dark-rgb), 1);
+
+    &:not(.app-title) {
+        font-size: 1.5rem;
+    }
+}
+
+.app-title {
+    font-size: 2rem;
+    font-family: Brush Script MT;
+}
+
+@media screen and (min-width: 992px) {
+    .header-search-bar {
+        transition: ease-out 500ms;
+        width: 15rem;
+
+        &:focus {
+            width: 20rem;
+        }
+    }
+}
+
+.toast-animation {
+    animation: toast-animation 1s ease-out;
+}
+
+@keyframes toast-animation {
+    0% {
+        opacity: 0;
+        transform: translateY(-10rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+label {
+    &.required:after {
+        content: "*";
+        color: rgba(var(--bs-danger-rgb), 1);
+    }
+}

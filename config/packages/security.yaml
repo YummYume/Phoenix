@@ -25,6 +25,9 @@ security:
                 path: app_logout
                 target: index
             switch_user: { role: ROLE_SUPER_ADMIN }
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
 
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

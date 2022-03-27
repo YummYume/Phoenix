@@ -6,23 +6,27 @@ use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/project')]
-final class ProjectController extends AbstractController
+class ProjectController extends AbstractController
 {
-    #[Route('/', name: 'project_index', methods: ['GET'])]
-    public function index(ProjectRepository $projectRepository): Response
+    #[Route('/', name: 'app_project_index', methods: ['GET'])]
+    public function index(Request $request, PaginatorInterface $paginator, ProjectRepository $projectRepository): Response
     {
+        $projects = $projectRepository->getProjectsByUser($this->getUser());
+        $pagination = $paginator->paginate($projects, $request->query->getInt('page', 1), 10);
+
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 
-    #[Route('/new', name: 'project_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $project = new Project();
@@ -33,7 +37,7 @@ final class ProjectController extends AbstractController
             $entityManager->persist($project);
             $entityManager->flush();
 
-            return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('project/new.html.twig', [
@@ -42,7 +46,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
     public function show(Project $project): Response
     {
         return $this->render('project/show.html.twig', [
@@ -50,7 +54,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'project_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProjectType::class, $project);
@@ -59,7 +63,7 @@ final class ProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('project/edit.html.twig', [
@@ -68,7 +72,7 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'project_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_project_delete', methods: ['POST'])]
     public function delete(Request $request, Project $project, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
@@ -76,6 +80,6 @@ final class ProjectController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('project_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
     }
 }

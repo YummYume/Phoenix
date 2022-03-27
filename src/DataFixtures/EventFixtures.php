@@ -11,10 +11,13 @@ class EventFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = \Faker\Factory::create('fr_FR');
+
         foreach (range(1, 10) as $i) {
             $event = (new Event())
-                ->setDate(new \DateTime())
-                ->setName("Fait marquant $i")
+                ->setDate($faker->dateTimeBetween('-1 years', 'now'))
+                ->setName(ucfirst($faker->words(rand(1, 3), true)))
+                ->setDescription($faker->text())
                 ->setMilestone($this->getReference(MilestoneFixtures::class.$i))
                 ->setProject($this->getReference(ProjectFixtures::class.$i))
             ;

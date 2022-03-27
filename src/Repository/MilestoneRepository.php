@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Milestone;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,32 +21,22 @@ class MilestoneRepository extends ServiceEntityRepository
         parent::__construct($registry, Milestone::class);
     }
 
-    // /**
-    //  * @return Milestone[] Returns an array of Milestone objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    // get all the milestones where the given user is a member or the responsible of the team
+    public function getMilestonesByUser(User $user): QueryBuilder
     {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('m');
 
-    /*
-    public function findOneBySomeField($value): ?Milestone
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $qb
+            ->join('m.project', 'p')
+            ->join('p.team', 't')
+            ->where($qb->expr()->orX(
+                $qb->expr()->eq('t.responsible', ':user'),
+                $qb->expr()->isMemberOf(':user', 't.members')
+            ))
+            ->orderBy('m.position', 'ASC')
+            ->setParameter('user', $user)
         ;
+
+        return $qb;
     }
-    */
 }

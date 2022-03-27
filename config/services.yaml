@@ -29,8 +29,7 @@ services:
                 name: 'doctrine.event_listener'
                 event: 'preUpdate'
 
-    gedmo.listener.timestampable:
-        class: Gedmo\Timestampable\TimestampableListener
+    Gedmo\Timestampable\TimestampableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:
@@ -42,8 +41,13 @@ services:
         calls:
             - [ setAnnotationReader, [ "@annotation_reader" ] ]
 
-    gedmo.listener.sluggable:
-        class: Gedmo\Sluggable\SluggableListener
+    Gedmo\Sluggable\SluggableListener:
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    Gedmo\Sortable\SortableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
         calls:

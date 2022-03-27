@@ -25,14 +25,25 @@ class Milestone
     private ?string $name;
 
     #[ORM\Column(type: 'boolean')]
-    private ?bool $required;
+    private bool $required = true;
 
     #[Gedmo\SortablePosition]
     #[ORM\Column(type: 'integer')]
     private ?int $position;
 
     #[ORM\OneToMany(mappedBy: 'milestone', targetEntity: Event::class)]
-    private $events;
+    private Collection $events;
+
+    #[Gedmo\SortableGroup]
+    #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'milestones')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Project $project;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTime $startAt;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTime $endAt;
 
     public function __construct()
     {
@@ -106,6 +117,42 @@ class Milestone
                 $event->setMilestone(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getStartAt(): ?\DateTimeInterface
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(?\DateTimeInterface $startAt): self
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    public function getEndAt(): ?\DateTimeInterface
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(?\DateTimeInterface $endAt): self
+    {
+        $this->endAt = $endAt;
 
         return $this;
     }

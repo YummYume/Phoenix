@@ -13,10 +13,12 @@ class RiskFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
+        $faker = \Faker\Factory::create('fr_FR');
+
         foreach (range(1, 10) as $i) {
             $risk = (new Risk())
-                ->setName("Risque $i")
-                ->setIdentifiedAt(new \DateTime())
+                ->setName(ucfirst($faker->words(rand(1, 3), true)))
+                ->setIdentifiedAt($faker->dateTimeBetween('-1 years', 'now'))
                 ->setSeverity(Severity::random())
                 ->setProbability(Probability::random())
                 ->setProject($this->getReference(ProjectFixtures::class.$i))
