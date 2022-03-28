@@ -81,7 +81,7 @@ class ProjectType extends AbstractType
                 'choice_label' => 'name',
                 'required' => true,
                 'query_builder' => function (TeamRepository $teamRepository) use ($user) {
-                    return $teamRepository->findAllByUser($user);
+                    return $teamRepository->findAllByUser($user, true);
                 },
             ])
             ->add('clientTeam', EntityType::class, [

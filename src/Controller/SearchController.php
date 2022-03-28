@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Enum\Role;
 use App\Repository\ProjectRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class SearchController extends AbstractController
             $this->addFlash('warning', '<i class="fa fa-exclamation-circle"></i> Votre recherche est vide.');
         }
 
-        $projects = $projectRepository->getPublicProjects($query, $this->getUser())->getQuery()->getResult();
+        $projects = $projectRepository->getAllProjects($query, $this->isGranted(Role::Admin) ? null : $this->getUser())->getQuery()->getResult();
         $pagination = $paginator->paginate($projects, $request->query->getInt('page', 1), 5);
 
         return $this->render('search/index.html.twig', [

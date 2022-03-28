@@ -24,18 +24,8 @@ class Budget
     #[ORM\Column(type: 'float')]
     private ?float $spentAmount = 0;
 
-    private float $leftAmount = 0;
-
-    private float $landing = 0;
-
     #[ORM\OneToOne(mappedBy: 'budget', targetEntity: Project::class, cascade: ['persist', 'remove'])]
-    private $project;
-
-    public function __construct()
-    {
-        $this->leftAmount = $this->initialAmount - $this->spentAmount;
-        $this->landing = $this->spentAmount + $this->leftAmount;
-    }
+    private ?Project $project;
 
     public function getId(): ?int
     {
@@ -68,26 +58,12 @@ class Budget
 
     public function getLeftAmount(): ?float
     {
-        return $this->leftAmount;
-    }
-
-    public function setLeftAmount(float $leftAmount): self
-    {
-        $this->leftAmount = $leftAmount;
-
-        return $this;
+        return $this->initialAmount - $this->spentAmount;
     }
 
     public function getLanding(): ?float
     {
-        return $this->landing;
-    }
-
-    public function setLanding(float $landing): self
-    {
-        $this->landing = $landing;
-
-        return $this;
+        return $this->spentAmount + $this->leftAmount;
     }
 
     public function getProject(): ?Project

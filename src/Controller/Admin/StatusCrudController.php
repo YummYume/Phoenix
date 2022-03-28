@@ -20,7 +20,7 @@ class StatusCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'view.status.index')
+            ->setPageTitle('app_index', 'view.status.index')
             ->setPageTitle('new', 'view.status.create')
             ->setPageTitle('edit', 'view.status.edit')
             ->setPageTitle('detail', 'view.status.detail')

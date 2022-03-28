@@ -251,7 +251,7 @@ class Project
         return $this;
     }
 
-    public function getArchived(): ?bool
+    public function isArchived(): ?bool
     {
         return $this->archived;
     }
@@ -293,7 +293,7 @@ class Project
         return $this;
     }
 
-    public function getPrivate(): ?bool
+    public function isPrivate(): ?bool
     {
         return $this->private;
     }

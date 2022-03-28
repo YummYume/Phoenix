@@ -20,7 +20,7 @@ final class ProjectFixtures extends Fixture implements DependentFixtureInterface
                 ->setDescription($faker->text())
                 ->setStatus($this->getReference(StatusFixtures::class.rand(1, 3)))
                 ->setStartAt($faker->dateTimeBetween('-1 years', '+1 years'))
-                ->setPortfolio($this->getReference(PortfolioFixtures::class.$portfolioCount))
+                ->addPortfolio($this->getReference(PortfolioFixtures::class.$portfolioCount))
                 ->setTeam($this->getReference(TeamFixtures::class.$i))
                 ->setBudget($this->getReference(BudgetFixtures::class.$i))
                 ->setArchived($faker->boolean(10))

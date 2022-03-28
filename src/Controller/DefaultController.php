@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 final class DefaultController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'app_index')]
     public function index(ProjectRepository $projectRepository, MilestoneRepository $milestoneRepository): Response
     {
         $user = $this->getUser();

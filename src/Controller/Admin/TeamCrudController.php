@@ -19,7 +19,7 @@ class TeamCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'view.team.index')
+            ->setPageTitle('app_index', 'view.team.index')
             ->setPageTitle('new', 'view.team.create')
             ->setPageTitle('edit', 'view.team.edit')
             ->setPageTitle('detail', 'view.team.detail')

@@ -23,7 +23,7 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'view.user.index')
+            ->setPageTitle('app_index', 'view.user.index')
             ->setPageTitle('new', 'view.user.create')
             ->setPageTitle('edit', 'view.user.edit')
             ->setPageTitle('detail', 'view.user.detail')

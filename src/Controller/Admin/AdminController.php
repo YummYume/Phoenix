@@ -40,7 +40,7 @@ class AdminController extends AbstractDashboardController
     {
         return parent::configureUserMenu($user)
             ->addMenuItems([
-                MenuItem::linkToRoute('menu.return_to_homepage', 'fas fa-home', 'index'),
+                MenuItem::linkToRoute('menu.return_to_homepage', 'fas fa-home', 'app_index'),
             ])
         ;
     }

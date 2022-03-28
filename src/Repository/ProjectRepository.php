@@ -22,20 +22,20 @@ class ProjectRepository extends ServiceEntityRepository
     }
 
     // get all public projects with title or description like query
-    public function getPublicProjects(?string $query = null, User $user = null): QueryBuilder
+    public function getAllProjects(?string $query = null, ?User $user = null): QueryBuilder
     {
         $qb = $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC')
         ;
 
-        if ($user) {
-            $qb->where('p.private = false');
-        } else {
+        if (!$user) {
             $qb
                 ->join('p.team', 't')
                 ->join('p.clientTeam', 'ct')
                 ->where($qb->expr()->orX(
                     'p.private = false',
+                    ':user = t.responsible',
+                    ':user = ct.responsible',
                     $qb->expr()->isMemberOf(':user', 't.members'),
                     $qb->expr()->isMemberOf(':user', 'ct.members')
                 ))

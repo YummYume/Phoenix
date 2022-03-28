@@ -22,18 +22,25 @@ class TeamRepository extends ServiceEntityRepository
     }
 
     // get all the teams of a user
-    public function findAllByUser(User $user): QueryBuilder
+    public function findAllByUser(User $user, bool $responsible = false): QueryBuilder
     {
-        $qb = ($this->createQueryBuilder('t'));
-
-        $qb
-            ->where($qb->expr()->orX(
-                $qb->expr()->isMemberOf(':user', 't.members'),
-                't.responsible = :user'
-            ))
+        $qb = ($this->createQueryBuilder('t'))
             ->setParameter('user', $user)
             ->orderBy('t.name', 'ASC')
         ;
+
+        if ($responsible) {
+            $qb
+                ->where('t.responsible = :user')
+            ;
+        } else {
+            $qb
+                ->where($qb->expr()->orX(
+                    $qb->expr()->isMemberOf(':user', 't.members'),
+                    't.responsible = :user'
+                ))
+            ;
+        }
 
         return $qb;
     }
