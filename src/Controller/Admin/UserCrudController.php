@@ -84,10 +84,8 @@ class UserCrudController extends AbstractCrudController
             DateTimeField::new('updatedAt', 'common.updated_at')
                 ->onlyOnIndex(),
             TextField::new('createdBy', 'common.created_by')
-                ->formatValue(static fn (?User $user): string|null => $user)
                 ->onlyOnIndex(),
             TextField::new('updatedBy', 'common.updated_by')
-                ->formatValue(static fn (?User $user): string|null => $user)
                 ->onlyOnIndex(),
         ];
     }

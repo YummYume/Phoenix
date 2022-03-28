@@ -24,9 +24,9 @@ class Budget
     #[ORM\Column(type: 'float')]
     private ?float $spentAmount = 0;
 
-    private float $leftAmount;
+    private float $leftAmount = 0;
 
-    private float $landing;
+    private float $landing = 0;
 
     #[ORM\OneToOne(mappedBy: 'budget', targetEntity: Project::class, cascade: ['persist', 'remove'])]
     private $project;

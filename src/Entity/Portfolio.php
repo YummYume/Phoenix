@@ -26,12 +26,12 @@ class Portfolio
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'portfolios')]
     private ?User $responsible;
 
-    #[ORM\OneToMany(mappedBy: 'portfolio', targetEntity: Project::class)]
-    private Collection $Projects;
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'portfolios')]
+    private Collection $projects;
 
     public function __construct()
     {
-        $this->Projects = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,14 +68,14 @@ class Portfolio
      */
     public function getProjects(): Collection
     {
-        return $this->Projects;
+        return $this->projects;
     }
 
     public function addProject(Project $project): self
     {
-        if (!$this->Projects->contains($project)) {
-            $this->Projects[] = $project;
-            $project->setPortfolio($this);
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->addPortfolio($this);
         }
 
         return $this;
@@ -83,11 +83,8 @@ class Portfolio
 
     public function removeProject(Project $project): self
     {
-        if ($this->Projects->removeElement($project)) {
-            // set the owning side to null (unless already changed)
-            if ($project->getPortfolio() === $this) {
-                $project->setPortfolio(null);
-            }
+        if ($this->projects->removeElement($project)) {
+            $project->removePortfolio($this);
         }
 
         return $this;

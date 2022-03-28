@@ -41,9 +41,6 @@ class Project
     #[Gedmo\Slug(fields: ['name'])]
     private ?string $code;
 
-    #[ORM\ManyToOne(targetEntity: Portfolio::class, inversedBy: 'Projects')]
-    private ?Portfolio $portfolio;
-
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Team $team;
@@ -70,11 +67,15 @@ class Project
     #[ORM\Column(type: 'boolean')]
     private bool $private = false;
 
+    #[ORM\ManyToMany(targetEntity: Portfolio::class, inversedBy: 'projects')]
+    private Collection $portfolios;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->risks = new ArrayCollection();
         $this->milestones = new ArrayCollection();
+        $this->portfolios = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,18 +151,6 @@ class Project
     public function setCode(string $code): self
     {
         $this->code = $code;
-
-        return $this;
-    }
-
-    public function getPortfolio(): ?Portfolio
-    {
-        return $this->portfolio;
-    }
-
-    public function setPortfolio(?Portfolio $portfolio): self
-    {
-        $this->portfolio = $portfolio;
 
         return $this;
     }
@@ -312,6 +301,30 @@ class Project
     public function setPrivate(bool $private): self
     {
         $this->private = $private;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Portfolio>
+     */
+    public function getPortfolios(): Collection
+    {
+        return $this->portfolios;
+    }
+
+    public function addPortfolio(Portfolio $portfolio): self
+    {
+        if (!$this->portfolios->contains($portfolio)) {
+            $this->portfolios[] = $portfolio;
+        }
+
+        return $this;
+    }
+
+    public function removePortfolio(Portfolio $portfolio): self
+    {
+        $this->portfolios->removeElement($portfolio);
 
         return $this;
     }

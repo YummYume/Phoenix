@@ -1,4 +1,23 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'id': 'project-form'}}) }}
+    <div class="row">
+        <div class="col-md-6">
+            <h3>{{ 'view.project.title'|trans }}</h3>
+            {{ form_row(form.name) }}
+            {{ form_row(form.code) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.startAt) }}
+            {{ form_row(form.endAt) }}
+            {{ form_row(form.archived) }}
+            {{ form_row(form.private) }}
+        </div>
+        <div class="col-md-6">
+            {{ form_row(form.status) }}
+            {{ form_row(form.portfolios) }}
+            {{ form_row(form.team) }}
+            {{ form_row(form.clientTeam) }}
+            <h3>{{ form_label(form.budget) }}</h3>
+            {{ form_row(form.budget.initialAmount) }}
+            {{ form_row(form.budget.spentAmount) }}
+        </div>
+    </div>
 {{ form_end(form) }}

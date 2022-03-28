@@ -12,18 +12,28 @@
                 <a href="{{ path('app_project_new')}}" class="btn btn-primary">Créer un projet</a>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-xl-8 col-md-10 col-12">
             <table class="table table-hover">
                 <tr>
                     <th{% if pagination.isSorted('p.name') %} class="sorted"{% endif %}>
-                        {{ knp_pagination_sortable(pagination, 'Nom', 'p.name') }}
+                        {{ knp_pagination_sortable(pagination, 'project.name'|trans, 'p.name') }}
                     </th>
                     <th{% if pagination.isSorted('p.startAt') %} class="sorted"{% endif %}>
-                        {{ knp_pagination_sortable(pagination, 'Commence le', 'p.startAt') }}
+                        {{ knp_pagination_sortable(pagination, 'project.start_at'|trans, 'p.startAt') }}
                     </th>
                     <th{% if pagination.isSorted('p.endAt') %} class="sorted"{% endif %}>
-                        {{ knp_pagination_sortable(pagination, 'Termine le', 'p.endAt') }}
+                        {{ knp_pagination_sortable(pagination, 'project.end_at'|trans, 'p.endAt') }}
                     </th>
+                    <th{% if pagination.isSorted('p.archived') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'project.archived'|trans, 'p.archived') }}
+                    </th>
+                    <th{% if pagination.isSorted('p.private') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'project.private'|trans, 'p.private') }}
+                    </th>
+                    <th{% if pagination.isSorted('p.budget.leftAmount') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'budget.left_amount'|trans, 'p.budget.leftAmount') }}
+                    </th>
+                    <th>{{ 'common.actions'|trans }}</th>
                 </tr>
 
                 {% for project in pagination %}
@@ -31,6 +41,14 @@
                         <td>{{ project.name }}</td>
                         <td>{{ project.startAt ? project.startAt|date('Y/m/d H:i:s') : '' }}</td>
                         <td>{{ project.endAt ? project.endAt|date('Y/m/d H:i:s') : '' }}</td>
+                        <td>{{ (project.archived ? 'common.yes' : 'common.no')|trans }}</td>
+                        <td>{{ (project.private ? 'common.yes' : 'common.no')|trans }}</td>
+                        <td>{{ project.budget.leftAmount ~ '€' }}</td>
+                        <td>
+                            <i class="fa fa-eye me-1"></i>
+                            <i class="fa fa-pencil me-1"></i>
+                            <i class="fa fa-trash"></i>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

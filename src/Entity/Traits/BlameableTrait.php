@@ -9,21 +9,21 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait BlameableTrait
 {
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\Column(nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Gedmo\Blameable(on: 'create')]
     private $createdBy;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\Column(nullable: true)]
+    #[ORM\JoinColumn(nullable: true)]
     #[Gedmo\Blameable(on: 'update')]
     private $updatedBy;
 
-    public function getCreatedBy(): ?User
+    public function getCreatedBy()
     {
         return $this->createdBy;
     }
 
-    public function getUpdatedBy(): ?User
+    public function getUpdatedBy()
     {
         return $this->updatedBy;
     }

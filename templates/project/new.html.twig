@@ -3,9 +3,24 @@
 {% block title %}New Project{% endblock %}
 
 {% block body %}
-    <h1>Create new Project</h1>
-
-    {{ include('project/_form.html.twig') }}
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>Créer un nouveau projet</h1>
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('project/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" href="{{ path('app_project_index') }}">
+                        <i class="fa fa-arrow-left"></i>
+                        {{ 'common.back_to_list'|trans }}
+                    </a>
+                    <button class="btn btn-outline-success" action="submit" form="project-form">
+                        <i class="fa fa-save"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
