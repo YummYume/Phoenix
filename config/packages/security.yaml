@@ -23,7 +23,7 @@ security:
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
-                target: index
+                target: app_index
             switch_user: { role: ROLE_SUPER_ADMIN }
             remember_me:
                 secret: '%kernel.secret%'

@@ -68,3 +68,17 @@ label {
         color: rgba(var(--bs-danger-rgb), 1);
     }
 }
+
+a {
+    color: rgba(var(--bs-dark-rgb), 1);
+    text-decoration: inherit;
+    transition: 2s;
+    border-bottom: 2px solid transparent;
+
+    :hover {
+        color: rgba(var(--bs-dark-rgb), 1);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(var(--bs-dark-rgb), 1);
+        transition: 2s;
+    }
+}
