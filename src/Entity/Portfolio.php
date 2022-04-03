@@ -8,6 +8,7 @@ use App\Repository\PortfolioRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PortfolioRepository::class)]
 class Portfolio
@@ -21,9 +22,12 @@ class Portfolio
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'portfolio.name.not_blank')]
     private ?string $name;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'portfolios')]
+    #[Assert\NotBlank(allowNull: false, message: 'portfolio.responsible.not_blank')]
+    #[Assert\Valid()]
     private ?User $responsible;
 
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'portfolios')]

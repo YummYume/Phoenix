@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% set pageTitle = 'view.milestone.edit'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'view.milestone.edit'|trans }}</h1>
+        </div>
+        <div class="col-12 my-3 text-end">
+            {% include('common/_timestampable_blameable.html.twig') with {
+                created_at: milestone.createdAt,
+                created_by: milestone.createdBy,
+                updated_at: milestone.updatedAt,
+                updated_by: milestone.updatedBy
+            } only %}
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('project/milestone/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" href="{{ path('app_project_show', {'code': milestone.project.code, '_fragment': 'project-milestones'}) }}">
+                        <i class="fa fa-arrow-left"></i>
+                        {{ 'project.back_to_project'|trans }}
+                    </a>
+                    <button class="btn btn-outline-danger" action="submit" form="milestone-delete">
+                        {{ include('project/milestone/_delete_form.html.twig') }}
+                        <i class="fa fa-trash"></i>
+                        {{ 'common.delete'|trans }}
+                    </button>
+                    <button class="btn btn-outline-success" action="submit" form="milestone-form">
+                        <i class="fa fa-save"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -9,16 +9,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-class SearchController extends AbstractController
+final class SearchController extends AbstractController
 {
     #[Route('/search', name: 'app_search')]
-    public function search(Request $request, PaginatorInterface $paginator, ProjectRepository $projectRepository): Response
-    {
+    public function search(
+        Request $request,
+        PaginatorInterface $paginator,
+        ProjectRepository $projectRepository,
+        TranslatorInterface $translator
+    ): Response {
         $query = trim($request->get('q'));
 
         if (empty($query)) {
-            $this->addFlash('warning', '<i class="fa fa-exclamation-circle"></i> Votre recherche est vide.');
+            $this->addFlash('warning', $translator->trans('common.empty_search', domain: 'flashes'));
         }
 
         $projects = $projectRepository->getAllProjects($query, $this->isGranted(Role::Admin) ? null : $this->getUser())->getQuery()->getResult();

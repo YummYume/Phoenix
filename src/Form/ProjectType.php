@@ -2,12 +2,11 @@
 
 namespace App\Form;
 
-use App\Entity\Portfolio;
 use App\Entity\Project;
 use App\Entity\Status;
 use App\Entity\Team;
-use App\Repository\PortfolioRepository;
 use App\Repository\TeamRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -18,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Security;
 
-class ProjectType extends AbstractType
+final class ProjectType extends AbstractType
 {
     public function __construct(private Security $security)
     {
@@ -27,6 +26,7 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $user = $this->security->getUser();
+        $project = $builder->getData();
 
         $builder
             ->add('name', TextType::class, [
@@ -47,11 +47,6 @@ class ProjectType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('code', TextType::class, [
-                'label' => 'project.code',
-                'required' => false,
-                'disabled' => true,
-            ])
             ->add('archived', CheckboxType::class, [
                 'label' => 'project.archived',
                 'required' => false,
@@ -64,15 +59,8 @@ class ProjectType extends AbstractType
                 'label' => 'project.status',
                 'class' => Status::class,
                 'choice_label' => 'title',
-            ])
-            ->add('portfolios', EntityType::class, [
-                'label' => 'project.portfolios',
-                'class' => Portfolio::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'required' => false,
-                'query_builder' => function (PortfolioRepository $portfolioRepository) use ($user) {
-                    return $portfolioRepository->findAllByUser($user);
+                'choice_attr' => function (?Status $status): array {
+                    return $status ? ['style' => 'color: '.$status->getColor().';'] : [];
                 },
             ])
             ->add('team', EntityType::class, [
@@ -80,7 +68,7 @@ class ProjectType extends AbstractType
                 'class' => Team::class,
                 'choice_label' => 'name',
                 'required' => true,
-                'query_builder' => function (TeamRepository $teamRepository) use ($user) {
+                'query_builder' => static function (TeamRepository $teamRepository) use ($user): QueryBuilder {
                     return $teamRepository->findAllByUser($user, true);
                 },
             ])
@@ -92,9 +80,17 @@ class ProjectType extends AbstractType
             ])
             ->add('budget', BudgetType::class, [
                 'label' => 'project.budget',
-                'required' => false,
+                'required' => true,
             ])
         ;
+
+        if ($project->getId()) {
+            $builder->add('code', TextType::class, [
+                'label' => 'project.code',
+                'required' => false,
+                'disabled' => true,
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void

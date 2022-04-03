@@ -1,25 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.project.edit'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <div class="row w-100 m-auto justify-content-center">
-        <div class="col-12 text-center my-2">
+        <div class="col-12 text-center my-4">
             <h1>Modifier un projet</h1>
         </div>
-        <div class="col-xl-10 col-12 my-2">
+        <div class="col-xl-10 col-12 my-4">
             {{ include('project/_form.html.twig') }}
-            <div class="col-12 text-end">
+            <div class="col-12 text-end my-2">
                 <div class="btn-group">
-                    <a class="btn btn-outline-primary" href="{{ path('app_project_index') }}">
+                    <a class="btn btn-outline-secondary" href="{{ path('app_project_index') }}">
                         <i class="fa fa-arrow-left"></i>
                         {{ 'common.back_to_list'|trans }}
                     </a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_project_delete', { id: project.id }) }}" form="project-delete">
+                    <a class="btn btn-outline-primary" href="{{ path('app_project_show', {code: project.code}) }}">
+                        <i class="fa fa-eye"></i>
+                        {{ 'project.show_project'|trans }}
+                    </a>
+                    <button class="btn btn-outline-danger" action="submit" form="project-delete">
                         {{ include('project/_delete_form.html.twig') }}
                         <i class="fa fa-trash"></i>
                         {{ 'common.delete'|trans }}
-                    </a>
+                    </button>
                     <button class="btn btn-outline-success" action="submit" form="project-form">
                         <i class="fa fa-save"></i>
                         {{ 'common.save'|trans }}

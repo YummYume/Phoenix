@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Project{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.project.create'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <div class="row w-100 m-auto justify-content-center">
         <div class="col-12 text-center my-4">
-            <h1>Créer un nouveau projet</h1>
+            <h1>{{ 'view.project.create'|trans }}</h1>
         </div>
         <div class="col-xl-10 col-12 my-4">
             {{ include('project/_form.html.twig') }}
             <div class="col-12 text-end my-2">
                 <div class="btn-group">
-                    <a class="btn btn-outline-primary" href="{{ path('app_project_index') }}">
+                    <a class="btn btn-outline-secondary" href="{{ path('app_project_index') }}">
                         <i class="fa fa-arrow-left"></i>
                         {{ 'common.back_to_list'|trans }}
                     </a>

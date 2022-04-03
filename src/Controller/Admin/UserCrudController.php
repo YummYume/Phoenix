@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -23,7 +24,7 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('app_index', 'view.user.index')
+            ->setPageTitle('index', 'view.user.index')
             ->setPageTitle('new', 'view.user.create')
             ->setPageTitle('edit', 'view.user.edit')
             ->setPageTitle('detail', 'view.user.detail')
@@ -50,6 +51,9 @@ class UserCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
                     'invalid_message' => 'user.password.mismatch',
+                    'constraints' => [
+                        new NotBlank(allowNull: false, message: 'user.password.not_blank'),
+                    ],
                     'options' => ['attr' => ['class' => 'password-field']],
                     'required' => true,
                     'first_options' => [

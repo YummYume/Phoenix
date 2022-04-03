@@ -14,6 +14,9 @@ final class ProjectVoter extends Voter
 {
     public const EDIT = 'PROJECT_EDIT';
     public const VIEW = 'PROJECT_VIEW';
+    public const EDIT_MILESTONE = 'PROJECT_EDIT_MILESTONE';
+    public const EDIT_RISK = 'PROJECT_EDIT_RISK';
+    public const EDIT_EVENT = 'PROJECT_EDIT_EVENT';
 
     public function __construct(private Security $security)
     {
@@ -21,7 +24,7 @@ final class ProjectVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return in_array($attribute, [self::EDIT, self::VIEW]) && $subject instanceof Project;
+        return in_array($attribute, [self::EDIT, self::VIEW, self::EDIT_MILESTONE, self::EDIT_RISK, self::EDIT_EVENT]) && $subject instanceof Project;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -39,6 +42,15 @@ final class ProjectVoter extends Voter
             case self::VIEW:
                 return $this->canView($subject, $user);
                 break;
+            case self::EDIT_MILESTONE:
+                return $this->canEditMilestones($subject, $user);
+                break;
+            case self::EDIT_RISK:
+                return $this->canEditRisks($subject, $user);
+                break;
+            case self::EDIT_EVENT:
+                return $this->canEditEvents($subject, $user);
+                break;
         }
 
         return false;
@@ -51,18 +63,37 @@ final class ProjectVoter extends Voter
 
     private function canView(Project $project, User $user): bool
     {
-        if ($this->security->isGranted(Role::Admin, $user)) {
-            return true;
-        }
-
-        if ($project->isPrivate()) {
+        if ($project->isPrivate() && !$this->security->isGranted(Role::Admin, $user)) {
             return
                 $project->getTeam()->getMembers()->contains($user)
-                || $project->getClientTeam()->getMembers()->contains($user)
+                || $project->getClientTeam()?->getMembers()->contains($user)
+                || $project->getClientTeam()?->getResponsible() === $user
+                || $project->getTeam()->getParentTeam()?->getMembers()->contains($user)
+                || $project->getTeam()->getParentTeam()?->getResponsible() === $user
                 || $project->getTeam()->getResponsible() === $user
             ;
         }
 
         return true;
+    }
+
+    private function canEditMilestones(Project $project, User $user): bool
+    {
+        return $this->canEdit($project, $user) || $project->getTeam()->getMembers()->contains($user);
+    }
+
+    private function canEditRisks(Project $project, User $user): bool
+    {
+        return $this->canEdit($project, $user) || $project->getTeam()->getMembers()->contains($user);
+    }
+
+    private function canEditEvents(Project $project, User $user): bool
+    {
+        return
+            $this->canEdit($project, $user)
+            || $project->getTeam()->getMembers()->contains($user)
+            || $project->getClientTeam()?->getMembers()->contains($user)
+            || $project->getClientTeam()?->getResponsible() === $user
+        ;
     }
 }

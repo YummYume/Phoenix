@@ -1,34 +1,91 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Team{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.team.show'|trans({name: team.name}) %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Team</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ team.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ team.name }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ team.createdAt ? team.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ team.updatedAt ? team.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_team_index') }}">back to list</a>
-
-    <a href="{{ path('app_team_edit', {'id': team.id}) }}">edit</a>
-
-    {{ include('team/_delete_form.html.twig') }}
+    <div class="row mx-auto w-100 justify-content-center">
+        <div class="col-md-10 col-12 mt-5 mb-2">
+            <div class="text-center">
+                <h1>{{ team.name }}</h1>
+            </div>
+        </div>
+        <div class="col-12 my-3">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 col-sm-5 col-12 mb-2">
+                    <div class="btn-group">
+                        <a class="btn btn-outline-secondary" href="{{ path('app_team_index') }}">
+                            <i class="fa fa-arrow-left"></i>
+                            {{ 'common.back'|trans }}
+                        </a>
+                        {% if is_granted(constant('App\\Security\\Voter\\TeamVoter::EDIT'), team) %}
+                            <a class="btn btn-outline-primary" href="{{ path('app_team_edit', {id: team.id}) }}">
+                                <i class="fa fa-pen"></i>
+                                {{ 'common.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-7 col-12 text-end mb-2">
+                    {% include('common/_timestampable_blameable.html.twig') with {
+                        created_at: team.createdAt,
+                        created_by: team.createdBy,
+                        updated_at: team.updatedAt,
+                        updated_by: team.updatedBy
+                    } only %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-12 my-2">
+            <div class="text-center">
+                <h2>{{ 'common.information'|trans }}</h2>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mt-4 mb-md-4 mb-0 align-self-center">
+            <div class="info-display">
+                <p>{{ 'team.responsible'|trans }}</p>
+                <span>{{ team.responsible.fullName }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'team.members'|trans ~ ' (' ~ team.members|length ~ ')' }}</p>
+                <span>{{ team.members|map(m => m.fullName)|join(', ') }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'team.teams'|trans }}</p>
+                <span>{{ team.teams|length }}</span>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mb-4 mt-md-4 mt-0 align-self-center">
+            {% if team.parentTeam %}
+                <div class="info-display">
+                    <p>{{ 'team.parent_team'|trans }}</p>
+                    <a href="{{ path('app_team_show', {id: team.parentTeam.id}) }}">
+                        <span>{{ team.parentTeam.name ~ ' (' ~ 'team.member_count'|trans({members: team.parentTeam.members|length}) ~ ')' }}</span>
+                    </a>
+                </div>
+            {% endif %}
+            <div class="info-display">
+                <p>{{ 'team.projects'|trans ~ ' (' ~ team.projects|length ~ ')' }}</p>
+                {% if team.projects is not empty %}
+                    <span>
+                        {{ team.projects|map(p => '<a href="' ~ path('app_project_show', {code: p.code}) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
+                    </span>
+                {% else %}
+                    <span>{{ 'common.none'|trans }}</span>
+                {% endif %}
+            </div>
+            <div class="info-display">
+                <p>{{ 'team.client_projects'|trans ~ ' (' ~ team.clientProjects|length ~ ')' }}</p>
+                {% if team.clientProjects is not empty %}
+                    <span>
+                        {{ team.clientProjects|map(p => '<a href="' ~ path('app_project_show', {code: p.code}) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
+                    </span>
+                {% else %}
+                    <span>{{ 'common.none'|trans }}</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Project[]    findAll()
  * @method Project[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProjectRepository extends ServiceEntityRepository
+final class ProjectRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -76,8 +76,8 @@ class ProjectRepository extends ServiceEntityRepository
                 $qb->expr()->eq('t.responsible', ':user'),
                 $qb->expr()->isMemberOf(':user', 't.members')
             ))
-            ->andWhere('p.endAt < :now')
-            ->andWhere('p.startAt > :now')
+            ->andWhere('p.endAt > :now')
+            ->andWhere('p.startAt < :now')
             ->andWhere('p.archived = false')
             ->setParameter('user', $user)
             ->setParameter('now', new \DateTime())
@@ -104,7 +104,7 @@ class ProjectRepository extends ServiceEntityRepository
                 $qb->expr()->eq('t.responsible', ':user'),
                 $qb->expr()->isMemberOf(':user', 't.members')
             ))
-            ->andWhere('p.startAt < :now')
+            ->andWhere('p.startAt > :now')
             ->andWhere('p.archived = false')
             ->setParameter('user', $user)
             ->setParameter('now', new \DateTime())

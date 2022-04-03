@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Projects{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.project.index'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <div class="row mx-auto w-100 justify-content-center align-items-center">
         <div class="col-12">
             <div class="text-center">
-                <h1>Vos projets ({{ pagination.getTotalItemCount }})</h1>
+                <h1>{{ 'view.projects.index'|trans }} ({{ pagination.getTotalItemCount }})</h1>
             </div>
             <div class="text-end">
-                <a href="{{ path('app_project_new')}}" class="btn btn-outline-success">Créer un projet</a>
+                <a href="{{ path('app_project_new')}}" class="btn btn-outline-success">{{ 'view.project.create'|trans }}</a>
             </div>
         </div>
         <div class="col-xl-8 col-md-10 col-12 table-responsive">
@@ -37,18 +40,20 @@
                 {% for project in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
                         <td>{{ project.name }}</td>
-                        <td>{{ project.startAt ? project.startAt|date('Y/m/d H:i:s') : '' }}</td>
-                        <td>{{ project.endAt ? project.endAt|date('Y/m/d H:i:s') : '' }}</td>
+                        <td>{{ project.startAt ? project.startAt|date('d/m/Y H:i:s') : '' }}</td>
+                        <td>{{ project.endAt ? project.endAt|date('d/m/Y H:i:s') : '' }}</td>
                         <td>{{ (project.archived ? 'common.yes' : 'common.no')|trans }}</td>
                         <td>{{ (project.private ? 'common.yes' : 'common.no')|trans }}</td>
-                        <td>{{ project.budget.leftAmount ~ '€' }}</td>
+                        <td>{{ project.budget.leftAmount|format_currency('EUR') }}</td>
                         <td>
-                            <a href="{{ path('app_project_show', { id: project.id }) }}">
-                                <i class="fa fa-eye me-1" title="Voir le projet"></i>
+                            <a href="{{ path('app_project_show', { code: project.code }) }}">
+                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
                             </a>
-                            <a href="{{ path('app_project_edit', { id: project.id }) }}">
-                                <i class="fa fa-pencil me-1" title="Modifier le projet"></i>
-                            </a>
+                            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
+                                <a href="{{ path('app_project_edit', { code: project.code }) }}">
+                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

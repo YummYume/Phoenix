@@ -1,0 +1,88 @@
+### User
+user.password.mismatch: Les mots de passe ne correspondent pas.
+user.email.unique: Cette adresse email est déjà utilisée.
+user.email.not_blank: L'adresse email est obligatoire.
+user.email.invalid: Veuillez entrer une adresse email valide.
+user.password.min_length: Le mot de passe doit contenir au moins 8 caractères.
+user.password.max_length: Le mot de passe ne doit pas dépasser 4096 caractères.
+user.password.invalid: Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.
+user.password.compromised: Ce mot de passe est compromis. Veuillez en choisir un autre.
+user.password.not_blank: Veuillez entrer un mot de passe.
+user.current_password.not_blank: Veuiillez entrer votre mot de passe actuel.
+user.current_password.invalid: Le mot de passe ne correspond pas.
+user.first_name.not_blank: Le prénom ne peut pas être vide.
+user.last_name.not_blank: Le nom ne peut pas être vide.
+user.agree_terms_error: Vous devez accepter les conditions d'utilisation.
+
+### Team
+team.name.not_blank: Le nom de l'équipe ne peut pas être vide.
+team.responsible.not_blank: Le responsable de l'équipe ne peut pas être vide.
+team.responsible.not_in_members: Le responsable de l'équipe doit être dans la liste des membres de l'équipe.
+team.parent_team.not_self: L'équipe parent ne peut pas être l'équipe courante.
+
+### Status
+status.slug.unique: Ce slug est déjà utilisé.
+status.name.not_blank: Le nom du statut ne peut pas être vide.
+status.position.type: La position du statut doit être un nombre entier.
+status.position.positive_or_zero: La position du statut doit être supérieure ou égale à 0.
+status.color.not_blank: La couleur du statut ne peut pas être vide.
+status.color.css_color: La couleur du statut doit être une couleur CSS valide.
+
+### Risk
+risk.name.not_blank: Le nom du risque ne peut pas être vide.
+risk.identified_at.not_blank: La date d'identification du risque ne peut pas être vide.
+risk.identified_at.type: La date d'identification du risque doit être une date valide.
+risk.identified_at.greater_than_or_equal: La date d'identification du risque doit être supérieure ou égale à la date de début du projet ({compared_value}).
+risk.resolved_at.not_blank: La date de résolution du risque ne peut pas être vide.
+risk.resolved_at.type: La date de résolution du risque doit être une date valide.
+risk.resolved_at.greater_than_or_equal: La date de résolution du risque doit être supérieure ou égale à la date d'identification du risque.
+risk.severity.not_blank: La sévérité du risque ne peut pas être vide.
+risk.severity.type: La sévérité du risque n'est pas reconnue.
+risk.probability.not_blank: La probabilité du risque ne peut pas être vide.
+risk.probability.type: La probabilité du risque n'est pas reconnue.
+status.project.not_blank: Le projet du risque ne peut pas être vide.
+
+### Project
+project.code.unique: Ce code est déjà utilisé.
+project.name.not_blank: Le nom du projet ne peut pas être vide.
+project.start_at.not_blank: La date de début du projet ne peut pas être vide.
+project.start_at.type: La date de début du projet doit être une date valide.
+project.end_at.not_blank: La date de fin du projet ne peut pas être vide.
+project.end_at.type: La date de fin du projet doit être une date valide.
+project.end_at.greater_than_or_equal_start_at: La date de fin du projet doit être supérieure ou égale à la date de début du projet.
+project.team.not_blank: L'équipe du projet ne peut pas être vide.
+project.client_team.not_blank: L'équipe client du projet ne peut pas être vide.
+project.budget.not_blank: Le budget du projet ne peut pas être vide.
+project.archived.type: Le statut "archivé" du projet doit être vrai ou faux.
+project.private.type: Le statut "privé" du projet doit être vrai ou faux.
+
+### Portfolio
+portfolio.name.not_blank: Le nom du portefeuille ne peut pas être vide.
+portfolio.responsible.not_blank: Le responsable du portefeuille ne peut pas être vide.
+
+### Milestone
+milestone.title.not_blank: Le titre du jalon ne peut pas être vide.
+milestone.required.type: Le statut "requis" du jalon doit être vrai ou faux.
+milestone.position.type: La position du jalon doit être un nombre entier.
+milestone.position.positive_or_zero: La position du jalon doit être supérieure ou égale à 0.
+milestone.start_at.not_blank: La date de début du jalon ne peut pas être vide.
+milestone.deadline.datetime: La date de début du jalon doit être une date valide.
+milestone.end_at.not_blank: La date de fin du jalon ne peut pas être vide.
+milestone.end_at.datetime: La date de fin du jalon doit être une date valide.
+milestone.start_at.greater_than_or_equal: La date de début du jalon doit être supérieure ou égale à la date de début du projet ({compared_value}).
+milestone.end_at.greater_than_start_at: La date de fin du jalon doit être supérieure à la date de début du jalon.
+
+### Event
+event.date.not_blank: La date du fait marquant ne peut pas être vide.
+event.date.type: La date du fait marquant doit être une date valide.
+event.date.greater_than_or_equal: La date du fait marquant doit être supérieure ou égale à la date de début du projet ({compared_value}).
+event.name.not_blank: Le nom du fait marquant ne peut pas être vide.
+event.milestone.not_blank: Le jalon du fait marquant ne peut pas être vide.
+event.project.not_blank: Le projet du fait marquant ne peut pas être vide.
+
+### Budget
+budget.amount.not_blank: Le montant du budget ne peut pas être vide.
+budget.amount.type: Le montant du budget doit être un nombre entier ou décimal.
+budget.spent_amount.not_blank: Le montant dépensé du budget ne peut pas être vide.
+budget.spentAmount.type: Le montant dépensé du budget doit être un nombre entier ou décimal.
+budget.spent_amount.positive_or_zero: Le montant dépensé du budget doit être supérieure ou égale à 0.

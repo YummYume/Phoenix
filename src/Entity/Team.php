@@ -8,6 +8,7 @@ use App\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team
@@ -18,19 +19,26 @@ class Team
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'team.name.not_blank')]
     private ?string $name;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'ownedTeams')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(allowNull: false, message: 'team.responsible.not_blank')]
+    #[Assert\Valid()]
     private ?User $responsible;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'teams')]
+    #[Assert\Expression(expression: 'this.getResponsible() in this.getMembers().toArray()', message: 'team.responsible.not_in_members')]
     private Collection $members;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'teams')]
+    #[Assert\NotBlank(allowNull: true, message: 'team.parent_team.not_blank')]
+    #[Assert\Expression(expression: 'not (value === this)', message: 'team.parent_team.not_self')]
+    #[Assert\Valid()]
     private ?Team $parentTeam;
 
     #[ORM\OneToMany(mappedBy: 'parentTeam', targetEntity: self::class)]

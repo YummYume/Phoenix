@@ -9,8 +9,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
+#[UniqueEntity(fields: ['code'], message: 'project.code.unique')]
 class Project
 {
     use TimestampableTrait;
@@ -19,22 +22,29 @@ class Project
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'project.name.not_blank')]
     private ?string $name;
 
     #[ORM\ManyToOne(targetEntity: Status::class, inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Valid()]
     private ?Status $status;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'project.start_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'project.start_at.type')]
     private ?\DateTime $startAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'project.end_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'project.end_at.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'startAt', message: 'project.end_at.greater_than_or_equal_start_at')]
     private ?\DateTime $endAt;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
@@ -43,13 +53,19 @@ class Project
 
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(allowNull: false, message: 'project.team.not_blank')]
+    #[Assert\Valid()]
     private ?Team $team;
 
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'clientProjects')]
+    #[Assert\NotBlank(allowNull: true, message: 'project.client_team.not_blank')]
+    #[Assert\Valid()]
     private ?Team $clientTeam;
 
     #[ORM\OneToOne(inversedBy: 'project', targetEntity: Budget::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(allowNull: false, message: 'project.budget.not_blank')]
+    #[Assert\Valid()]
     private ?Budget $budget;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Event::class, orphanRemoval: true)]
@@ -59,12 +75,14 @@ class Project
     private Collection $risks;
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\Type(type: 'bool', message: 'project.archived.type')]
     private ?bool $archived = false;
 
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Milestone::class, orphanRemoval: true)]
     private Collection $milestones;
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\Type(type: 'bool', message: 'project.private.type')]
     private bool $private = false;
 
     #[ORM\ManyToMany(targetEntity: Portfolio::class, inversedBy: 'projects')]
@@ -124,7 +142,7 @@ class Project
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeInterface $startAt): self
+    public function setStartAt(?\DateTimeInterface $startAt): self
     {
         $this->startAt = $startAt;
 

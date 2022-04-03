@@ -242,6 +242,9 @@
     "symfony/event-dispatcher-contracts": {
         "version": "v3.0.0"
     },
+    "symfony/expression-language": {
+        "version": "v6.0.3"
+    },
     "symfony/filesystem": {
         "version": "v6.0.3"
     },
@@ -281,6 +284,12 @@
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
         ]
+    },
+    "symfony/http-client": {
+        "version": "v6.0.5"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v3.0.0"
     },
     "symfony/http-foundation": {
         "version": "v6.0.3"
@@ -488,6 +497,12 @@
     },
     "symfony/yaml": {
         "version": "v6.0.3"
+    },
+    "twig/extra-bundle": {
+        "version": "v3.3.8"
+    },
+    "twig/intl-extra": {
+        "version": "v3.3.5"
     },
     "twig/twig": {
         "version": "v3.3.7"

@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% set pageTitle = 'Recherche ' ~ pagination.params.q|default('') %}{{ parent() }}{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.search.title'|trans ~ " \"" ~ pagination.params.q|default('') ~ "\"" %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     {% set query = pagination.params.q|default('') %}
     <div class="row w-100 m-auto justify-content-center">
         <div class="col-12 my-2 text-center">
-            <h1 class="w-100">{{ pagination.getTotalItemCount ~ ' résultat' ~ (pagination.getTotalItemCount > 1 ? 's' : '') }}</h1>
+            <h1 class="w-100">{{ 'view.search.results'|trans({'count': pagination.getTotalItemCount }) }}</h1>
         </div>
         <div class="col-md-8 my-2 col-lg-6 col-xl-5">
             {% for project in pagination %}
@@ -14,29 +17,41 @@
                     {% if query is not empty %}
                         <div class="col-12 my-2">
                             <h2>
-                                {% if project.private %}
-                                    <i class="fa fa-lock" title="Projet privé"></i>
-                                {% endif %}
-                                <a href="{{ path('app_project_show', { id: project.id }) }}">
+                                <a href="{{ path('app_project_show', { code: project.code }) }}">
                                     <span>{{ project.name|replace({ (query): ('<span class="text-primary">' ~ query ~ '</span>')|striptags('<span>') })|raw }}</span>
                                 </a>
+                                {% if app.user in project.team.members or app.user == project.team.responsible %}
+                                    <i class="fa fa-user-group" title="{{ 'view.search.project.member_of'|trans }}"></i>
+                                {% endif %}
+                                {% if project.private %}
+                                    <i class="fa fa-lock" title="{{ 'view.search.project.private'|trans }}"></i>
+                                {% endif %}
                             </h2>
                             <p>
                                 {% set description = project.description|length > 150 ? project.description|slice(0, 150) ~ '...' : project.description %}
-                                <span>{{ description|replace({ (query): ('<span class="text-primary">' ~ query ~ '</span>')|striptags('<span>') })|raw }}</span>
+                                {% if description %}
+                                    <span>{{ description|replace({ (query): ('<span class="text-primary">' ~ query ~ '</span>')|striptags('<span>') })|raw }}</span>
+                                {% else %}
+                                    <span>{{ 'project.no_description'|trans }}</span>
+                                {% endif %}
                             </p>
                         </div>
                     {% else %}
                         <div class="col-12 my-2">
                             <h2>
-                                {% if project.private %}
-                                    <i class="fa fa-lock" title="Projet privé"></i>
+                                <a href="{{ path('app_project_show', { code: project.code }) }}">
+                                    <span>{{ project.name }}</span>
+                                </a>
+                                {% if app.user in project.team.members or app.user == project.team.responsible %}
+                                    <i class="fa fa-user-group" title="{{ 'view.search.project.member_of'|trans }}"></i>
                                 {% endif %}
-                                <span>{{ project.name }}</span>
+                                {% if project.private %}
+                                    <i class="fa fa-lock" title="{{ 'view.search.project.private'|trans }}"></i>
+                                {% endif %}
                             </h2>
                             <p>
                                 {% set description = project.description|length > 150 ? project.description|slice(0, 150) ~ '...' : project.description %}
-                                <span>{{ description }}</span>
+                                <span>{{ description ?? 'project.no_description'|trans }}</span>
                             </p>
                         </div>
                     {% endif %}

@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Sortable\Entity\Repository\SortableRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortableRepository::class)]
 class Milestone
@@ -22,13 +23,17 @@ class Milestone
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'milestone.title.not_blank')]
     private ?string $name;
 
     #[ORM\Column(type: 'boolean')]
+    #[Assert\Type(type: 'bool', message: 'milestone.required.type')]
     private bool $required = true;
 
     #[Gedmo\SortablePosition]
     #[ORM\Column(type: 'integer')]
+    #[Assert\Type(type: 'integer', message: 'milestone.position.type')]
+    #[Assert\PositiveOrZero(message: 'milestone.position.positive_or_zero')]
     private ?int $position;
 
     #[ORM\OneToMany(mappedBy: 'milestone', targetEntity: Event::class)]
@@ -37,12 +42,19 @@ class Milestone
     #[Gedmo\SortableGroup]
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'milestones')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\Valid()]
     private ?Project $project;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'milestone.start_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'milestone.start_at.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'project.startAt', message: 'milestone.start_at.greater_than_or_equal')]
     private ?\DateTime $startAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'milestone.end_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'milestone.end_at.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'startAt', message: 'milestone.end_at.greater_than_start_at')]
     private ?\DateTime $endAt;
 
     public function __construct()

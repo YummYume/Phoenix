@@ -11,10 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'user.email.unique')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableTrait;
@@ -23,9 +24,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private ?int $id;
+    private ?int $id = null;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Assert\NotBlank(allowNull: false, message: 'user.email.not_blank')]
+    #[Assert\Email(message: 'user.email.invalid')]
     private ?string $email;
 
     #[ORM\Column(type: 'json')]
@@ -34,13 +37,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private ?string $password;
 
+    #[Assert\Length(min: 8, max: 4096, minMessage: 'user.password.min_length', maxMessage: 'user.password.max_length')]
+    #[Assert\Regex(pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', message: 'user.password.invalid')]
+    #[Assert\NotCompromisedPassword(message: 'user.password.compromised')]
     private ?string $plainPassword = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $firstName;
+    #[Assert\NotBlank(allowNull: true, message: 'user.first_name.not_blank')]
+    private ?string $firstName = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private ?string $lastName;
+    #[Assert\NotBlank(allowNull: true, message: 'user.last_name.not_blank')]
+    private ?string $lastName = null;
 
     #[ORM\OneToMany(mappedBy: 'responsible', targetEntity: Team::class)]
     private Collection $ownedTeams;

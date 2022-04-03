@@ -1,66 +1,286 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Project{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.project.show'|trans({name: project.name}) %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Project</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ project.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ project.description }}</td>
-            </tr>
-            <tr>
-                <th>StartAt</th>
-                <td>{{ project.startAt ? project.startAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndAt</th>
-                <td>{{ project.endAt ? project.endAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
-                <td>{{ project.code }}</td>
-            </tr>
-            <tr>
-                <th>Archived</th>
-                <td>{{ project.archived ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Private</th>
-                <td>{{ project.private ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ project.createdAt ? project.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ project.updatedAt ? project.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedBy</th>
-                <td>{{ project.createdBy }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedBy</th>
-                <td>{{ project.updatedBy }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_project_index') }}">back to list</a>
-
-    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
-
-    {{ include('project/_delete_form.html.twig') }}
+    {% set now = 'now'|date() %}
+    {% set projectOngoing = project.startAt and project.startAt > now and (not project.endAt or project.endAt < now) and not project.archived %}
+    <div class="row mx-auto w-100 justify-content-center">
+        <div class="col-md-10 col-12 mt-5 mb-2">
+            <div class="text-center">
+                <h1>{{ project.name }}</h1>
+            </div>
+        </div>
+        <div class="col-12 my-3">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-3 col-sm-5 col-12 mb-2">
+                    <div class="btn-group">
+                        <a class="btn btn-outline-secondary" href="{{ path('app_project_index') }}">
+                            <i class="fa fa-arrow-left"></i>
+                            {{ 'common.back'|trans }}
+                        </a>
+                        {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
+                            <a class="btn btn-outline-primary" href="{{ path('app_project_edit', {code: project.code}) }}">
+                                <i class="fa fa-pen"></i>
+                                {{ 'common.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-7 col-12 text-end mb-2">
+                    {% include('common/_timestampable_blameable.html.twig') with {
+                        created_at: project.createdAt,
+                        created_by: project.createdBy,
+                        updated_at: project.updatedAt,
+                        updated_by: project.updatedBy
+                    } only %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10 col-12 my-2">
+            <div class="text-center">
+                <h2>{{ 'common.information'|trans }}</h2>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mt-4 mb-md-4 mb-0 align-self-center">
+            <div class="info-display">
+                <p>{{ 'project.description'|trans }}</p>
+                <span>{{ project.description ?? 'project.no_description'|trans }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'project.status'|trans }}</p>
+                <span style="color: {{ project.status.color }};">{{ project.status.title }}</span>
+            </div>
+            {% if project.startAt %}
+                <div class="info-display">
+                    <p>{{ 'project.start_at'|trans }}</p>
+                    <span>{{ project.startAt|date('d/m/Y H:i:s') }}</span>
+                </div>
+            {% endif %}
+            {% if project.endAt %}
+                <div class="info-display">
+                    <p>{{ 'project.end_at'|trans }}</p>
+                    <span>{{ project.endAt|date('d/m/Y H:i:s') }}</span>
+                </div>
+            {% endif %}
+            <div class="info-display">
+                <p>{{ 'project.archived'|trans }}</p>
+                <span>{{ project.archived ? 'common.yes'|trans : 'common.no'|trans }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'project.private'|trans }}</p>
+                <span>{{ project.private ? 'common.yes'|trans : 'common.no'|trans }}</span>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 mb-4 mt-md-4 mt-0 align-self-center">
+            <div class="info-display">
+                <p>{{ 'project.team'|trans }}</p>
+                <a href="{{ path('app_team_show', {id: project.team.id}) }}">
+                    <span>{{ project.team.name ~ ' (' ~ 'team.member_count'|trans({members: project.team.members|length}) ~ ')' }}</span>
+                </a>
+            </div>
+            {% if project.clientTeam %}
+                <div class="info-display">
+                    <p>{{ 'project.client_team'|trans }}</p>
+                    <span>{{ project.clientTeam.name }}</span>
+                </div>
+            {% endif %}
+            <div class="info-display">
+                <p>{{ 'budget.initial_amount'|trans }}</p>
+                <span>{{ project.budget.initialAmount|format_currency('EUR') }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'budget.spent_amount'|trans }}</p>
+                <span>{{ project.budget.spentAmount|format_currency('EUR') }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'budget.left_amount'|trans }}</p>
+                <span>{{ project.budget.leftAmount|format_currency('EUR') }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'budget.landing'|trans }}</p>
+                <span>{{ project.budget.landing|format_currency('EUR') }}</span>
+            </div>
+            <div class="info-display">
+                <p>{{ 'project.forecast'|trans }}</p>
+                <span>TODO</span>
+            </div>
+        </div>
+        <div class="col-md-10 col-12 my-5">
+            <div class="text-center mb-2">
+                <h2>{{ 'project.milestones'|trans }}</h2>
+                {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), project) %}
+                    <div class="text-center my-4">
+                        <a class="btn btn-outline-success" href="{{ path('app_project_milestone_new', {'code': project.code}) }}">
+                            <i class="fa fa-plus"></i>
+                            {{ 'common.new'|trans }}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row justify-content-center" id="project-milestones">
+                {% for milestone in project.milestones %}
+                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
+                        <div class="card text-white bg-dark border-{{ milestone.required ? 'danger' : 'success' }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ milestone.name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ milestone.required ? 'milestone.is_required'|trans : 'milestone.is_not_required'|trans }}</h6>
+                                <p class="card-text">
+                                    <p class="m-0">
+                                        <b>{{ 'milestone.events'|trans }}</b> : {{ milestone.events|length }}
+                                    </p>
+                                    {% if milestone.startAt %}
+                                        <p class="m-0">
+                                            <b>{{ 'milestone.start_at'|trans }}</b> : {{ milestone.startAt|date('d/m/Y H:i:s') }}
+                                        </p>
+                                    {% endif %}
+                                    {% if milestone.endAt %}
+                                        <p class="m-0">
+                                            <b>{{ 'milestone.end_at'|trans }}</b> : {{ milestone.endAt|date('d/m/Y H:i:s') }}
+                                        </p>
+                                    {% endif %}
+                                </p>
+                                {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), project) %}
+                                    <a class="card-link" href="{{ path('app_project_milestone_edit', { code: project.code, id: milestone.id }) }}">
+                                        <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>{{ 'common.edit'|trans }}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 my-5">
+            <div class="text-center mb-2">
+                <h2>{{ 'project.risks'|trans }}</h2>
+            </div>
+            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_RISK'), project) %}
+                <div class="text-center my-4">
+                    <a class="btn btn-outline-success" href="{{ path('app_project_risk_new', {'code': project.code}) }}">
+                        <i class="fa fa-plus"></i>
+                        {{ 'common.new'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+            <div class="table-responsive" id="project-risks">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'risk.name'|trans }}</th>
+                            <th scope="col">{{ 'risk.identified_at'|trans }}</th>
+                            <th scope="col">{{ 'risk.resolved_at'|trans }}</th>
+                            <th scope="col">{{ 'risk.severity'|trans }}</th>
+                            <th scope="col">{{ 'risk.probability'|trans }}</th>
+                            <th scope="col">{{ 'common.actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for risk in project.risks %}
+                            {% set color = 'light' %}
+                            {% if projectOngoing and not risk.resolvedAt %}
+                                {% if risk.probability == constant('App\\Enum\\Probability::Never') %}
+                                    {% set color = 'success' %}
+                                {% elseif risk.severity == constant('App\\Enum\\Severity::Breaking') %}
+                                    {% if risk.probability == constant('App\\Enum\\Probability::VeryLow') %}
+                                        {% set color = 'warning' %}
+                                    {% else %}
+                                        {% set color = 'danger' %}
+                                    {% endif %}
+                                {% elseif risk.severity == constant('App\\Enum\\Severity::High') %}
+                                    {% if risk.probability in [constant('App\\Enum\\Probability::VeryLow'), constant('App\\Enum\\Probability::Low')] %}
+                                        {% set color = 'warning' %}
+                                    {% else %}
+                                        {% set color = 'danger' %}
+                                    {% endif %}
+                                {% elseif risk.severity in [constant('App\\Enum\\Severity::High'), constant('App\\Enum\\Severity::Medium')] %}
+                                    {% if risk.probability in [
+                                        constant('App\\Enum\\Probability::VeryLow'),
+                                        constant('App\\Enum\\Probability::Low'),
+                                        constant('App\\Enum\\Probability::Medium')
+                                    ] %}
+                                        {% set color = 'info' %}
+                                    {% else %}
+                                        {% set color = 'warning' %}
+                                    {% endif %}
+                                {% elseif risk.severity in [constant('App\\Enum\\Severity::Low'), constant('App\\Enum\\Severity::VeryLow')] %}
+                                    {% if risk.probability in [
+                                        constant('App\\Enum\\Probability::VeryLow'),
+                                        constant('App\\Enum\\Probability::Low'),
+                                        constant('App\\Enum\\Probability::Medium')
+                                    ] %}
+                                        {% set color = 'success' %}
+                                    {% else %}
+                                        {% set color = 'info' %}
+                                    {% endif %}
+                                {% elseif risk.severity == constant('App\\Enum\\Severity::CanBeIgnored') %}
+                                    {% set color = 'success' %}
+                                {% endif %}
+                            {% endif %}
+                            <tr class="table-{{ color }}">
+                                <td>{{ risk.name }}</td>
+                                <td>{{ risk.identifiedAt ? risk.identifiedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                <td>{{ risk.resolvedAt ? risk.resolvedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                <td>{{ risk.severity ? ('severity.' ~ risk.severity.value)|trans : '' }}</td>
+                                <td>{{ risk.probability ? ('probability.' ~ risk.probability.value)|trans : '' }}</td>
+                                <td>
+                                    {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_RISK'), project) %}
+                                        <a href="{{ path('app_project_risk_edit', { code: project.code, id: risk.id }) }}">
+                                            <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-6 col-12 my-5">
+            <div class="text-center mb-2">
+                <h2>{{ 'project.events'|trans }}</h2>
+            </div>
+            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_EVENT'), project) %}
+                <div class="text-center my-4">
+                    <a class="btn btn-outline-success" href="{{ path('app_project_event_new', {'code': project.code}) }}">
+                        <i class="fa fa-plus"></i>
+                        {{ 'common.new'|trans }}
+                    </a>
+                </div>
+            {% endif %}
+            <div class="table-responsive" id="project-events">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{ 'event.name'|trans }}</th>
+                            <th scope="col">{{ 'event.description'|trans }}</th>
+                            <th scope="col">{{ 'event.date'|trans }}</th>
+                            <th scope="col">{{ 'event.milestone'|trans }}</th>
+                            <th scope="col">{{ 'common.actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for event in project.events %}
+                            <tr>
+                                <td>{{ event.name }}</td>
+                                <td>{{ event.description }}</td>
+                                <td>{{ event.date ? event.date|date('d/m/Y H:i:s') : '' }}</td>
+                                <td>{{ event.milestone ? event.milestone.name : '' }}</td>
+                                <td>
+                                    {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_EVENT'), project) %}
+                                        <a href="{{ path('app_project_event_edit', { code: project.code, id: event.id }) }}">
+                                            <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

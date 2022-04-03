@@ -1,28 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.login'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-        <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'common.login'|trans }}</h1>
         </div>
+        <div class="col-xl-6 col-md-8 col-sm-10 col-12 my-4">
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+                <div class="my-3">
+                    <label for="inputEmail">{{ 'user.email'|trans }}</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                </div>
+                <div class="my-3">
+                    <label for="inputPassword">{{ 'user.password'|trans }}</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+                <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+
+                <div class="checkbox my-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> {{ 'user.remember_me'|trans }}
+                    </label>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-lg btn-outline-success" type="submit">
+                        <i class="fa fa-arrow-right-to-bracket"></i>
+                        {{ 'common.login'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -19,7 +19,7 @@ class TeamCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('app_index', 'view.team.index')
+            ->setPageTitle('index', 'view.team.index')
             ->setPageTitle('new', 'view.team.create')
             ->setPageTitle('edit', 'view.team.edit')
             ->setPageTitle('detail', 'view.team.detail')
@@ -39,7 +39,7 @@ class TeamCrudController extends AbstractCrudController
                 ->onlyOnIndex(),
             AssociationField::new('members', 'team.members')
                 ->onlyOnForms(),
-            AssociationField::new('parentTeam', 'team.parentTeam'),
+            AssociationField::new('parentTeam', 'team.parent_team'),
             DateTimeField::new('createdAt', 'common.created_at')
                 ->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'common.updated_at')

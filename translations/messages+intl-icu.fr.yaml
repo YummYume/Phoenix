@@ -1,0 +1,209 @@
+### Common
+common.app_name: Phénix
+common.default_title: Bienvenue
+common.created_at: Créé le
+common.updated_at: Mis à jours le
+common.created_by: Créé par
+common.updated_by: Mis à jours par
+common.by: par
+common.save: Sauvegarder
+common.show: Afficher
+common.edit: Modifier
+common.delete: Supprimer
+common.back: Retour
+common.back_to_list: Retourner à la liste
+common.yes: Oui
+common.no: Non
+common.actions: Actions
+common.ask_confirmation: Êtes-vous sûr de vouloir supprimer cet élément ?
+common.close: Fermer
+common.search: Rechercher
+common.login: Connexion
+common.logout: Déconnexion
+common.sign_up: Inscription
+common.welcome: Bienvenue !
+common.information: Informations
+common.new: Nouveau
+common.none: Aucun
+
+### Navbar
+nav.administration: Administration
+nav.my_projects: Mes projets
+nav.my_teams: Mes équipes
+nav.my_portfolios: Mes portefeuilles
+nav.profile.edit: Modifier mon profil
+nav.search.projet.placeholder: Rechercher un projet...
+
+### Views
+view.index.dashboard: Bienvenue! Voici votre tableau de bord.
+view.index.not_logged_in: >
+  Vous n'êtes pas connecté. Veuillez vous <a href="{login_path}">connecter</a> pour accéder à votre tableau de bord.
+  Vous pouvez également vous <a href="{register_path}">inscrire</a> si vous n'avez pas de compte.
+view.admin.dashboard: Bienvenue sur votre tableau de bord!
+view.search.title: Recherche
+view.search.results: >-
+  {count, plural, =0 {Aucun résultat} one {1 résultat} other {# résultats}}
+view.search.project.member_of: Vous faites partie de l'équipe de ce projet
+view.search.project.private: Projet privé
+view.status.title: Statut
+view.status.index: Statuts
+view.status.new: Nouveau statut
+view.status.create: Créer un statut
+view.status.edit: Modifier le statut
+view.status.detail: Détails du statut
+view.status.single: un statut
+view.status.plural: des statuts
+view.team.title: Équipe
+view.team.show: Détails de l'équipe {name}
+view.team.index: Équipes
+view.teams.index: Vos équipes
+view.team.new: Nouvelle équipe
+view.team.create: Créer une équipe
+view.team.edit: Modifier l'équipe
+view.team.detail: Détails de l'équipe
+view.team.single: une équipe
+view.team.plural: des équipes
+view.user.title: Utilisateur
+view.user.index: Utilisateurs
+view.user.new: Nouvel utilisateur
+view.user.create: Créer un utilisateur
+view.user.edit: Modifier l'utilisateur
+view.user.detail: Détails de l'utilisateur
+view.user.single: un utilisateur
+view.user.plural: des utilisateurs
+view.project.title: Projet
+view.project.index: Projets
+view.projects.index: Vos projets
+view.project.show: Détails du projet {name}
+view.project.new: Nouveau projet
+view.project.create: Créer un projet
+view.project.edit: Modifier un projet
+view.ongoing_projects.title: Projets en cours
+view.upcoming_projects.title: Projets à venir
+view.projets_with_risks.title: Projets avec risques
+view.milestone.title: Jalon
+view.milestone.index: Jalons
+view.milestone.new: Nouveau jalon
+view.milestone.create: Créer un jalon
+view.milestone.edit: Modifier un jalon
+view.event.new: Nouveau fait marquant
+view.event.create: Créer un fait marquant
+view.event.title: Fait marquant
+view.event.edit: Modifier un fait marquant
+
+### Menu
+menu.dashboard: Tableau de bord
+menu.status: Statuts
+menu.team: Equipes
+menu.user: Utilisateurs
+menu.return_to_homepage: Retourner à l'accueil
+
+### Entities
+# Status
+status.title: Titre
+status.position: Position
+status.color: Couleur
+
+# Team
+team.name: Nom
+team.responsible: Responsable
+team.members: Membres
+team.parent_team: Équipe parent
+team.projects: Projets
+team.client_projects: Projets clients
+team.show_team: Afficher l'équipe
+team.teams: Équipes supervisées
+team.member_count: >-
+  {members, plural, =0 {Aucun membre} one {1 membre} other {# membres}}
+
+# User
+user.email: Adresse email
+user.roles: Rôles
+user.full_name: Nom complet
+user.first_name: Prénom
+user.last_name: Nom
+user.password: Mot de passe
+user.password_repeat: Répéter le mot de passe
+user.current_password: Mot de passe actuel
+user.new_password: Nouveau mot de passe
+user.new_password_repeat: Répéter le nouveau mot de passe
+user.remember_me: Se souvenir de moi
+user.agree_terms: J'accepte les conditions d'utilisation
+
+# Project
+project.name: Nom
+project.code: Code
+project.code.help: Le code est généré automatiquement en fonction du nom de projet.
+project.description: Description
+project.no_description: Aucune description.
+project.start_at: Commence le
+project.end_at: Termine le
+project.archived: Archivé
+project.archived.help: Un projet archivé est considéré comme terminé.
+project.private: Privé
+project.private.help: Un projet privé n'apparaitra pas aux personnes n'appartenants pas à l'équipe du projet.
+project.status: Statut
+project.portfolios: Portefeuilles
+project.team: Équipe
+project.client_team: Équipe cliente
+project.budget: Budget
+project.forecast: Prévision
+project.milestones: Jalons
+project.risks: Risques
+project.events: Faits marquants
+project.back_to_project: Retourner au projet
+project.show_project: Afficher le projet
+
+# Budget
+budget.initial_amount: Montant de départ
+budget.spent_amount: Montant dépensé
+budget.left_amount: Montant restant
+budget.landing: Atterrissage
+
+# Milestone
+milestone.name: Nom
+milestone.required: Requis
+milestone.project: Projet
+milestone.is_required: Requis
+milestone.is_not_required: Non requis
+milestone.start_at: Commence le
+milestone.end_at: Termine le
+milestone.events: Faits marquants
+
+# Risk
+risk.name: Nom
+risk.identified_at: Identifié le
+risk.resolved_at: Résolu le
+risk.severity: Sévérité
+risk.probability: Probabilité
+risk.project: Projet
+
+# Event
+event.name: Nom
+event.description: Description
+event.date: Date
+event.milestone: Jalon
+event.project: Projet
+
+# Severity
+severity.breaking: Bloquant
+severity.very_high: Très élevé
+severity.high: Élevé
+severity.medium: Moyen
+severity.low: Faible
+severity.very_low: Très faible
+severity.can_be_ignored: Peut être ignoré
+
+# Probability
+probability.present: Présent
+probability.very_high: Très élevé
+probability.high: Élevé
+probability.medium: Moyen
+probability.low: Faible
+probability.very_low: Très faible
+probability.never: Jamais
+
+# Roles
+User: Utilisateur
+Admin: Administrateur
+SuperAdmin: Super Administateur

@@ -4,30 +4,39 @@
     {% if app.user %}
         <div class="row">
             <div class="col-12 text-center align-items-center d-flex">
-                <h2 class="w-100 my-lg-0 my-3">Bienvenue! Voici votre tableau de bord.</h2>
+                <h2 class="w-100 my-lg-0 my-3">{{ 'view.index.dashboard'|trans }}</h2>
             </div>
             <div class="col-lg-6">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h3>Projets en cours</h3>
+                        <h3>{{ 'view.ongoing_projects.title'|trans }}</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date de début</th>
-                                    <th scope="col">Date de fin</th>
+                                    <th scope="col">{{ 'project.name'|trans }}</th>
+                                    <th scope="col">{{ 'project.start_at'|trans }}</th>
+                                    <th scope="col">{{ 'project.end_at'|trans }}</th>
+                                    <th scope="col">{{ 'common.actions'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for project in activeProjects %}
                                     <tr>
                                         <td>{{ project.name }}</td>
-                                        <td>{{ project.description }}</td>
-                                        <td>{{ project.startAt|date('d/m/Y') }}</td>
-                                        <td>{{ project.endAt|date('d/m/Y') }}</td>
+                                        <td>{{ project.startAt ? project.startAt|date('d/m/Y') : '' }}</td>
+                                        <td>{{ project.endAt ? project.endAt|date('d/m/Y') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('app_project_show', { code: project.code }) }}">
+                                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
+                                            </a>
+                                            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
+                                                <a href="{{ path('app_project_edit', { code: project.code }) }}">
+                                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                                </a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -38,25 +47,34 @@
             <div class="col-lg-6">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h3>Projets à venir</h3>
+                        <h3>{{ 'view.upcoming_projects.title'|trans }}</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date de début</th>
-                                    <th scope="col">Date de fin</th>
+                                    <th scope="col">{{ 'project.name'|trans }}</th>
+                                    <th scope="col">{{ 'project.start_at'|trans }}</th>
+                                    <th scope="col">{{ 'project.end_at'|trans }}</th>
+                                    <th scope="col">{{ 'common.actions'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for project in upcomingProjects %}
                                     <tr>
                                         <td>{{ project.name }}</td>
-                                        <td>{{ project.description }}</td>
-                                        <td>{{ project.startAt|date('d/m/Y') }}</td>
-                                        <td>{{ project.endAt|date('d/m/Y') }}</td>
+                                        <td>{{ project.startAt ? project.startAt|date('d/m/Y') : '' }}</td>
+                                        <td>{{ project.endAt ? project.endAt|date('d/m/Y') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('app_project_show', { code: project.code }) }}">
+                                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
+                                            </a>
+                                            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
+                                                <a href="{{ path('app_project_edit', { code: project.code }) }}">
+                                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                                </a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -67,25 +85,36 @@
             <div class="col-lg-6">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h3>Projets avec risques</h3>
+                        <h3>{{ 'view.projets_with_risks.title'|trans }}</h3>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date de début</th>
-                                    <th scope="col">Date de fin</th>
+                                    <th scope="col">{{ 'project.name'|trans }}</th>
+                                    <th scope="col">{{ 'project.risks'|trans }}</th>
+                                    <th scope="col">{{ 'project.start_at'|trans }}</th>
+                                    <th scope="col">{{ 'project.end_at'|trans }}</th>
+                                    <th scope="col">{{ 'common.actions'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for project in projectsWithRisks %}
                                     <tr>
                                         <td>{{ project.name }}</td>
-                                        <td>{{ project.description }}</td>
-                                        <td>{{ project.startAt|date('d/m/Y') }}</td>
-                                        <td>{{ project.endAt|date('d/m/Y') }}</td>
+                                        <td>{{ project.risks|length }}</td>
+                                        <td>{{ project.startAt ? project.startAt|date('d/m/Y') : '' }}</td>
+                                        <td>{{ project.endAt ? project.endAt|date('d/m/Y') : '' }}</td>
+                                        <td>
+                                            <a href="{{ path('app_project_show', { code: project.code }) }}">
+                                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
+                                            </a>
+                                            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
+                                                <a href="{{ path('app_project_edit', { code: project.code }) }}">
+                                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                                </a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -96,23 +125,34 @@
             <div class="col-lg-6">
                 <div class="card mb-3">
                     <div class="card-header">
-                        <h3>Jalons</h3>
+                        <h3>{{ 'view.milestone.index'|trans }}</h3>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Requis</th>
-                                    <th scope="col">Projet</th>
+                                    <th scope="col">{{ 'milestone.name'|trans }}</th>
+                                    <th scope="col">{{ 'milestone.required'|trans }}</th>
+                                    <th scope="col">{{ 'milestone.project'|trans }}</th>
+                                    <th scope="col">{{ 'common.actions'|trans }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for milestone in milestones %}
                                     <tr>
                                         <td>{{ milestone.name }}</td>
-                                        <td>{{ milestone.required ? 'Oui' : 'Non' }}</td>
+                                        <td>{{ milestone.required ? 'common.yes'|trans : 'common.no'|trans }}</td>
                                         <td>{{ milestone.project.name }}</td>
+                                        <td>
+                                            <a href="{{ path('app_project_show', { code: milestone.project.code, '_fragment': 'project-milestones' }) }}">
+                                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
+                                            </a>
+                                            {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), milestone.project) %}
+                                                <a href="{{ path('app_project_milestone_edit', { code: milestone.project.code, id: milestone.id }) }}">
+                                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                                </a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -124,8 +164,11 @@
     {% else %}
         <div class="row d-flex align-items-center justify-content-center text-center">
             <div class="col-md-10 col-12">
-                <h1>Bienvenue!</h1>
-                <h2>Vous n'êtes pas connecté. Veuillez vous <a href="{{ path('app_login') }}">connecter</a> pour accéder à votre tableau de bord. Vous pouvez également vous <a href="{{ path('app_register') }}">inscrire</a> si vous n'avez pas de compte.</h2>
+                <h1>{{ 'common.welcome'|trans }}</h1>
+                <h2>{{ 'view.index.not_logged_in'|trans({
+                    login_path: path('app_login'),
+                    register_path: path('app_register')
+                })|striptags('<a>')|raw }}</h2>
             </div>
         </div>
     {% endif %}

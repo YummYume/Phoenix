@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Milestone;
+use App\Entity\Project;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -14,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Milestone[]    findAll()
  * @method Milestone[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MilestoneRepository extends ServiceEntityRepository
+final class MilestoneRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -38,5 +39,16 @@ class MilestoneRepository extends ServiceEntityRepository
         ;
 
         return $qb;
+    }
+
+    // get all the milestones of the current project
+    public function getMilestonesByProject(Project $project): QueryBuilder
+    {
+        return
+            $this->createQueryBuilder('m')
+            ->where('m.project = :project')
+            ->orderBy('m.position', 'ASC')
+            ->setParameter('project', $project)
+        ;
     }
 }

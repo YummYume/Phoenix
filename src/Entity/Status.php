@@ -9,8 +9,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Sortable\Entity\Repository\SortableRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SortableRepository::class)]
+#[UniqueEntity(fields: ['slug'], message: 'status.slug.unique')]
 class Status
 {
     use TimestampableTrait;
@@ -22,6 +25,7 @@ class Status
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'status.name.not_blank')]
     private ?string $title;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
@@ -33,9 +37,13 @@ class Status
 
     #[Gedmo\SortablePosition]
     #[ORM\Column(type: 'integer')]
+    #[Assert\Type(type: 'integer', message: 'status.position.type')]
+    #[Assert\PositiveOrZero(message: 'status.position.positive_or_zero')]
     private ?int $position;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'status.color.not_blank')]
+    #[Assert\CssColor(message: 'status.color.css_color')]
     private ?string $color;
 
     public function __construct()

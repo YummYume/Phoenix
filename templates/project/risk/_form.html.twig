@@ -1,0 +1,12 @@
+{{ form_start(form, {'attr': {'id': 'risk-form'}}) }}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-sm-10 col-12">
+            <h3>{{ 'view.risk.title'|trans }}</h3>
+            {{ form_row(form.name) }}
+            {{ form_row(form.identifiedAt) }}
+            {{ form_row(form.resolvedAt) }}
+            {{ form_row(form.severity) }}
+            {{ form_row(form.probability) }}
+        </div>
+    </div>
+{{ form_end(form) }}

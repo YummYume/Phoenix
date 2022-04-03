@@ -8,6 +8,7 @@ use App\Enum\Probability;
 use App\Enum\Severity;
 use App\Repository\RiskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RiskRepository::class)]
 class Risk
@@ -21,22 +22,35 @@ class Risk
     private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'risk.name.not_blank')]
     private ?string $name;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'risk.identified_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'risk.identified_at.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'project.startAt', message: 'risk.identified_at.greater_than_or_equal')]
     private ?\DateTime $identifiedAt;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Assert\NotBlank(allowNull: true, message: 'risk.resolved_at.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'risk.resolved_at.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'identifiedAt', message: 'risk.resolved_at.greater_than_or_equal')]
     private ?\DateTime $resolvedAt;
 
     #[ORM\Column(type: 'string', length: 255, enumType: Severity::class)]
+    #[Assert\NotBlank(allowNull: false, message: 'risk.severity.not_blank')]
+    #[Assert\Type(type: Severity::class, message: 'risk.severity.type')]
     private ?Severity $severity;
 
     #[ORM\Column(type: 'string', length: 255, enumType: Probability::class)]
+    #[Assert\NotBlank(allowNull: false, message: 'risk.probability.not_blank')]
+    #[Assert\Type(type: Probability::class, message: 'risk.probability.type')]
     private ?Probability $probability;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'risks')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(allowNull: false, message: 'status.project.not_blank')]
+    #[Assert\Valid()]
     private ?Project $project;
 
     public function getId(): ?int

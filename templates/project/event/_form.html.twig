@@ -1,0 +1,11 @@
+{{ form_start(form, {'attr': {'id': 'event-form'}}) }}
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-sm-10 col-12">
+            <h3>{{ 'view.event.title'|trans }}</h3>
+            {{ form_row(form.name) }}
+            {{ form_row(form.description) }}
+            {{ form_row(form.date) }}
+            {{ form_row(form.milestone) }}
+        </div>
+    </div>
+{{ form_end(form) }}

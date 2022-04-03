@@ -6,6 +6,7 @@ use App\Entity\Traits\BlameableTrait;
 use App\Entity\Traits\TimestampableTrait;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
@@ -19,19 +20,27 @@ class Event
     private ?int $id;
 
     #[ORM\Column(type: 'datetime')]
+    #[Assert\NotBlank(allowNull: false, message: 'event.date.not_blank')]
+    #[Assert\Type(type: 'datetime', message: 'event.date.type')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'project.startAt', message: 'event.date.greater_than_or_equal')]
     private ?\DateTime $date;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(allowNull: false, message: 'event.name.not_blank')]
     private ?string $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description;
 
     #[ORM\ManyToOne(targetEntity: Milestone::class, inversedBy: 'events')]
+    #[Assert\NotBlank(allowNull: true, message: 'event.milestone.not_blank')]
+    #[Assert\Valid()]
     private ?Milestone $milestone;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(allowNull: false, message: 'event.project.not_blank')]
+    #[Assert\Valid()]
     private ?Project $project;
 
     public function getId(): ?int

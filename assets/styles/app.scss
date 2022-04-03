@@ -13,6 +13,7 @@ header {
 #body {
     min-height: 82vh;
     display: flex;
+    font-family: 'Roboto', sans-serif;
 }
 
 // Footer
@@ -70,15 +71,37 @@ label {
 }
 
 a {
-    color: rgba(var(--bs-dark-rgb), 1);
+    color: unset;
     text-decoration: inherit;
-    transition: 2s;
-    border-bottom: 2px solid transparent;
+    transition: 1s;
 
     :hover {
-        color: rgba(var(--bs-dark-rgb), 1);
+        color: rgba(var(--bs-primary-rgb), 1);
         text-decoration: none;
-        border-bottom: 1px solid rgba(var(--bs-dark-rgb), 1);
-        transition: 2s;
+        transition: 1s;
+    }
+}
+
+.info-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(var(--bs-dark-rgb), 1);
+    color: rgba(var(--bs-light-rgb), 1);
+    font-size: 1.5rem;
+    // use a more readable font
+    font-family: Bradley Hand;
+
+    p {
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    span {
+        margin: 0;
     }
 }

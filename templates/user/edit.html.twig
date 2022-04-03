@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% set pageTitle = 'nav.profile.edit'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'nav.profile.edit'|trans }}</h1>
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('user/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="text-center">
+                    <button class="btn btn-lg btn-outline-success" action="submit" form="user-form">
+                        <i class="fa fa-user-check"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

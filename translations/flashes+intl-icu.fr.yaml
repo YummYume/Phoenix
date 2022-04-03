@@ -1,0 +1,49 @@
+### Common
+common.empty_search: <i class="fa fa-exclamation-circle"></i> Votre recherche est vide.
+common.invalid_form: <i class="fa fa-exclamation-circle"></i> Le formulaire est invalide. Veuillez vérifier votre saisie.
+
+### Create
+create.project.success: <i class="fa fa-check-circle"></i> Le projet {name} a été créé avec succès.
+create.project.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création du projet.
+create.team.success: <i class="fa fa-check-circle"></i> L'équipe {name} a été créée avec succès.
+create.team.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création de l'équipe.
+create.portfolio.success: <i class="fa fa-check-circle"></i> Le portefeuille {name} a été créé avec succès.
+create.portfolio.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création du portefeuille.
+create.user.success: <i class="fa fa-check-circle"></i> Bienvenue, {name}!
+create.user.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création de votre compte.
+create.milestone.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été créé avec succès.
+create.milestone.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création du jalon.
+create.risk.success: <i class="fa fa-check-circle"></i> Le risque {name} a été créé avec succès.
+create.risk.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création du risque.
+create.event.success: <i class="fa fa-check-circle"></i> Le fait marquant {name} a été créé avec succès.
+create.event.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la création du fait marquant.
+
+### Edit
+edit.project.success: <i class="fa fa-check-circle"></i> Le projet {name} a été mis à jour avec succès.
+edit.project.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour du projet.
+edit.team.success: <i class="fa fa-check-circle"></i> L'équipe {name} a été mise à jour avec succès.
+edit.team.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour de l'équipe.
+edit.portfolio.success: <i class="fa fa-check-circle"></i> Le portefeuille {name} a été mis à jour avec succès.
+edit.portfolio.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour du portefeuille.
+edit.user.success: <i class="fa fa-check-circle"></i> Votre profil a été mis à jour avec succès.
+edit.user.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour de votre profil.
+edit.milestone.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été mis à jour avec succès.
+edit.milestone.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour du jalon.
+edit.risk.success: <i class="fa fa-check-circle"></i> Le risque {name} a été mis à jour avec succès.
+edit.risk.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour du risque.
+edit.event.success: <i class="fa fa-check-circle"></i> Le fait marquant {name} a été mis à jour avec succès.
+edit.event.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la mise à jour du fait marquant.
+
+### Delete
+delete.project.success: <i class="fa fa-check-circle"></i> Le projet {name} a été supprimé avec succès.
+delete.project.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du projet.
+delete.team.success: <i class="fa fa-check-circle"></i> L'équipe {name} a été supprimée avec succès.
+delete.team.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression de l'équipe.
+delete.portfolio.success: <i class="fa fa-check-circle"></i> Le portefeuille {name} a été supprimé avec succès.
+delete.portfolio.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du portefeuille.
+delete.miletone.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été supprimé avec succès.
+delete.miletone.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du jalon.
+delete.risk.success: <i class="fa fa-check-circle"></i> Le risque {name} a été supprimé avec succès.
+delete.risk.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du risque.
+delete.event.success: <i class="fa fa-check-circle"></i> Le fait marquant {name} a été supprimé avec succès.
+delete.event.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du fait marquant.

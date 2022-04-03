@@ -1,13 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Team{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.team.edit'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Team</h1>
-
-    {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_team_index') }}">back to list</a>
-
-    {{ include('team/_delete_form.html.twig') }}
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'view.team.edit'|trans }}</h1>
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('team/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-secondary" href="{{ path('app_team_index') }}">
+                        <i class="fa fa-arrow-left"></i>
+                        {{ 'common.back_to_list'|trans }}
+                    </a>
+                    <a class="btn btn-outline-primary" href="{{ path('app_team_show', {id: team.id}) }}">
+                        <i class="fa fa-eye"></i>
+                        {{ 'team.show_team'|trans }}
+                    </a>
+                    <button class="btn btn-outline-danger" action="submit" form="team-delete">
+                        {{ include('team/_delete_form.html.twig') }}
+                        <i class="fa fa-trash"></i>
+                        {{ 'common.delete'|trans }}
+                    </button>
+                    <button class="btn btn-outline-success" action="submit" form="team-form">
+                        <i class="fa fa-save"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

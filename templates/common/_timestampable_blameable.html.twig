@@ -1,0 +1,11 @@
+<div>
+    {% if created_at %}
+        <span>{{ 'common.created_at'|trans ~ ' ' ~ created_at|date('d/m/Y H:i:s') ~ (created_by ? (' ' ~ 'common.by'|trans ~ ' ' ~ created_by.fullName) : '') }}</span>
+    {% endif %}
+    {% if created_at and updated_at %}
+        <span> | </span>
+    {% endif %}
+    {% if updated_at %}
+        <span>{{ 'common.updated_at'|trans ~ ' ' ~ updated_at|date('d/m/Y H:i:s') ~ (updated_by ? (' ' ~ 'common.by'|trans ~ ' ' ~ updated_by.fullName) : '') }}</span>
+    {% endif %}
+</div>

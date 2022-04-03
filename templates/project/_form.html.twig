@@ -1,18 +1,38 @@
 {{ form_start(form, {'attr': {'id': 'project-form'}}) }}
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-12">
             <h3>{{ 'view.project.title'|trans }}</h3>
+        </div>
+        <div class="col-md-6">
             {{ form_row(form.name) }}
-            {{ form_row(form.code) }}
+            {% if form.code is defined %}
+                <div class="mb-3">
+                    <div>
+                        {{ form_label(form.code) }}
+                        <i class="fa-solid fa-circle-question" title="{{ 'project.code.help'|trans }}"></i>
+                    </div>
+                    {{ form_widget(form.code) }}
+                    {{ form_errors(form.code) }}
+                </div>
+            {% endif %}
             {{ form_row(form.description) }}
             {{ form_row(form.startAt) }}
             {{ form_row(form.endAt) }}
-            {{ form_row(form.archived) }}
-            {{ form_row(form.private) }}
+            <div class="d-flex align-items-center mb-2">
+                {{ form_widget(form.archived) }}
+                {{ form_label(form.archived) }}
+                {{ form_errors(form.archived) }}
+                <i class="fa-solid fa-circle-question ms-1" title="{{ 'project.archived.help'|trans }}"></i>
+            </div>
+            <div class="d-flex align-items-center mb-2">
+                {{ form_widget(form.private) }}
+                {{ form_label(form.private) }}
+                {{ form_errors(form.private) }}
+                <i class="fa-solid fa-circle-question ms-1" title="{{ 'project.private.help'|trans }}"></i>
+            </div>
         </div>
         <div class="col-md-6">
             {{ form_row(form.status) }}
-            {{ form_row(form.portfolios) }}
             {{ form_row(form.team) }}
             {{ form_row(form.clientTeam) }}
             <h3>{{ form_label(form.budget) }}</h3>

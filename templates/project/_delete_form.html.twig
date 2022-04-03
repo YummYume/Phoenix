@@ -1,4 +1,3 @@
-<form id="project-delete" method="post" action="{{ path('app_project_delete', {'id': project.id}) }}" onsubmit="() => {return confirm('Are you sure you want to delete this item?');}">
+<form id="project-delete" method="post" action="{{ path('app_project_delete', {'code': project.code}) }}" onsubmit="return confirm('{{ 'common.ask_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
-    <button class="btn">Delete</button>
 </form>

@@ -24,8 +24,7 @@ class AdminController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Administration')
-        ;
+            ->setTitle('menu.administration');
     }
 
     public function configureMenuItems(): iterable

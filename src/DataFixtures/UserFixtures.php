@@ -28,7 +28,7 @@ final class UserFixtures extends Fixture
         // Users
         foreach (range(1, 20) as $i) {
             $user = (new User())
-                ->setEmail($faker->unique()->email())
+                ->setEmail($faker->unique()->safeEmail())
                 ->setFirstName($faker->firstName())
                 ->setLastName($faker->lastName())
                 ->setPlainPassword('123456')
@@ -42,7 +42,7 @@ final class UserFixtures extends Fixture
         // Responsibles
         foreach (range(1, 10) as $i) {
             $user = (new User())
-                ->setEmail($faker->unique()->email())
+                ->setEmail($faker->unique()->safeEmail())
                 ->setFirstName($faker->firstName())
                 ->setLastName($faker->lastName())
                 ->setPlainPassword('123456')

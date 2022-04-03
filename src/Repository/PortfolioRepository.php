@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Portfolio[]    findAll()
  * @method Portfolio[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PortfolioRepository extends ServiceEntityRepository
+final class PortfolioRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

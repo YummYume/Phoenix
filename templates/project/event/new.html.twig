@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% set pageTitle = 'view.event.create'|trans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'view.event.create'|trans }}</h1>
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('project/event/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" href="{{ path('app_project_show', {'code': event.project.code, '_fragment': 'project-events'}) }}">
+                        <i class="fa fa-arrow-left"></i>
+                        {{ 'project.back_to_project'|trans }}
+                    </a>
+                    <button class="btn btn-outline-success" action="submit" form="event-form">
+                        <i class="fa fa-save"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
