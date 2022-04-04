@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\BlameableTrait;
 use App\Entity\Traits\TimestampableTrait;
+use App\Enum\Probability;
+use App\Enum\Severity;
 use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -352,31 +354,64 @@ class Project
 
     public function getBrainData(): array
     {
-        $projectData = [
-            'startAt' => $this->startAt,
-            'endAt' => $this->endAt,
-            'archived' => $this->archived,
-        ];
-        $budgetData = [
-            'initialAmount' => $this->budget->getInitialAmount(),
-            'spentAmount' => $this->budget->getSpentAmount(),
-            'leftAmount' => $this->budget->getLeftAmount(),
-        ];
-        $riskDatas = [];
+        $daysLeft = null;
+        $dangerRisks = 0;
+        $highRisks = 0;
+        $mediumRisks = 0;
+        $lowRisks = 0;
+        $canBeIgnoredRisks = 0;
+
+        if ($this->startAt && $this->endAt) {
+            $daysLeft = $this->startAt->diff($this->endAt)->days;
+        }
 
         foreach ($this->risks as $risk) {
-            $riskDatas[] = [
-                'identifiedAt' => $risk->getIdentifiedAt(),
-                'resolvedAt' => $risk->getResolvedAt(),
-                'probability' => $risk->getProbability()->value,
-                'severity' => $risk->getSeverity()->value,
-            ];
+            $probability = $risk->getProbability();
+            $severity = $risk->getSeverity();
+
+            if (!$risk->getResolvedAt()) {
+                if (Probability::Never === $probability) {
+                    ++$canBeIgnoredRisks;
+                } elseif (Severity::Breaking === $severity) {
+                    if (Probability::VeryLow === $probability) {
+                        ++$highRisks;
+                    } else {
+                        ++$dangerRisks;
+                    }
+                } elseif (Severity::High === $severity) {
+                    if (in_array($probability, [Probability::VeryLow, Probability::Low], true)) {
+                        ++$highRisks;
+                    } else {
+                        ++$dangerRisks;
+                    }
+                } elseif (in_array($severity, [Severity::High, Severity::Medium], true)) {
+                    if (in_array($probability, [Probability::VeryLow, Probability::Low, Probability::Medium], true)) {
+                        ++$mediumRisks;
+                    } else {
+                        ++$highRisks;
+                    }
+                } elseif (in_array($severity, [Severity::Low, Severity::VeryLow], true)) {
+                    if (in_array($probability, [Probability::VeryLow, Probability::Low, Probability::Medium], true)) {
+                        ++$lowRisks;
+                    } else {
+                        ++$mediumRisks;
+                    }
+                } else {
+                    ++$lowRisks;
+                }
+            }
         }
 
         return [
-            'project' => $projectData,
-            'budget' => $budgetData,
-            'risks' => $riskDatas,
+            'initialAmount' => $this->budget->getInitialAmount(),
+            'leftAmount' => $this->budget->getLeftAmount(),
+            'archived' => $this->archived ? 1 : 0,
+            'daysLeft' => $daysLeft,
+            'dangerRisks' => $dangerRisks,
+            'highRisks' => $highRisks,
+            'mediumRisks' => $mediumRisks,
+            'lowRisks' => $lowRisks,
+            'canBeIgnoredRisks' => $canBeIgnoredRisks,
         ];
     }
 }

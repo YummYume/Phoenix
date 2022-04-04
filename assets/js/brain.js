@@ -1,4 +1,3 @@
-// on page loaded
 window.onload = function () {
     const project = document.getElementById('project-data');
     const projectForecast = document.getElementById('project-forecast');
@@ -9,7 +8,7 @@ window.onload = function () {
 
         const config = {
             binaryThresh: 0.5,
-            hiddenLayers: [5], // array of ints for the sizes of the hidden layers in the network
+            hiddenLayers: [10], // array of ints for the sizes of the hidden layers in the network
             activation: 'sigmoid', // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
             leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
         };
@@ -17,170 +16,68 @@ window.onload = function () {
         const trainingData = [
             {
                 input: {
-                    now: Date.now(),
-                    budget: {
-                        initialAmount: 5000,
-                        leftAmount: 4000,
-                        spentAmount: 1000,
-                    },
-                    project: {
-                        archived: false,
-                        endAt: null,
-                        startAt: {
-                            date: "2021-05-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                    },
-                    risks: [
-                        {
-                            probability: "very_low",
-                            resolvedAt: null,
-                            identifiedAt: {
-                                date: "2022-05-16 22:01:06.000000",
-                                timezone: "UTC",
-                                timezone_type: 3,
-                            },
-                            severity: "very_high",
-                        }
-                    ]
+                    initialAmount: 5000,
+                    leftAmount: 5000,
+                    archived: 0,
+                    daysLeft: 320,
+                    dangerRisks: 0,
+                    highRisks: 0,
+                    mediumRisks: 0,
+                    lowRisks: 1,
+                    canBeIgnoredRisks: 2
                 },
                 output: {
-                    '😇': 1,
-                    '😀': 0,
-                    '😟': 0,
-                    '😰': 0,
+                    '😇': 1
                 }
             },
             {
                 input: {
-                    now: Date.now(),
-                    budget: {
-                        initialAmount: 5000,
-                        leftAmount: 3000,
-                        spentAmount: 2000,
-                    },
-                    project: {
-                        archived: false,
-                        endAt: null,
-                        startAt: {
-                            date: "2021-10-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                    },
-                    risks: [
-                        {
-                            probability: "medium",
-                            resolvedAt: null,
-                            identifiedAt: {
-                                date: "2022-05-16 22:01:06.000000",
-                                timezone: "UTC",
-                                timezone_type: 3,
-                            },
-                            severity: "very_high",
-                        }
-                    ]
+                    initialAmount: 5000,
+                    leftAmount: 3000,
+                    archived: 0,
+                    daysLeft: null,
+                    dangerRisks: 0,
+                    highRisks: 0,
+                    mediumRisks: 0,
+                    lowRisks: 3,
+                    canBeIgnoredRisks: 1
                 },
                 output: {
-                    '😇': 0,
-                    '😀': 1,
-                    '😟': 0,
-                    '😰': 0,
+                    '😀': 1
                 }
             },
             {
                 input: {
-                    now: Date.now(),
-                    budget: {
-                        initialAmount: 5000,
-                        leftAmount: 4000,
-                        spentAmount: 1000,
-                    },
-                    project: {
-                        archived: false,
-                        endAt: {
-                            date: "2022-04-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                        startAt: {
-                            date: "2021-05-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                    },
-                    risks: [
-                        {
-                            probability: "very_high",
-                            resolvedAt: null,
-                            identifiedAt: {
-                                date: "2022-05-16 22:01:06.000000",
-                                timezone: "UTC",
-                                timezone_type: 3,
-                            },
-                            severity: "medium",
-                        }
-                    ]
+                    initialAmount: 2000,
+                    leftAmount: 100,
+                    archived: 0,
+                    daysLeft: 30,
+                    dangerRisks: 0,
+                    highRisks: 0,
+                    mediumRisks: 1,
+                    lowRisks: 3,
+                    canBeIgnoredRisks: 0
                 },
                 output: {
-                    '😇': 0,
-                    '😀': 0,
-                    '😟': 1,
-                    '😰': 0,
+                    '😟': 1
                 }
             },
             {
                 input: {
-                    now: Date.now(),
-                    budget: {
-                        initialAmount: 5000,
-                        leftAmount: -1000,
-                        spentAmount: 6000,
-                    },
-                    project: {
-                        archived: false,
-                        endAt: {
-                            date: "2022-03-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                        startAt: {
-                            date: "2021-05-16 22:01:06.000000",
-                            timezone: "UTC",
-                            timezone_type: 3,
-                        },
-                    },
-                    risks: [
-                        {
-                            probability: "very_high",
-                            resolvedAt: null,
-                            identifiedAt: {
-                                date: "2022-05-16 22:01:06.000000",
-                                timezone: "UTC",
-                                timezone_type: 3,
-                            },
-                            severity: "medium",
-                        },
-                        {
-                            probability: "present",
-                            resolvedAt: null,
-                            identifiedAt: {
-                                date: "2022-05-18 22:01:06.000000",
-                                timezone: "UTC",
-                                timezone_type: 3,
-                            },
-                            severity: "breaking",
-                        }
-                    ]
+                    initialAmount: 5000,
+                    leftAmount: -2000,
+                    archived: 0,
+                    daysLeft: 20,
+                    dangerRisks: 0,
+                    highRisks: 2,
+                    mediumRisks: 1,
+                    lowRisks: 0,
+                    canBeIgnoredRisks: 0
                 },
                 output: {
-                    '😇': 0,
-                    '😀': 0,
-                    '😟': 0,
-                    '😰': 1,
+                    '😰': 1
                 }
-            },
+            }
         ];
 
         const net = new brain.NeuralNetwork(config);
@@ -189,5 +86,17 @@ window.onload = function () {
 
         const output = net.run(projectData);
         console.log(output);
+        const highestValue = Object.keys(output).reduce(function (previous, key) {
+            return previous < output[key] ? output[key] : previous;
+        }, 0)
+        const forecast = Object.keys(output).find(key => output[key] === highestValue);
+
+        // delete everything inside the project forecast div and add a span with the current forecast
+        while (projectForecast.firstChild) {
+            projectForecast.removeChild(projectForecast.firstChild);
+        }
+        const span = document.createElement('span');
+        span.innerText = forecast;
+        projectForecast.appendChild(span);
     }
 }

@@ -194,7 +194,7 @@
                                     {% else %}
                                         {% set color = 'danger' %}
                                     {% endif %}
-                                {% elseif risk.severity == constant('App\\Enum\\Severity::High') %}
+                                {% elseif risk.severity == constant('App\\Enum\\Severity::VeryHigh') %}
                                     {% if risk.probability in [constant('App\\Enum\\Probability::VeryLow'), constant('App\\Enum\\Probability::Low')] %}
                                         {% set color = 'warning' %}
                                     {% else %}
