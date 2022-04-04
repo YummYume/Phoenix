@@ -148,7 +148,7 @@
                                                 <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
                                             </a>
                                             {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), milestone.project) %}
-                                                <a href="{{ path('app_project_milestone_edit', { code: milestone.project.code, id: milestone.id }) }}">
+                                                <a href="{{ path('app_project_milestone_edit', { code: milestone.project.code, milestone_id: milestone.id }) }}">
                                                     <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
                                                 </a>
                                             {% endif %}

@@ -47,11 +47,11 @@
                         <td>{{ project.budget.leftAmount|format_currency('EUR') }}</td>
                         <td>
                             <a href="{{ path('app_project_show', { code: project.code }) }}">
-                                <i class="fa fa-eye me-1" title="{{ 'common.show'|trans }}"></i>
+                                <i class="fa fa-eye me-1" title="{{ 'project.show_project'|trans }}"></i>
                             </a>
                             {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT'), project) %}
                                 <a href="{{ path('app_project_edit', { code: project.code }) }}">
-                                    <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
+                                    <i class="fa fa-pencil me-1" title="{{ 'project.edit_project'|trans }}"></i>
                                 </a>
                             {% endif %}
                         </td>

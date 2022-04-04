@@ -106,7 +106,11 @@
             </div>
             <div class="info-display">
                 <p>{{ 'project.forecast'|trans }}</p>
-                <span>TODO</span>
+                <span id="project-forecast">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">...</span>
+                    </div>
+                </span>
             </div>
         </div>
         <div class="col-md-10 col-12 my-5">
@@ -144,7 +148,7 @@
                                     {% endif %}
                                 </p>
                                 {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), project) %}
-                                    <a class="card-link" href="{{ path('app_project_milestone_edit', { code: project.code, id: milestone.id }) }}">
+                                    <a class="card-link" href="{{ path('app_project_milestone_edit', { code: project.code, milestone_id: milestone.id }) }}">
                                         <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>{{ 'common.edit'|trans }}
                                     </a>
                                 {% endif %}
@@ -167,7 +171,7 @@
                 </div>
             {% endif %}
             <div class="table-responsive" id="project-risks">
-                <table class="table table-hover">
+                <table class="table table-hover table-light">
                     <thead>
                         <tr>
                             <th scope="col">{{ 'risk.name'|trans }}</th>
@@ -228,7 +232,7 @@
                                 <td>{{ risk.probability ? ('probability.' ~ risk.probability.value)|trans : '' }}</td>
                                 <td>
                                     {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_RISK'), project) %}
-                                        <a href="{{ path('app_project_risk_edit', { code: project.code, id: risk.id }) }}">
+                                        <a href="{{ path('app_project_risk_edit', { code: project.code, risk_id: risk.id }) }}">
                                             <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
                                         </a>
                                     {% endif %}
@@ -252,7 +256,7 @@
                 </div>
             {% endif %}
             <div class="table-responsive" id="project-events">
-                <table class="table table-hover">
+                <table class="table table-hover table-light">
                     <thead>
                         <tr>
                             <th scope="col">{{ 'event.name'|trans }}</th>
@@ -271,7 +275,7 @@
                                 <td>{{ event.milestone ? event.milestone.name : '' }}</td>
                                 <td>
                                     {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_EVENT'), project) %}
-                                        <a href="{{ path('app_project_event_edit', { code: project.code, id: event.id }) }}">
+                                        <a href="{{ path('app_project_event_edit', { code: project.code, event_id: event.id }) }}">
                                             <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>
                                         </a>
                                     {% endif %}
@@ -281,6 +285,7 @@
                     </tbody>
                 </table>
             </div>
+            <div id="project-data" data-project="{{ project.brainData|json_encode|e('html_attr') }}"></div>
         </div>
     </div>
 {% endblock %}

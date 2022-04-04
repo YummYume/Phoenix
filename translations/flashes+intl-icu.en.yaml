@@ -1,0 +1,3 @@
+### Common
+common.empty_search: <i class="fa fa-exclamation-circle"></i> Your search is empty. Please enter a search term.
+common.invalid_form: <i class="fa fa-exclamation-circle"></i> The form is invalid. Please check the errors below.

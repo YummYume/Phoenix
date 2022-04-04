@@ -85,7 +85,7 @@ class Project
     #[Assert\Type(type: 'bool', message: 'project.private.type')]
     private bool $private = false;
 
-    #[ORM\ManyToMany(targetEntity: Portfolio::class, inversedBy: 'projects')]
+    #[ORM\ManyToMany(targetEntity: Portfolio::class, mappedBy: 'projects')]
     private Collection $portfolios;
 
     public function __construct()
@@ -335,6 +335,7 @@ class Project
     {
         if (!$this->portfolios->contains($portfolio)) {
             $this->portfolios[] = $portfolio;
+            $portfolio->addProject($this);
         }
 
         return $this;
@@ -342,8 +343,40 @@ class Project
 
     public function removePortfolio(Portfolio $portfolio): self
     {
-        $this->portfolios->removeElement($portfolio);
+        if ($this->portfolios->removeElement($portfolio)) {
+            $portfolio->removeProject($this);
+        }
 
         return $this;
+    }
+
+    public function getBrainData(): array
+    {
+        $projectData = [
+            'startAt' => $this->startAt,
+            'endAt' => $this->endAt,
+            'archived' => $this->archived,
+        ];
+        $budgetData = [
+            'initialAmount' => $this->budget->getInitialAmount(),
+            'spentAmount' => $this->budget->getSpentAmount(),
+            'leftAmount' => $this->budget->getLeftAmount(),
+        ];
+        $riskDatas = [];
+
+        foreach ($this->risks as $risk) {
+            $riskDatas[] = [
+                'identifiedAt' => $risk->getIdentifiedAt(),
+                'resolvedAt' => $risk->getResolvedAt(),
+                'probability' => $risk->getProbability()->value,
+                'severity' => $risk->getSeverity()->value,
+            ];
+        }
+
+        return [
+            'project' => $projectData,
+            'budget' => $budgetData,
+            'risks' => $riskDatas,
+        ];
     }
 }

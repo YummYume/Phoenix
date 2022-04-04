@@ -30,7 +30,7 @@ class Portfolio
     #[Assert\Valid()]
     private ?User $responsible;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'portfolios')]
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'portfolios')]
     private Collection $projects;
 
     public function __construct()
@@ -79,7 +79,6 @@ class Portfolio
     {
         if (!$this->projects->contains($project)) {
             $this->projects[] = $project;
-            $project->addPortfolio($this);
         }
 
         return $this;
@@ -87,9 +86,7 @@ class Portfolio
 
     public function removeProject(Project $project): self
     {
-        if ($this->projects->removeElement($project)) {
-            $project->removePortfolio($this);
-        }
+        $this->projects->removeElement($project);
 
         return $this;
     }

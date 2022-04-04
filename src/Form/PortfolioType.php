@@ -29,6 +29,7 @@ final class PortfolioType extends AbstractType
                 'required' => true,
             ])
             ->add('projects', EntityType::class, [
+                'label' => 'portfolio.projects',
                 'class' => Project::class,
                 'choice_label' => 'name',
                 'multiple' => true,

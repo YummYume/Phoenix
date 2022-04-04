@@ -17,6 +17,7 @@ class PortfolioFixtures extends Fixture implements DependentFixtureInterface
             $portfolio = (new Portfolio())
                 ->setName(ucfirst($faker->words(rand(1, 3), true)))
                 ->setResponsible($this->getReference(UserFixtures::class."responsible$i"))
+                ->addProject($this->getReference(ProjectFixtures::class.$i))
             ;
 
             $manager->persist($portfolio);
@@ -30,6 +31,7 @@ class PortfolioFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            ProjectFixtures::class,
         ];
     }
 }

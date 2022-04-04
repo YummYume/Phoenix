@@ -8,7 +8,7 @@ user.password.max_length: Le mot de passe ne doit pas dépasser 4096 caractères
 user.password.invalid: Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre.
 user.password.compromised: Ce mot de passe est compromis. Veuillez en choisir un autre.
 user.password.not_blank: Veuillez entrer un mot de passe.
-user.current_password.not_blank: Veuiillez entrer votre mot de passe actuel.
+user.current_password.not_blank: Veuillez entrer votre mot de passe actuel.
 user.current_password.invalid: Le mot de passe ne correspond pas.
 user.first_name.not_blank: Le prénom ne peut pas être vide.
 user.last_name.not_blank: Le nom ne peut pas être vide.
@@ -70,7 +70,7 @@ milestone.deadline.datetime: La date de début du jalon doit être une date vali
 milestone.end_at.not_blank: La date de fin du jalon ne peut pas être vide.
 milestone.end_at.datetime: La date de fin du jalon doit être une date valide.
 milestone.start_at.greater_than_or_equal: La date de début du jalon doit être supérieure ou égale à la date de début du projet ({compared_value}).
-milestone.end_at.greater_than_start_at: La date de fin du jalon doit être supérieure à la date de début du jalon.
+milestone.end_at.greater_than_start_at: La date de fin du jalon doit être supérieure ou égale à la date de début du jalon.
 
 ### Event
 event.date.not_blank: La date du fait marquant ne peut pas être vide.

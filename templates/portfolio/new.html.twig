@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Portfolio{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.portfolio.create'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Portfolio</h1>
-
-    {{ include('portfolio/_form.html.twig') }}
-
-    <a href="{{ path('app_portfolio_index') }}">back to list</a>
+    <div class="row w-100 m-auto justify-content-center">
+        <div class="col-12 text-center my-4">
+            <h1>{{ 'view.portfolio.create'|trans }}</h1>
+        </div>
+        <div class="col-xl-10 col-12 my-4">
+            {{ include('portfolio/_form.html.twig') }}
+            <div class="col-12 text-end my-2">
+                <div class="btn-group">
+                    <a class="btn btn-outline-secondary" href="{{ path('app_portfolio_index') }}">
+                        <i class="fa fa-arrow-left"></i>
+                        {{ 'common.back_to_list'|trans }}
+                    </a>
+                    <button class="btn btn-outline-success" action="submit" form="portfolio-form">
+                        <i class="fa fa-save"></i>
+                        {{ 'common.save'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

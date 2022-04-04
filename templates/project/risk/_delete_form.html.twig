@@ -1,3 +1,3 @@
-<form id="risk-delete" method="post" action="{{ path('app_project_risk_delete', {'code': risk.project.code, 'id': risk.id}) }}" onsubmit="return confirm('{{ 'common.ask_confirmation'|trans }}');">
+<form id="risk-delete" method="post" action="{{ path('app_project_risk_delete', { code: risk.project.code, risk_id: risk.id }) }}" onsubmit="return confirm('{{ 'common.ask_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ risk.id) }}">
 </form>

@@ -11,7 +11,7 @@
             <h1>{{ 'view.portfolio.edit'|trans }}</h1>
         </div>
         <div class="col-xl-10 col-12 my-4">
-            {{ include('project/_form.html.twig') }}
+            {{ include('portfolio/_form.html.twig') }}
             <div class="col-12 text-end my-2">
                 <div class="btn-group">
                     <a class="btn btn-outline-secondary" href="{{ path('app_portfolio_index') }}">
@@ -20,14 +20,14 @@
                     </a>
                     <a class="btn btn-outline-primary" href="{{ path('app_portfolio_show', {id: portfolio.id}) }}">
                         <i class="fa fa-eye"></i>
-                        {{ 'project.show_project'|trans }}
+                        {{ 'portfolio.show_portfolio'|trans }}
                     </a>
-                    <button class="btn btn-outline-danger" action="submit" form="project-delete">
-                        {{ include('project/_delete_form.html.twig') }}
+                    <button class="btn btn-outline-danger" action="submit" form="portfolio-delete">
+                        {{ include('portfolio/_delete_form.html.twig') }}
                         <i class="fa fa-trash"></i>
                         {{ 'common.delete'|trans }}
                     </button>
-                    <button class="btn btn-outline-success" action="submit" form="project-form">
+                    <button class="btn btn-outline-success" action="submit" form="portfolio-form">
                         <i class="fa fa-save"></i>
                         {{ 'common.save'|trans }}
                     </button>

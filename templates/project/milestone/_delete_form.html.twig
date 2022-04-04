@@ -1,3 +1,3 @@
-<form id="milestone-delete" method="post" action="{{ path('app_project_milestone_delete', {'code': milestone.project.code, 'id': milestone.id}) }}" onsubmit="return confirm('{{ 'common.ask_confirmation'|trans }}');">
+<form id="milestone-delete" method="post" action="{{ path('app_project_milestone_delete', {'code': milestone.project.code, 'milestone_id': milestone.id}) }}" onsubmit="return confirm('{{ 'common.ask_confirmation'|trans }}');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ milestone.id) }}">
 </form>

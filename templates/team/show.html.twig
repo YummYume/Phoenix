@@ -62,7 +62,7 @@
                 <div class="info-display">
                     <p>{{ 'team.parent_team'|trans }}</p>
                     <a href="{{ path('app_team_show', {id: team.parentTeam.id}) }}">
-                        <span>{{ team.parentTeam.name ~ ' (' ~ 'team.member_count'|trans({members: team.parentTeam.members|length}) ~ ')' }}</span>
+                        <span>{{ team.parentTeam.name ~ ' (' ~ 'team.member_count'|trans({ members: team.parentTeam.members|length }) ~ ')' }}</span>
                     </a>
                 </div>
             {% endif %}
@@ -70,7 +70,7 @@
                 <p>{{ 'team.projects'|trans ~ ' (' ~ team.projects|length ~ ')' }}</p>
                 {% if team.projects is not empty %}
                     <span>
-                        {{ team.projects|map(p => '<a href="' ~ path('app_project_show', {code: p.code}) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
+                        {{ team.projects|map(p => '<a href="' ~ path('app_project_show', { code: p.code }) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
                     </span>
                 {% else %}
                     <span>{{ 'common.none'|trans }}</span>
@@ -80,7 +80,7 @@
                 <p>{{ 'team.client_projects'|trans ~ ' (' ~ team.clientProjects|length ~ ')' }}</p>
                 {% if team.clientProjects is not empty %}
                     <span>
-                        {{ team.clientProjects|map(p => '<a href="' ~ path('app_project_show', {code: p.code}) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
+                        {{ team.clientProjects|map(p => '<a href="' ~ path('app_project_show', { code: p.code }) ~ '">' ~ p.name ~ '</a>')|join(', ')|striptags('<a>')|raw }}
                     </span>
                 {% else %}
                     <span>{{ 'common.none'|trans }}</span>

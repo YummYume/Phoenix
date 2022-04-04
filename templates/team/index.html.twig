@@ -37,11 +37,11 @@
                         <td>{{ team.members|length }}</td>
                         <td>
                             <a href="{{ path('app_team_show', { id: team.id }) }}">
-                                <i class="fa fa-eye me-1" title="Voir l'équipe"></i>
+                                <i class="fa fa-eye me-1" title="{{ 'team.show_team'|trans }}"></i>
                             </a>
                             {% if is_granted(constant('App\\Security\\Voter\\TeamVoter::EDIT'), team) %}
                                 <a href="{{ path('app_team_edit', { id: team.id }) }}">
-                                    <i class="fa fa-pencil me-1" title="Modifier l'équipe"></i>
+                                    <i class="fa fa-pencil me-1" title="{{ 'team.edit_team'|trans }}"></i>
                                 </a>
                             {% endif %}
                         </td>

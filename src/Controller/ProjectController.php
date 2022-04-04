@@ -155,7 +155,10 @@ final class ProjectController extends AbstractController
 
                     $this->addFlash('success', $this->translator->trans('create.milestone.success', ['name' => $milestone->getName()], 'flashes'));
 
-                    return $this->redirectToRoute('app_project_milestone_edit', ['code' => $project->getCode(), 'id' => $milestone->getId()], Response::HTTP_SEE_OTHER);
+                    return $this->redirectToRoute('app_project_milestone_edit', [
+                        'code' => $project->getCode(),
+                        'milestone_id' => $milestone->getId(),
+                    ], Response::HTTP_SEE_OTHER);
                 } catch (\Exception $e) {
                     $this->logger->critical($e->getMessage(), ['exception' => $e, 'milestone' => $milestone]);
                     $this->addFlash('error', $this->translator->trans('create.milestone.error', domain: 'flashes'));
@@ -201,7 +204,8 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/milestone/{id}/delete', name: 'app_project_milestone_delete', methods: ['POST'])]
+    #[Route('/{code}/milestone/{milestone_id}/delete', name: 'app_project_milestone_delete', methods: ['POST'])]
+    #[Entity('milestone', expr: 'repository.find(milestone_id)')]
     public function deleteMilestone(Request $request, Project $project, Milestone $milestone): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_MILESTONE, $project);
@@ -240,7 +244,10 @@ final class ProjectController extends AbstractController
 
                     $this->addFlash('success', $this->translator->trans('create.risk.success', ['name' => $risk->getName()], 'flashes'));
 
-                    return $this->redirectToRoute('app_project_risk_edit', ['code' => $project->getCode(), 'id' => $risk->getId()], Response::HTTP_SEE_OTHER);
+                    return $this->redirectToRoute('app_project_risk_edit', [
+                        'code' => $project->getCode(),
+                        'risk_id' => $risk->getId(),
+                    ], Response::HTTP_SEE_OTHER);
                 } catch (\Exception $e) {
                     $this->logger->critical($e->getMessage(), ['exception' => $e, 'risk' => $risk]);
                     $this->addFlash('error', $this->translator->trans('create.risk.error', domain: 'flashes'));
@@ -256,7 +263,8 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/risk/{id}/edit', name: 'app_project_risk_edit', methods: ['GET', 'POST'])]
+    #[Route('/{code}/risk/{risk_id}/edit', name: 'app_project_risk_edit', methods: ['GET', 'POST'])]
+    #[Entity('risk', expr: 'repository.find(risk_id)')]
     public function editRisk(Request $request, Project $project, Risk $risk): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_RISK, $project);
@@ -285,7 +293,8 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/risk/{id}/delete', name: 'app_project_risk_delete', methods: ['POST'])]
+    #[Route('/{code}/risk/{risk_id}/delete', name: 'app_project_risk_delete', methods: ['POST'])]
+    #[Entity('risk', expr: 'repository.find(risk_id)')]
     public function deleteRisk(Request $request, Project $project, Risk $risk): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_RISK, $project);
@@ -324,7 +333,10 @@ final class ProjectController extends AbstractController
 
                     $this->addFlash('success', $this->translator->trans('create.event.success', ['name' => $event->getName()], 'flashes'));
 
-                    return $this->redirectToRoute('app_project_event_edit', ['code' => $project->getCode(), 'id' => $event->getId()], Response::HTTP_SEE_OTHER);
+                    return $this->redirectToRoute('app_project_event_edit', [
+                        'code' => $project->getCode(),
+                        'event_id' => $event->getId(),
+                    ], Response::HTTP_SEE_OTHER);
                 } catch (\Exception $e) {
                     $this->logger->critical($e->getMessage(), ['exception' => $e, 'event' => $event]);
                     $this->addFlash('error', $this->translator->trans('create.event.error', domain: 'flashes'));
@@ -340,7 +352,8 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/event/{id}/edit', name: 'app_project_event_edit', methods: ['GET', 'POST'])]
+    #[Route('/{code}/event/{event_id}/edit', name: 'app_project_event_edit', methods: ['GET', 'POST'])]
+    #[Entity('event', expr: 'repository.find(event_id)')]
     public function editEvent(Request $request, Project $project, Event $event): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_EVENT, $project);
@@ -369,7 +382,8 @@ final class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{code}/event/{id}/delete', name: 'app_project_event_delete', methods: ['POST'])]
+    #[Route('/{code}/event/{event_id}/delete', name: 'app_project_event_delete', methods: ['POST'])]
+    #[Entity('event', expr: 'repository.find(event_id)')]
     public function deleteEvent(Request $request, Project $project, Event $event): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_EVENT, $project);

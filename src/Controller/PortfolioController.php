@@ -117,6 +117,8 @@ final class PortfolioController extends AbstractController
             try {
                 $this->entityManager->remove($portfolio);
                 $this->entityManager->flush();
+
+                $this->addFlash('success', $this->translator->trans('delete.portfolio.success', ['name' => $portfolio->getName()], 'flashes'));
             } catch (\Exception $e) {
                 $this->logger->critical($e->getMessage(), ['exception' => $e, 'portfolio' => $portfolio]);
                 $this->addFlash('danger', $this->translator->trans('delete.portfolio.error', domain: 'flashes'));

@@ -1,39 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Portfolio index{% endblock %}
+{% block title %}
+    {% set pageTitle = 'view.portfolio.index'|trans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
-    <h1>Portfolio index</h1>
+    <div class="row mx-auto w-100 justify-content-center align-items-center">
+        <div class="col-12">
+            <div class="text-center">
+                <h1>{{ 'view.portfolios.index'|trans }} ({{ pagination.getTotalItemCount }})</h1>
+            </div>
+            <div class="text-end">
+                <a href="{{ path('app_portfolio_new')}}" class="btn btn-outline-success">{{ 'view.portfolio.create'|trans }}</a>
+            </div>
+        </div>
+        <div class="col-xl-8 col-md-10 col-12 table-responsive">
+            <table class="table table-hover">
+                <tr>
+                    <th{% if pagination.isSorted('p.name') %} class="sorted"{% endif %}>
+                        {{ knp_pagination_sortable(pagination, 'portfolio.name'|trans, 'p.name') }}
+                    </th>
+                    <th>{{ 'portfolio.projects'|trans }}</th>
+                    <th>{{ 'common.actions'|trans }}</th>
+                </tr>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for portfolio in portfolios %}
-            <tr>
-                <td>{{ portfolio.id }}</td>
-                <td>{{ portfolio.name }}</td>
-                <td>{{ portfolio.createdAt ? portfolio.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ portfolio.updatedAt ? portfolio.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_portfolio_show', {'id': portfolio.id}) }}">show</a>
-                    <a href="{{ path('app_portfolio_edit', {'id': portfolio.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_portfolio_new') }}">Create new</a>
+                {% for portfolio in pagination %}
+                    <tr {% if loop.index is odd %}class="color"{% endif %}>
+                        <td>{{ portfolio.name }}</td>
+                        <td>{{ portfolio.projects|length }}</td>
+                        <td>
+                            <a href="{{ path('app_portfolio_show', { id: portfolio.id }) }}">
+                                <i class="fa fa-eye me-1" title="{{ 'portfolio.show_portfolio'|trans }}"></i>
+                            </a>
+                            {% if is_granted(constant('App\\Security\\Voter\\PortfolioVoter::EDIT'), portfolio) %}
+                                <a href="{{ path('app_portfolio_edit', { id: portfolio.id }) }}">
+                                    <i class="fa fa-pencil me-1" title="{{ 'portfolio.edit_portfolio'|trans }}"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-12">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

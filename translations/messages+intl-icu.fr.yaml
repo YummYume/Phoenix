@@ -90,6 +90,13 @@ view.event.new: Nouveau fait marquant
 view.event.create: Créer un fait marquant
 view.event.title: Fait marquant
 view.event.edit: Modifier un fait marquant
+view.portfolio.title: Portefeuille
+view.portfolio.index: Portefeuilles
+view.portfolios.index: Vos portefeuilles
+view.portfolio.new: Nouveau portefeuille
+view.portfolio.create: Créer un portefeuille
+view.portfolio.edit: Modifier un portefeuille
+view.portfolio.show: Détails du portefeuille {name}
 
 ### Menu
 menu.dashboard: Tableau de bord
@@ -112,6 +119,7 @@ team.parent_team: Équipe parent
 team.projects: Projets
 team.client_projects: Projets clients
 team.show_team: Afficher l'équipe
+team.edit_team: Modifier l'équipe
 team.teams: Équipes supervisées
 team.member_count: >-
   {members, plural, =0 {Aucun membre} one {1 membre} other {# membres}}
@@ -153,6 +161,7 @@ project.risks: Risques
 project.events: Faits marquants
 project.back_to_project: Retourner au projet
 project.show_project: Afficher le projet
+project.edit_project: Modifier le projet
 
 # Budget
 budget.initial_amount: Montant de départ
@@ -184,6 +193,13 @@ event.description: Description
 event.date: Date
 event.milestone: Jalon
 event.project: Projet
+
+# Portfolio
+portfolio.name: Nom
+portfolio.projects: Projets
+portfolio.responsible: Responsable
+portfolio.show_portfolio: Afficher le portefeuille
+portfolio.edit_portfolio: Modifier le portefeuille
 
 # Severity
 severity.breaking: Bloquant
