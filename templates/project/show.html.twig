@@ -110,6 +110,8 @@
                     <div class="spinner-border text-primary" role="status">
                         <span class="visually-hidden">...</span>
                     </div>
+                    {# this is for brain.js #}
+                    <div class="d-none" id="project-data" data-project="{{ project.brainData|json_encode|e('html_attr') }}"></div>
                 </span>
             </div>
         </div>
@@ -131,7 +133,11 @@
                         <div class="card text-white bg-dark border-{{ milestone.required ? 'danger' : 'success' }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ milestone.name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ milestone.required ? 'milestone.is_required'|trans : 'milestone.is_not_required'|trans }}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <span>{{ milestone.required ? 'milestone.is_required'|trans : 'milestone.is_not_required'|trans }}</span>
+                                    <span>|</span>
+                                    <span>{{ milestone.completed ? 'milestone.is_completed'|trans : 'milestone.is_not_completed'|trans }}</span>
+                                </h6>
                                 <p class="card-text">
                                     <p class="m-0">
                                         <b>{{ 'milestone.events'|trans }}</b> : {{ milestone.events|length }}
@@ -249,7 +255,7 @@
             </div>
             {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_EVENT'), project) %}
                 <div class="text-center my-4">
-                    <a class="btn btn-outline-success" href="{{ path('app_project_event_new', {'code': project.code}) }}">
+                    <a class="btn btn-outline-success" href="{{ path('app_project_event_new', { code: project.code }) }}">
                         <i class="fa fa-plus"></i>
                         {{ 'common.new'|trans }}
                     </a>
@@ -285,7 +291,8 @@
                     </tbody>
                 </table>
             </div>
-            <div id="project-data" data-project="{{ project.brainData|json_encode|e('html_attr') }}"></div>
         </div>
+        {# uncomment this for magic #}
+        {# <div id="brain-diagram"></div> #}
     </div>
 {% endblock %}

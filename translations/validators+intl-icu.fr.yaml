@@ -63,6 +63,7 @@ portfolio.responsible.not_blank: Le responsable du portefeuille ne peut pas êtr
 ### Milestone
 milestone.title.not_blank: Le titre du jalon ne peut pas être vide.
 milestone.required.type: Le statut "requis" du jalon doit être vrai ou faux.
+milestone.completed.type: Le statut "terminé" du jalon doit être vrai ou faux.
 milestone.position.type: La position du jalon doit être un nombre entier.
 milestone.position.positive_or_zero: La position du jalon doit être supérieure ou égale à 0.
 milestone.start_at.not_blank: La date de début du jalon ne peut pas être vide.

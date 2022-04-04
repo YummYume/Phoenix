@@ -57,6 +57,10 @@ class Milestone
     #[Assert\GreaterThanOrEqual(propertyPath: 'startAt', message: 'milestone.end_at.greater_than_start_at')]
     private ?\DateTime $endAt;
 
+    #[ORM\Column(type: 'boolean')]
+    #[Assert\Type(type: 'bool', message: 'milestone.completed.type')]
+    private bool $completed = false;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -79,7 +83,7 @@ class Milestone
         return $this;
     }
 
-    public function getRequired(): ?bool
+    public function isRequired(): ?bool
     {
         return $this->required;
     }
@@ -165,6 +169,18 @@ class Milestone
     public function setEndAt(?\DateTimeInterface $endAt): self
     {
         $this->endAt = $endAt;
+
+        return $this;
+    }
+
+    public function isCompleted(): ?bool
+    {
+        return $this->completed;
+    }
+
+    public function setCompleted(bool $completed): self
+    {
+        $this->completed = $completed;
 
         return $this;
     }

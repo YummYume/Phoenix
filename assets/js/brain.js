@@ -8,7 +8,7 @@ window.onload = function () {
 
         const config = {
             binaryThresh: 0.5,
-            hiddenLayers: [10], // array of ints for the sizes of the hidden layers in the network
+            hiddenLayers: [10, 10, 10], // array of ints for the sizes of the hidden layers in the network
             activation: 'sigmoid', // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
             leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
         };
@@ -16,15 +16,10 @@ window.onload = function () {
         const trainingData = [
             {
                 input: {
-                    initialAmount: 5000,
-                    leftAmount: 5000,
-                    archived: 0,
-                    daysLeft: 320,
-                    dangerRisks: 0,
-                    highRisks: 0,
-                    mediumRisks: 0,
-                    lowRisks: 1,
-                    canBeIgnoredRisks: 2
+                    budgetPercentage: 0.1,
+                    daysPercentage: 0.5,
+                    riskPercentage: 1,
+                    milestonePercentage: 0.8
                 },
                 output: {
                     '😇': 1
@@ -32,15 +27,10 @@ window.onload = function () {
             },
             {
                 input: {
-                    initialAmount: 5000,
-                    leftAmount: 3000,
-                    archived: 0,
-                    daysLeft: null,
-                    dangerRisks: 0,
-                    highRisks: 0,
-                    mediumRisks: 0,
-                    lowRisks: 3,
-                    canBeIgnoredRisks: 1
+                    budgetPercentage: 0.25,
+                    daysPercentage: 0.3,
+                    riskPercentage: 0.8,
+                    milestonePercentage: 0.75
                 },
                 output: {
                     '😀': 1
@@ -48,15 +38,10 @@ window.onload = function () {
             },
             {
                 input: {
-                    initialAmount: 2000,
-                    leftAmount: 100,
-                    archived: 0,
-                    daysLeft: 30,
-                    dangerRisks: 0,
-                    highRisks: 0,
-                    mediumRisks: 1,
-                    lowRisks: 3,
-                    canBeIgnoredRisks: 0
+                    budgetPercentage: 0.35,
+                    daysPercentage: 0.1,
+                    riskPercentage: 0.9,
+                    milestonePercentage: 0.4
                 },
                 output: {
                     '😟': 1
@@ -64,15 +49,10 @@ window.onload = function () {
             },
             {
                 input: {
-                    initialAmount: 5000,
-                    leftAmount: -2000,
-                    archived: 0,
-                    daysLeft: 20,
-                    dangerRisks: 0,
-                    highRisks: 2,
-                    mediumRisks: 1,
-                    lowRisks: 0,
-                    canBeIgnoredRisks: 0
+                    budgetPercentage: 1,
+                    daysPercentage: 0.9,
+                    riskPercentage: 0.75,
+                    milestonePercentage: 0.2
                 },
                 output: {
                     '😰': 1
@@ -98,5 +78,11 @@ window.onload = function () {
         const span = document.createElement('span');
         span.innerText = forecast;
         projectForecast.appendChild(span);
+
+        const diagram = document.getElementById('brain-diagram');
+
+        if (diagram) {
+            diagram.innerHTML = brain.utilities.toSVG(net.toJSON());
+        }
     }
 }

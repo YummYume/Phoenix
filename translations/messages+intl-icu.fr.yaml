@@ -172,9 +172,12 @@ budget.landing: Atterrissage
 # Milestone
 milestone.name: Nom
 milestone.required: Requis
+milestone.completed: Terminé
 milestone.project: Projet
 milestone.is_required: Requis
 milestone.is_not_required: Non requis
+milestone.is_completed: Terminé
+milestone.is_not_completed: Non terminé
 milestone.start_at: Commence le
 milestone.end_at: Termine le
 milestone.events: Faits marquants

@@ -63,6 +63,7 @@ portfolio.responsible.not_blank: The portfolio responsible cannot be blank.
 ### Milestone
 milestone.title.not_blank: The milestone title cannot be blank.
 milestone.required.type: The milestone required status must be a boolean.
+milestone.completed.type: The milestone completed status must be a boolean.
 milestone.position.type: The milestone position must be an integer.
 milestone.position.positive_or_zero: The milestone position must be greater than or equal to 0.
 milestone.start_at.not_blank: The milestone start date cannot be blank.

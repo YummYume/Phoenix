@@ -354,64 +354,92 @@ class Project
 
     public function getBrainData(): array
     {
-        $daysLeft = null;
-        $dangerRisks = 0;
-        $highRisks = 0;
-        $mediumRisks = 0;
-        $lowRisks = 0;
-        $canBeIgnoredRisks = 0;
+        $nonResolvedRisks = [
+            'danger' => 0,
+            'high' => 0,
+            'medium' => 0,
+            'low' => 0,
+            'canBeIgnored' => 0,
+        ];
+        $resolvedRisks = [
+            'danger' => 0,
+            'high' => 0,
+            'medium' => 0,
+            'low' => 0,
+            'canBeIgnored' => 0,
+        ];
+        $milestonePercentage = 1;
+        $riskPercentage = 1;
+        $daysPercentage = null;
+        $budgetPercentage = ($this->budget->getSpentAmount() * 1) / $this->budget->getInitialAmount();
+        $now = new \DateTime();
+        $ongoing = $this->startAt && $this->endAt && $this->startAt < $now && $now < $this->endAt && !$this->archived;
 
-        if ($this->startAt && $this->endAt) {
-            $daysLeft = $this->startAt->diff($this->endAt)->days;
+        if ($ongoing) {
+            $daysSpent = $this->startAt->diff($now)->days;
+            $totalDays = $this->startAt->diff($this->endAt)->days;
+            $daysPercentage = ($daysSpent * 1) / $totalDays;
         }
 
-        foreach ($this->risks as $risk) {
-            $probability = $risk->getProbability();
-            $severity = $risk->getSeverity();
+        if ($this->risks->count() > 0) {
+            foreach ($this->risks as $risk) {
+                $probability = $risk->getProbability();
+                $severity = $risk->getSeverity();
+                $resolved = $risk->getResolvedAt() ? true : false;
 
-            if (!$risk->getResolvedAt()) {
                 if (Probability::Never === $probability) {
-                    ++$canBeIgnoredRisks;
+                    $resolved ? ++$resolvedRisks['canBeIgnored'] : ++$nonResolvedRisks['canBeIgnored'];
                 } elseif (Severity::Breaking === $severity) {
                     if (Probability::VeryLow === $probability) {
-                        ++$highRisks;
+                        $resolved ? ++$resolvedRisks['high'] : ++$nonResolvedRisks['high'];
                     } else {
-                        ++$dangerRisks;
+                        $resolved ? ++$resolvedRisks['danger'] : ++$nonResolvedRisks['danger'];
                     }
                 } elseif (Severity::High === $severity) {
                     if (in_array($probability, [Probability::VeryLow, Probability::Low], true)) {
-                        ++$highRisks;
+                        $resolved ? ++$resolvedRisks['high'] : ++$nonResolvedRisks['high'];
                     } else {
-                        ++$dangerRisks;
+                        $resolved ? ++$resolvedRisks['danger'] : ++$nonResolvedRisks['danger'];
                     }
                 } elseif (in_array($severity, [Severity::High, Severity::Medium], true)) {
                     if (in_array($probability, [Probability::VeryLow, Probability::Low, Probability::Medium], true)) {
-                        ++$mediumRisks;
+                        $resolved ? ++$resolvedRisks['medium'] : ++$nonResolvedRisks['medium'];
                     } else {
-                        ++$highRisks;
+                        $resolved ? ++$resolvedRisks['high'] : ++$nonResolvedRisks['high'];
                     }
                 } elseif (in_array($severity, [Severity::Low, Severity::VeryLow], true)) {
                     if (in_array($probability, [Probability::VeryLow, Probability::Low, Probability::Medium], true)) {
-                        ++$lowRisks;
+                        $resolved ? ++$resolvedRisks['low'] : ++$nonResolvedRisks['low'];
                     } else {
-                        ++$mediumRisks;
+                        $resolved ? ++$resolvedRisks['medium'] : ++$nonResolvedRisks['medium'];
                     }
                 } else {
-                    ++$lowRisks;
+                    $resolved ? ++$resolvedRisks['low'] : ++$nonResolvedRisks['low'];
                 }
             }
+
+            $resolvedRisksPercentage = ($resolvedRisks['danger'] * 2) + ($resolvedRisks['high'] * 1.5) + $resolvedRisks['medium'] + ($resolvedRisks['low'] * 0.5);
+            $nonResolvedRisksPercentage = ($nonResolvedRisks['danger'] * 2) + ($nonResolvedRisks['high'] * 1.5) + $nonResolvedRisks['medium'] + ($nonResolvedRisks['low'] * 0.5);
+            $riskPercentage = ($resolvedRisksPercentage * 1) / count($this->risks);
+        }
+
+        if ($this->milestones->count() > 1) {
+            $milestonesCompleted = 0;
+
+            foreach ($this->milestones as $milestone) {
+                if ($milestone->isRequired() && $milestone->isCompleted()) {
+                    ++$milestonesCompleted;
+                }
+            }
+
+            $milestonePercentage = ($milestonesCompleted * 1) / count($this->milestones);
         }
 
         return [
-            'initialAmount' => $this->budget->getInitialAmount(),
-            'leftAmount' => $this->budget->getLeftAmount(),
-            'archived' => $this->archived ? 1 : 0,
-            'daysLeft' => $daysLeft,
-            'dangerRisks' => $dangerRisks,
-            'highRisks' => $highRisks,
-            'mediumRisks' => $mediumRisks,
-            'lowRisks' => $lowRisks,
-            'canBeIgnoredRisks' => $canBeIgnoredRisks,
+            'budgetPercentage' => $budgetPercentage,
+            'daysPercentage' => $daysPercentage,
+            'riskPercentage' => $riskPercentage,
+            'milestonePercentage' => $milestonePercentage,
         ];
     }
 }

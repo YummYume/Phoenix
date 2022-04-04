@@ -17,6 +17,7 @@ class MilestoneFixtures extends Fixture implements DependentFixtureInterface
             $milestone = (new Milestone())
                 ->setName(ucfirst($faker->words(rand(1, 3), true)))
                 ->setRequired($faker->boolean())
+                ->setCompleted($faker->boolean())
                 ->setProject($this->getReference(ProjectFixtures::class.$i))
             ;
 

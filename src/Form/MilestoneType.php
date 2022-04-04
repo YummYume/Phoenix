@@ -33,6 +33,10 @@ final class MilestoneType extends AbstractType
                 'label' => 'milestone.required',
                 'required' => false,
             ])
+            ->add('completed', CheckboxType::class, [
+                'label' => 'milestone.completed',
+                'required' => false,
+            ])
         ;
     }
 
