@@ -90,6 +90,10 @@ view.event.new: Nouveau fait marquant
 view.event.create: Créer un fait marquant
 view.event.title: Fait marquant
 view.event.edit: Modifier un fait marquant
+view.risk.new: Nouveau risque
+view.risk.create: Créer un risque
+view.risk.title: Risque
+view.risk.edit: Modifier un risque
 view.portfolio.title: Portefeuille
 view.portfolio.index: Portefeuilles
 view.portfolios.index: Vos portefeuilles
@@ -104,6 +108,7 @@ menu.status: Statuts
 menu.team: Equipes
 menu.user: Utilisateurs
 menu.return_to_homepage: Retourner à l'accueil
+menu.administration: Administration
 
 ### Entities
 # Status

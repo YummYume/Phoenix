@@ -17,6 +17,7 @@ use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -79,8 +80,21 @@ final class ProjectController extends AbstractController
     {
         $this->denyAccessUnlessGranted(ProjectVoter::VIEW, $project);
 
+        $finder = new Finder();
+        $ai = null;
+
+        $finder
+            ->in(__DIR__.'\\..\\..\\data')
+            ->name('projectAi.min.json')
+        ;
+
+        foreach ($finder as $file) {
+            $ai = $file->getContents();
+        }
+
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'ai' => $ai,
         ]);
     }
 

@@ -373,7 +373,7 @@ class Project
         $daysPercentage = null;
         $budgetPercentage = ($this->budget->getSpentAmount() * 1) / $this->budget->getInitialAmount();
         $now = new \DateTime();
-        $ongoing = $this->startAt && $this->endAt && $this->startAt < $now && $now < $this->endAt && !$this->archived;
+        $ongoing = $this->startAt && $this->startAt < $now && $this->endAt || $now < $this->endAt && !$this->archived;
 
         if ($ongoing) {
             $daysSpent = $this->startAt->diff($now)->days;
@@ -420,19 +420,19 @@ class Project
 
             $resolvedRisksPercentage = ($resolvedRisks['danger'] * 2) + ($resolvedRisks['high'] * 1.5) + $resolvedRisks['medium'] + ($resolvedRisks['low'] * 0.5);
             $nonResolvedRisksPercentage = ($nonResolvedRisks['danger'] * 2) + ($nonResolvedRisks['high'] * 1.5) + $nonResolvedRisks['medium'] + ($nonResolvedRisks['low'] * 0.5);
-            $riskPercentage = ($resolvedRisksPercentage * 1) / count($this->risks);
+            $riskPercentage = ($resolvedRisksPercentage * 1) / $this->risks->count();
         }
 
-        if ($this->milestones->count() > 1) {
+        if ($this->milestones->count() > 0) {
             $milestonesCompleted = 0;
 
             foreach ($this->milestones as $milestone) {
-                if ($milestone->isRequired() && $milestone->isCompleted()) {
+                if (!$milestone->isRequired() || $milestone->isCompleted()) {
                     ++$milestonesCompleted;
                 }
             }
 
-            $milestonePercentage = ($milestonesCompleted * 1) / count($this->milestones);
+            $milestonePercentage = ($milestonesCompleted * 1) / $this->milestones->count();
         }
 
         return [
