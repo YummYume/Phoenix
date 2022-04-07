@@ -67,9 +67,10 @@ class Budget
         return $this->initialAmount - $this->spentAmount;
     }
 
+    // No idea what this is for
     public function getLanding(): ?float
     {
-        return $this->getSpentAmount() + $this->getLeftAmount();
+        return $this->getLeftAmount() - $this->spentAmount;
     }
 
     public function getProject(): ?Project
