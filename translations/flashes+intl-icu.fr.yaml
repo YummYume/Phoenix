@@ -41,9 +41,14 @@ delete.team.success: <i class="fa fa-check-circle"></i> L'équipe {name} a été
 delete.team.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression de l'équipe.
 delete.portfolio.success: <i class="fa fa-check-circle"></i> Le portefeuille {name} a été supprimé avec succès.
 delete.portfolio.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du portefeuille.
-delete.miletone.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été supprimé avec succès.
-delete.miletone.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du jalon.
+delete.milestone.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été supprimé avec succès.
+delete.milestone.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du jalon.
 delete.risk.success: <i class="fa fa-check-circle"></i> Le risque {name} a été supprimé avec succès.
 delete.risk.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du risque.
 delete.event.success: <i class="fa fa-check-circle"></i> Le fait marquant {name} a été supprimé avec succès.
 delete.event.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors de la suppression du fait marquant.
+
+### Milestones
+milestone.move.success: <i class="fa fa-check-circle"></i> Le jalon {name} a été déplacé avec succès.
+milestone.move.error: <i class="fa fa-exclamation-circle"></i> Une erreur est survenue lors du déplacement du jalon.
+milestone.move.not_allowed: <i class="fa fa-exclamation-circle"></i> Vous n'êtes pas autorisé à déplacer ce jalon.

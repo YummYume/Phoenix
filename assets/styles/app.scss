@@ -70,10 +70,9 @@ label {
     }
 }
 
-a {
+a:not(.nav-link, .navbar-brand) {
     color: unset;
     text-decoration: inherit;
-    transition: 1s;
 
     :hover {
         color: rgba(var(--bs-primary-rgb), 1);
@@ -104,4 +103,12 @@ a {
     span {
         margin: 0;
     }
+}
+
+.project-milestone-drag {
+    background: transparent;
+}
+
+.project-sortable {
+    cursor: pointer;
 }

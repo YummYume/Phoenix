@@ -162,6 +162,13 @@ project.client_team: Équipe cliente
 project.budget: Budget
 project.forecast: Prévision
 project.milestones: Jalons
+project.milestones.summary: Résumé des jalons
+project.milestones.completed: >-
+  {count, plural, =0 {Aucun jalon terminé} one {1 jalon terminé} other {# jalons terminés}}
+project.milestones.not_completed_nor_required: >-
+  {count, plural, =0 {Aucun jalon non terminé ni requis} one {1 jalon non terminé ni requis} other {# jalons non terminés ni requis}}
+project.milestones.not_completed: >-
+  {count, plural, =0 {Aucun jalon non complété} one {1 jalon non complété} other {# jalons non complétés}}
 project.risks: Risques
 project.events: Faits marquants
 project.back_to_project: Retourner au projet

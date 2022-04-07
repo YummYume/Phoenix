@@ -127,12 +127,66 @@
                         </a>
                     </div>
                 {% endif %}
+                {% set allMilestones = project.milestones|length %}
+                {% if allMilestones > 0 %}
+                    {% set completedMilestones = project.milestones|filter(m => m.completed)|length %}
+                    {% set nonRequiredMilestones = project.milestones|filter(m => not m.completed and not m.required)|length %}
+                    {% set nonCompletedMilestones = allMilestones - (completedMilestones + nonRequiredMilestones) %}
+                    {% set completedMilestonesPercentage = allMilestones > 0 ? ((completedMilestones * 100) / allMilestones)|round : 0 %}
+                    {% set nonRequiredMilestonesPercentage = allMilestones > 0 ? ((nonRequiredMilestones * 100) / allMilestones)|round : 0 %}
+                    {% set nonCompletedMilestonesPercentage = allMilestones > 0 ? ((nonCompletedMilestones * 100) / allMilestones)|round : 0 %}
+                    <div class="row align-items-center justify-content-center mb-5 mt-2">
+                        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 col-12 text-center">
+                            <h4>{{ 'project.milestones.summary'|trans }}</h4>
+                            <div class="progress">
+                                <div
+                                    class="progress-bar bg-success"
+                                    role="progressbar"
+                                    style="width: {{ completedMilestonesPercentage }}%;"
+                                    aria-valuenow="{{ completedMilestonesPercentage }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    title="{{ 'project.milestones.completed'|trans({ count: completedMilestones }) }}"
+                                >
+                                    {{ 0 < completedMilestonesPercentage ? completedMilestonesPercentage : '' }}%
+                                </div>
+                                <div
+                                    class="progress-bar bg-info"
+                                    role="progressbar"
+                                    style="width: {{ nonRequiredMilestonesPercentage }}%;"
+                                    aria-valuenow="{{ nonRequiredMilestonesPercentage }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    title="{{ 'project.milestones.not_completed_nor_required'|trans({ count: nonRequiredMilestones }) }}"
+                                >
+                                    {{ 0 < nonRequiredMilestonesPercentage ? nonRequiredMilestonesPercentage : '' }}%
+                                </div>
+                                <div
+                                    class="progress-bar bg-danger"
+                                    role="progressbar"
+                                    style="width: {{ nonCompletedMilestonesPercentage }}%;"
+                                    aria-valuenow="{{ nonCompletedMilestonesPercentage }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    title="{{ 'project.milestones.not_completed'|trans({ count: nonCompletedMilestones }) }}"
+                                >
+                                    {{ 0 < nonCompletedMilestonesPercentage ? nonCompletedMilestonesPercentage : '' }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
-            <div class="row justify-content-center" id="project-milestones">
-                {% for milestone in project.milestones %}
-                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12">
-                        <div class="card text-white bg-dark border-{{ milestone.required ? 'danger' : 'success' }}">
-                            <div class="card-body">
+            {% set canEditMilestones = is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), project) %}
+            <div id="can-edit-milestones" class="d-none" data-granted="{{ canEditMilestones|json_encode|e('html_attr') }}"></div>
+            <div class="row justify-content-center align-items-stretch" id="project-milestones">
+                {% for milestone in project.milestones|sort((prev, current) => prev.position <=> current.position) %}
+                    <div
+                        class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-12 my-2 project-sortable"
+                        data-route="{{ path('app_project_milestone_move', { code: project.code, milestone_id: milestone.id }) }}"
+                    >
+                        <div class="card h-100 text-white bg-dark border-{{ milestone.completed ? 'success' : milestone.required ? 'danger' : 'info' }}">
+                            <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title">{{ milestone.name }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">
                                     <span>{{ milestone.required ? 'milestone.is_required'|trans : 'milestone.is_not_required'|trans }}</span>
@@ -154,7 +208,7 @@
                                         </p>
                                     {% endif %}
                                 </p>
-                                {% if is_granted(constant('App\\Security\\Voter\\ProjectVoter::EDIT_MILESTONE'), project) %}
+                                {% if canEditMilestones %}
                                     <a class="card-link" href="{{ path('app_project_milestone_edit', { code: project.code, milestone_id: milestone.id }) }}">
                                         <i class="fa fa-pencil me-1" title="{{ 'common.edit'|trans }}"></i>{{ 'common.edit'|trans }}
                                     </a>

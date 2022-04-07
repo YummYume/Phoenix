@@ -133,6 +133,7 @@
                                 <tr>
                                     <th scope="col">{{ 'milestone.name'|trans }}</th>
                                     <th scope="col">{{ 'milestone.required'|trans }}</th>
+                                    <th scope="col">{{ 'milestone.completed'|trans }}</th>
                                     <th scope="col">{{ 'milestone.project'|trans }}</th>
                                     <th scope="col">{{ 'common.actions'|trans }}</th>
                                 </tr>
@@ -142,6 +143,7 @@
                                     <tr>
                                         <td>{{ milestone.name }}</td>
                                         <td>{{ milestone.required ? 'common.yes'|trans : 'common.no'|trans }}</td>
+                                        <td>{{ milestone.completed ? 'common.yes'|trans : 'common.no'|trans }}</td>
                                         <td>{{ milestone.project.name }}</td>
                                         <td>
                                             <a href="{{ path('app_project_show', { code: milestone.project.code, '_fragment': 'project-milestones' }) }}">

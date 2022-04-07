@@ -47,7 +47,7 @@ class Team
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Project::class, orphanRemoval: true)]
     private Collection $projects;
 
-    #[ORM\OneToMany(mappedBy: 'clientTeam', targetEntity: Project::class, orphanRemoval: false)]
+    #[ORM\OneToMany(mappedBy: 'clientTeam', targetEntity: Project::class, orphanRemoval: true)]
     private Collection $clientProjects;
 
     public function __construct()

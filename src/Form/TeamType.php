@@ -30,9 +30,7 @@ final class TeamType extends AbstractType
                 'choice_label' => 'fullName',
                 'multiple' => true,
                 'required' => false,
-                'query_builder' => static function (UserRepository $userRepository): QueryBuilder {
-                    return $userRepository->findAll();
-                },
+                'query_builder' => static fn (UserRepository $userRepository): QueryBuilder => $userRepository->findAll(),
             ])
             ->add('parentTeam', EntityType::class, [
                 'label' => 'team.parent_team',

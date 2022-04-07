@@ -18,8 +18,10 @@ use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -192,6 +194,10 @@ final class ProjectController extends AbstractController
     #[Entity('milestone', expr: 'repository.find(milestone_id)')]
     public function editMilestone(Request $request, Project $project, Milestone $milestone): Response
     {
+        if ($project !== $milestone->getProject()) {
+            throw new NotFoundHttpException('Milestone not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_MILESTONE, $project);
 
         $form = $this->createForm(MilestoneType::class, $milestone);
@@ -222,6 +228,10 @@ final class ProjectController extends AbstractController
     #[Entity('milestone', expr: 'repository.find(milestone_id)')]
     public function deleteMilestone(Request $request, Project $project, Milestone $milestone): Response
     {
+        if ($project !== $milestone->getProject()) {
+            throw new NotFoundHttpException('Milestone not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_MILESTONE, $project);
 
         if ($this->isCsrfTokenValid('delete'.$milestone->getId(), $request->request->get('_token'))) {
@@ -237,6 +247,44 @@ final class ProjectController extends AbstractController
         }
 
         return $this->redirectToRoute('app_project_show', ['code' => $project->getCode()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{code}/milestone/{milestone_id}/move', name: 'app_project_milestone_move', condition: 'request.isXmlHttpRequest()', methods: ['POST'])]
+    #[Entity('milestone', expr: 'repository.find(milestone_id)')]
+    public function moveMilestone(Request $request, Project $project, Milestone $milestone): JsonResponse
+    {
+        $response = [];
+
+        try {
+            if ($project !== $milestone->getProject()) {
+                $response['status'] = 'error';
+                $response['message'] = $this->translator->trans('milestone.move.error', domain: 'flashes');
+            } elseif (!$this->isGranted(ProjectVoter::EDIT_MILESTONE, $project)) {
+                $response['status'] = 'error';
+                $response['message'] = $this->translator->trans('milestone.move.not_allowed', domain: 'flashes');
+            } else {
+                $oldPosition = $request->request->get('oldPosition');
+                $newPosition = $request->request->get('newPosition');
+
+                if (null === $oldPosition || null === $newPosition || $oldPosition === $newPosition || intval($oldPosition) !== $milestone->getPosition()) {
+                    $response['status'] = 'error';
+                    $response['message'] = $this->translator->trans('milestone.move.error', domain: 'flashes');
+                } else {
+                    $milestone->setPosition(intval($newPosition));
+
+                    $this->entityManager->flush();
+
+                    $response['status'] = 'success';
+                    $response['message'] = $this->translator->trans('milestone.move.success', ['name' => $milestone->getName()], 'flashes');
+                }
+            }
+        } catch (\Exception $e) {
+            $this->logger->critical($e->getMessage(), ['exception' => $e, 'milestone' => $milestone]);
+            $response['status'] = 'error';
+            $response['message'] = $this->translator->trans('milestone.move.error', domain: 'flashes');
+        }
+
+        return new JsonResponse($response);
     }
 
     #[Route('/{code}/risk/new', name: 'app_project_risk_new', methods: ['GET', 'POST'])]
@@ -281,6 +329,10 @@ final class ProjectController extends AbstractController
     #[Entity('risk', expr: 'repository.find(risk_id)')]
     public function editRisk(Request $request, Project $project, Risk $risk): Response
     {
+        if ($project !== $risk->getProject()) {
+            throw new NotFoundHttpException('Risk not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_RISK, $project);
 
         $form = $this->createForm(RiskType::class, $risk);
@@ -311,6 +363,10 @@ final class ProjectController extends AbstractController
     #[Entity('risk', expr: 'repository.find(risk_id)')]
     public function deleteRisk(Request $request, Project $project, Risk $risk): Response
     {
+        if ($project !== $risk->getProject()) {
+            throw new NotFoundHttpException('Risk not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_RISK, $project);
 
         if ($this->isCsrfTokenValid('delete'.$risk->getId(), $request->request->get('_token'))) {
@@ -370,6 +426,10 @@ final class ProjectController extends AbstractController
     #[Entity('event', expr: 'repository.find(event_id)')]
     public function editEvent(Request $request, Project $project, Event $event): Response
     {
+        if ($project !== $event->getProject()) {
+            throw new NotFoundHttpException('Event not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_EVENT, $project);
 
         $form = $this->createForm(EventType::class, $event);
@@ -400,6 +460,10 @@ final class ProjectController extends AbstractController
     #[Entity('event', expr: 'repository.find(event_id)')]
     public function deleteEvent(Request $request, Project $project, Event $event): Response
     {
+        if ($project !== $event->getProject()) {
+            throw new NotFoundHttpException('Event not found.');
+        }
+
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT_EVENT, $project);
 
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {

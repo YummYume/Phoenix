@@ -32,7 +32,7 @@ class Status
     #[Gedmo\Slug(fields: ['title'])]
     private ?string $slug;
 
-    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Project::class)]
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: Project::class, cascade: ['remove'])]
     private Collection $projects;
 
     #[Gedmo\SortablePosition]

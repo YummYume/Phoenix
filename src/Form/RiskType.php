@@ -35,13 +35,13 @@ final class RiskType extends AbstractType
                 'class' => Severity::class,
                 'label' => 'risk.severity',
                 'required' => true,
-                'choice_label' => fn (Severity $severity): string => 'severity.'.$severity->value,
+                'choice_label' => static fn (Severity $severity): string => 'severity.'.$severity->value,
             ])
             ->add('probability', EnumType::class, [
                 'class' => Probability::class,
                 'label' => 'risk.probability',
                 'required' => true,
-                'choice_label' => fn (Probability $probability): string => 'probability.'.$probability->value,
+                'choice_label' => static fn (Probability $probability): string => 'probability.'.$probability->value,
             ])
         ;
     }

@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password;
 
     #[Assert\Length(min: 8, max: 4096, minMessage: 'user.password.min_length', maxMessage: 'user.password.max_length')]
-    #[Assert\Regex(pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', message: 'user.password.invalid')]
+    #[Assert\Regex(pattern: '/^[^\s](?=.*[a-z])(?=.*[A-Z])(?=.*\d).+[^\s]$/', message: 'user.password.invalid')]
     #[Assert\NotCompromisedPassword(message: 'user.password.compromised')]
     private ?string $plainPassword = null;
 

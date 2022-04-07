@@ -1,1 +1,1102 @@
-[{"input":{"budgetPercentage":0.46,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.49},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.81,"daysPercentage":0.4,"riskPercentage":0.85,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.32,"daysPercentage":null,"riskPercentage":0.56,"milestonePercentage":0.26},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.31,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.82},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.15,"daysPercentage":0.69,"riskPercentage":1,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.95,"daysPercentage":null,"riskPercentage":0.04,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.44,"daysPercentage":null,"riskPercentage":0.45,"milestonePercentage":0.7},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.38,"daysPercentage":0.35,"riskPercentage":0.26,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.83,"daysPercentage":null,"riskPercentage":0.95,"milestonePercentage":0.56},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.55,"daysPercentage":null,"riskPercentage":0.74,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.71,"daysPercentage":0.66,"riskPercentage":0.01,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.24,"daysPercentage":0.87,"riskPercentage":0.68,"milestonePercentage":0.03},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.31,"daysPercentage":null,"riskPercentage":0.15,"milestonePercentage":0.32},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.34,"daysPercentage":0.57,"riskPercentage":0.9,"milestonePercentage":0.95},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.33,"daysPercentage":null,"riskPercentage":0.63,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.68,"daysPercentage":null,"riskPercentage":0.04,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.91,"daysPercentage":null,"riskPercentage":0.83,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.31,"daysPercentage":0.58,"riskPercentage":1,"milestonePercentage":0.5},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.97,"daysPercentage":null,"riskPercentage":0.17,"milestonePercentage":0.14},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.52,"daysPercentage":0.06,"riskPercentage":0.99,"milestonePercentage":0.98},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.11,"daysPercentage":0.58,"riskPercentage":0.61,"milestonePercentage":0.13},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.08,"daysPercentage":0.63,"riskPercentage":0.42,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.23,"daysPercentage":null,"riskPercentage":0.68,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.37,"daysPercentage":1,"riskPercentage":0.44,"milestonePercentage":0.91},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.18,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.05},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.41,"daysPercentage":0.45,"riskPercentage":1,"milestonePercentage":0.8},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.7,"daysPercentage":0.21,"riskPercentage":0.26,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.92,"daysPercentage":0.06,"riskPercentage":0.11,"milestonePercentage":0.47},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.1,"daysPercentage":null,"riskPercentage":0.94,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.62,"daysPercentage":null,"riskPercentage":0.46,"milestonePercentage":0.18},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.02,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.53,"daysPercentage":0.09,"riskPercentage":0.17,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.49,"daysPercentage":null,"riskPercentage":0.65,"milestonePercentage":0.23},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.89,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.45},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.03,"daysPercentage":0.13,"riskPercentage":1,"milestonePercentage":0.78},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.4,"daysPercentage":0.51,"riskPercentage":0.24,"milestonePercentage":0.86},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.1,"daysPercentage":null,"riskPercentage":0.95,"milestonePercentage":0.27},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.9,"daysPercentage":null,"riskPercentage":0.78,"milestonePercentage":0.98},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.58,"daysPercentage":0.64,"riskPercentage":1,"milestonePercentage":0.56},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.04,"daysPercentage":0.11,"riskPercentage":0.67,"milestonePercentage":0.95},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.28,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.68},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.18,"daysPercentage":null,"riskPercentage":0.41,"milestonePercentage":0.94},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.72,"daysPercentage":null,"riskPercentage":0.39,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.49,"daysPercentage":0.6,"riskPercentage":0.81,"milestonePercentage":0.26},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.24,"daysPercentage":0.12,"riskPercentage":1,"milestonePercentage":0.18},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.8,"daysPercentage":0.72,"riskPercentage":1,"milestonePercentage":0.19},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.26,"daysPercentage":null,"riskPercentage":0.36,"milestonePercentage":0.71},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.17,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.26},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0,"daysPercentage":0.47,"riskPercentage":0.13,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.25,"daysPercentage":0.63,"riskPercentage":0.26,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.91,"daysPercentage":0.46,"riskPercentage":1,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.99,"daysPercentage":0.55,"riskPercentage":0,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.36,"daysPercentage":0.68,"riskPercentage":0.85,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.75,"daysPercentage":null,"riskPercentage":0.18,"milestonePercentage":0.26},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.79,"daysPercentage":null,"riskPercentage":0.6,"milestonePercentage":0.07},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.02,"daysPercentage":0.53,"riskPercentage":0.87,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.09,"daysPercentage":null,"riskPercentage":0.16,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.02,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.87},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.63,"daysPercentage":null,"riskPercentage":0.87,"milestonePercentage":0.08},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.38,"daysPercentage":0.52,"riskPercentage":0.6,"milestonePercentage":0.46},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.35,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.14},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.79,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.54},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.29,"daysPercentage":0.14,"riskPercentage":0.22,"milestonePercentage":0.76},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.95,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.31},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.09,"daysPercentage":null,"riskPercentage":0.23,"milestonePercentage":0.1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.79,"daysPercentage":null,"riskPercentage":0,"milestonePercentage":0.37},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.58,"daysPercentage":0.55,"riskPercentage":1,"milestonePercentage":0.29},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.06,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":0.72},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.77,"daysPercentage":0.69,"riskPercentage":1,"milestonePercentage":0.35},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.21,"daysPercentage":0.44,"riskPercentage":0.68,"milestonePercentage":0.93},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.44,"daysPercentage":null,"riskPercentage":0.77,"milestonePercentage":0.59},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.04,"daysPercentage":0.9,"riskPercentage":0.05,"milestonePercentage":0.26},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.72,"daysPercentage":0.38,"riskPercentage":0.42,"milestonePercentage":0},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.56,"daysPercentage":null,"riskPercentage":0.65,"milestonePercentage":0.64},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.47,"daysPercentage":0.22,"riskPercentage":0.41,"milestonePercentage":0.94},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.41,"daysPercentage":0.25,"riskPercentage":0.1,"milestonePercentage":0.59},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.87,"daysPercentage":null,"riskPercentage":0.91,"milestonePercentage":0.28},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.16,"daysPercentage":0.2,"riskPercentage":0.01,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.41,"daysPercentage":0.36,"riskPercentage":0.98,"milestonePercentage":0.41},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.41,"daysPercentage":0.96,"riskPercentage":0.68,"milestonePercentage":0.51},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.6,"daysPercentage":null,"riskPercentage":0.4,"milestonePercentage":0.7},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.26,"daysPercentage":null,"riskPercentage":0.14,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.88,"daysPercentage":0.26,"riskPercentage":1,"milestonePercentage":0.44},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.14,"daysPercentage":null,"riskPercentage":0.13,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.63,"daysPercentage":0.11,"riskPercentage":1,"milestonePercentage":0.79},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.87,"daysPercentage":null,"riskPercentage":0.89,"milestonePercentage":0.02},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.79,"daysPercentage":0.21,"riskPercentage":0.83,"milestonePercentage":0.21},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.85,"daysPercentage":0.11,"riskPercentage":0.63,"milestonePercentage":0.01},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.9,"daysPercentage":0.69,"riskPercentage":0.67,"milestonePercentage":0.18},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.37,"daysPercentage":0.54,"riskPercentage":0.92,"milestonePercentage":0.97},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.56,"daysPercentage":null,"riskPercentage":0.46,"milestonePercentage":0.8},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.42,"daysPercentage":null,"riskPercentage":0.21,"milestonePercentage":0.77},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":1.84,"daysPercentage":null,"riskPercentage":0.88,"milestonePercentage":0.87},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.2,"daysPercentage":null,"riskPercentage":1,"milestonePercentage":1},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.07,"daysPercentage":0.76,"riskPercentage":0.1,"milestonePercentage":0.15},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.69,"daysPercentage":null,"riskPercentage":0.75,"milestonePercentage":0.72},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.83,"daysPercentage":0.56,"riskPercentage":1,"milestonePercentage":0.02},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.2,"daysPercentage":0.46,"riskPercentage":0.83,"milestonePercentage":0.63},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.32,"daysPercentage":0.48,"riskPercentage":0.55,"milestonePercentage":0.81},"output":{"Expected output here.":1}},{"input":{"budgetPercentage":0.27,"daysPercentage":null,"riskPercentage":0.29,"milestonePercentage":1},"output":{"Expected output here.":1}}]
+[
+    {
+        "input": {
+            "budgetPercentage": 0.46,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.49
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.81,
+            "daysPercentage": 0.4,
+            "riskPercentage": 0.85,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.32,
+            "daysPercentage": null,
+            "riskPercentage": 0.56,
+            "milestonePercentage": 0.26
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.31,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.82
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.15,
+            "daysPercentage": 0.69,
+            "riskPercentage": 1,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.95,
+            "daysPercentage": null,
+            "riskPercentage": 0.04,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.44,
+            "daysPercentage": null,
+            "riskPercentage": 0.45,
+            "milestonePercentage": 0.7
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.38,
+            "daysPercentage": 0.35,
+            "riskPercentage": 0.26,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.83,
+            "daysPercentage": null,
+            "riskPercentage": 0.95,
+            "milestonePercentage": 0.56
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.55,
+            "daysPercentage": null,
+            "riskPercentage": 0.74,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.71,
+            "daysPercentage": 0.66,
+            "riskPercentage": 0.01,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.24,
+            "daysPercentage": 0.87,
+            "riskPercentage": 0.68,
+            "milestonePercentage": 0.03
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.31,
+            "daysPercentage": null,
+            "riskPercentage": 0.15,
+            "milestonePercentage": 0.32
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.34,
+            "daysPercentage": 0.57,
+            "riskPercentage": 0.9,
+            "milestonePercentage": 0.95
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.33,
+            "daysPercentage": null,
+            "riskPercentage": 0.63,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.68,
+            "daysPercentage": null,
+            "riskPercentage": 0.04,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.91,
+            "daysPercentage": null,
+            "riskPercentage": 0.83,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.31,
+            "daysPercentage": 0.58,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.5
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.97,
+            "daysPercentage": null,
+            "riskPercentage": 0.17,
+            "milestonePercentage": 0.14
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.52,
+            "daysPercentage": 0.06,
+            "riskPercentage": 0.99,
+            "milestonePercentage": 0.98
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.11,
+            "daysPercentage": 0.58,
+            "riskPercentage": 0.61,
+            "milestonePercentage": 0.13
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.08,
+            "daysPercentage": 0.63,
+            "riskPercentage": 0.42,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.23,
+            "daysPercentage": null,
+            "riskPercentage": 0.68,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.37,
+            "daysPercentage": 1,
+            "riskPercentage": 0.44,
+            "milestonePercentage": 0.91
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.18,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.05
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.41,
+            "daysPercentage": 0.45,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.8
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.7,
+            "daysPercentage": 0.21,
+            "riskPercentage": 0.26,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.92,
+            "daysPercentage": 0.06,
+            "riskPercentage": 0.11,
+            "milestonePercentage": 0.47
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.1,
+            "daysPercentage": null,
+            "riskPercentage": 0.94,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.62,
+            "daysPercentage": null,
+            "riskPercentage": 0.46,
+            "milestonePercentage": 0.18
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.02,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.53,
+            "daysPercentage": 0.09,
+            "riskPercentage": 0.17,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.49,
+            "daysPercentage": null,
+            "riskPercentage": 0.65,
+            "milestonePercentage": 0.23
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.89,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.45
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.03,
+            "daysPercentage": 0.13,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.78
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.4,
+            "daysPercentage": 0.51,
+            "riskPercentage": 0.24,
+            "milestonePercentage": 0.86
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.1,
+            "daysPercentage": null,
+            "riskPercentage": 0.95,
+            "milestonePercentage": 0.27
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.9,
+            "daysPercentage": null,
+            "riskPercentage": 0.78,
+            "milestonePercentage": 0.98
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.58,
+            "daysPercentage": 0.64,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.56
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.04,
+            "daysPercentage": 0.11,
+            "riskPercentage": 0.67,
+            "milestonePercentage": 0.95
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.28,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.68
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.18,
+            "daysPercentage": null,
+            "riskPercentage": 0.41,
+            "milestonePercentage": 0.94
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.72,
+            "daysPercentage": null,
+            "riskPercentage": 0.39,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.49,
+            "daysPercentage": 0.6,
+            "riskPercentage": 0.81,
+            "milestonePercentage": 0.26
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.24,
+            "daysPercentage": 0.12,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.18
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.8,
+            "daysPercentage": 0.72,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.19
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.26,
+            "daysPercentage": null,
+            "riskPercentage": 0.36,
+            "milestonePercentage": 0.71
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.17,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.26
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0,
+            "daysPercentage": 0.47,
+            "riskPercentage": 0.13,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.25,
+            "daysPercentage": 0.63,
+            "riskPercentage": 0.26,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.91,
+            "daysPercentage": 0.46,
+            "riskPercentage": 1,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.99,
+            "daysPercentage": 0.55,
+            "riskPercentage": 0,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.36,
+            "daysPercentage": 0.68,
+            "riskPercentage": 0.85,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.75,
+            "daysPercentage": null,
+            "riskPercentage": 0.18,
+            "milestonePercentage": 0.26
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.79,
+            "daysPercentage": null,
+            "riskPercentage": 0.6,
+            "milestonePercentage": 0.07
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.02,
+            "daysPercentage": 0.53,
+            "riskPercentage": 0.87,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.09,
+            "daysPercentage": null,
+            "riskPercentage": 0.16,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.02,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.87
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.63,
+            "daysPercentage": null,
+            "riskPercentage": 0.87,
+            "milestonePercentage": 0.08
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.38,
+            "daysPercentage": 0.52,
+            "riskPercentage": 0.6,
+            "milestonePercentage": 0.46
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.35,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.14
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.79,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.54
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.29,
+            "daysPercentage": 0.14,
+            "riskPercentage": 0.22,
+            "milestonePercentage": 0.76
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.95,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.31
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.09,
+            "daysPercentage": null,
+            "riskPercentage": 0.23,
+            "milestonePercentage": 0.1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.79,
+            "daysPercentage": null,
+            "riskPercentage": 0,
+            "milestonePercentage": 0.37
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.58,
+            "daysPercentage": 0.55,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.29
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.06,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.72
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.77,
+            "daysPercentage": 0.69,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.35
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.21,
+            "daysPercentage": 0.44,
+            "riskPercentage": 0.68,
+            "milestonePercentage": 0.93
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.44,
+            "daysPercentage": null,
+            "riskPercentage": 0.77,
+            "milestonePercentage": 0.59
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.04,
+            "daysPercentage": 0.9,
+            "riskPercentage": 0.05,
+            "milestonePercentage": 0.26
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.72,
+            "daysPercentage": 0.38,
+            "riskPercentage": 0.42,
+            "milestonePercentage": 0
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.56,
+            "daysPercentage": null,
+            "riskPercentage": 0.65,
+            "milestonePercentage": 0.64
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.47,
+            "daysPercentage": 0.22,
+            "riskPercentage": 0.41,
+            "milestonePercentage": 0.94
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.41,
+            "daysPercentage": 0.25,
+            "riskPercentage": 0.1,
+            "milestonePercentage": 0.59
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.87,
+            "daysPercentage": null,
+            "riskPercentage": 0.91,
+            "milestonePercentage": 0.28
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.16,
+            "daysPercentage": 0.2,
+            "riskPercentage": 0.01,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.41,
+            "daysPercentage": 0.36,
+            "riskPercentage": 0.98,
+            "milestonePercentage": 0.41
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.41,
+            "daysPercentage": 0.96,
+            "riskPercentage": 0.68,
+            "milestonePercentage": 0.51
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.6,
+            "daysPercentage": null,
+            "riskPercentage": 0.4,
+            "milestonePercentage": 0.7
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.26,
+            "daysPercentage": null,
+            "riskPercentage": 0.14,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.88,
+            "daysPercentage": 0.26,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.44
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.14,
+            "daysPercentage": null,
+            "riskPercentage": 0.13,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.63,
+            "daysPercentage": 0.11,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.79
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.87,
+            "daysPercentage": null,
+            "riskPercentage": 0.89,
+            "milestonePercentage": 0.02
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.79,
+            "daysPercentage": 0.21,
+            "riskPercentage": 0.83,
+            "milestonePercentage": 0.21
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.85,
+            "daysPercentage": 0.11,
+            "riskPercentage": 0.63,
+            "milestonePercentage": 0.01
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.9,
+            "daysPercentage": 0.69,
+            "riskPercentage": 0.67,
+            "milestonePercentage": 0.18
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.37,
+            "daysPercentage": 0.54,
+            "riskPercentage": 0.92,
+            "milestonePercentage": 0.97
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.56,
+            "daysPercentage": null,
+            "riskPercentage": 0.46,
+            "milestonePercentage": 0.8
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.42,
+            "daysPercentage": null,
+            "riskPercentage": 0.21,
+            "milestonePercentage": 0.77
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 1.84,
+            "daysPercentage": null,
+            "riskPercentage": 0.88,
+            "milestonePercentage": 0.87
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.2,
+            "daysPercentage": null,
+            "riskPercentage": 1,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.07,
+            "daysPercentage": 0.76,
+            "riskPercentage": 0.1,
+            "milestonePercentage": 0.15
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.69,
+            "daysPercentage": null,
+            "riskPercentage": 0.75,
+            "milestonePercentage": 0.72
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.83,
+            "daysPercentage": 0.56,
+            "riskPercentage": 1,
+            "milestonePercentage": 0.02
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.2,
+            "daysPercentage": 0.46,
+            "riskPercentage": 0.83,
+            "milestonePercentage": 0.63
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.32,
+            "daysPercentage": 0.48,
+            "riskPercentage": 0.55,
+            "milestonePercentage": 0.81
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    },
+    {
+        "input": {
+            "budgetPercentage": 0.27,
+            "daysPercentage": null,
+            "riskPercentage": 0.29,
+            "milestonePercentage": 1
+        },
+        "output": {
+            "Expected output here.": 1
+        }
+    }
+]
